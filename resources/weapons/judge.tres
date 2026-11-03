@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://vfqxc5dq3pu1"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://c4vitycq28ol6" path="res://assets/sprites/ui/guns/judge.png" id="2_judge_tex"]
+[ext_resource type="Texture2D" uid="uid://cvo7j0iy3goj3" path="res://assets/sprites/weapons/judge.png" id="3_judge_game"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://bm6ew6bcmnxfb" path="res://assets/audio/sfx/weapons/judge_shot.ogg" id="5_judge_shot"]
+[ext_resource type="AudioStream" uid="uid://yttxw54mbol8" path="res://assets/audio/sfx/weapons/judge_reload.ogg" id="6_judge_reload"]
+[ext_resource type="AudioStream" uid="uid://cm5nuwfy5cdrb" path="res://assets/audio/sfx/weapons/judge_equip.ogg" id="7_judge_equip"]
+
+[sub_resource type="Resource" id="JudgeEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_judge_equip")
+volume_db = 5.0
+
+[sub_resource type="Resource" id="JudgeReloadAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_judge_reload")
+max_distance = 180.0
+
+[sub_resource type="Resource" id="JudgeShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_judge_shot")
+max_distance = 400.0
+
+[resource]
+script = ExtResource("1_weapon")
+weapon_name = "Judge"
+weapon_type = "Shotgun"
+wall_penetration = "Low"
+short_range = 10.0
+medium_range = 15.0
+short_damage = 17.0
+medium_damage = 10.0
+long_damage = 7.0
+fire_rate = 3.5
+pellets_per_shot = 12
+pellet_spread_degrees = 10.0
+magazine_size = 5
+reserve_ammo = 15
+reload_time = 2.2
+shot_audio = SubResource("JudgeShotAudio")
+reload_audio = SubResource("JudgeReloadAudio")
+equip_audio = SubResource("JudgeEquipAudio")
+equip_time = 0.8
+recoil_per_shot_degrees = 2.5
+max_recoil_degrees = 9.0
+recoil_recovery_speed = 5.5
+recoil_randomness_degrees = 0.8
+weapon_sprite = ExtResource("3_judge_game")
+ui_sprite = ExtResource("2_judge_tex")

@@ -1,0 +1,7 @@
+﻿.godot/
+.idea/
+exports/
+export_check.exe
+versions/*.exe
+versions/*.zip
+website/versions/*.exe

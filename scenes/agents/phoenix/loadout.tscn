@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://cqmqq1q2i4k83"]
+
+[ext_resource type="Script" uid="uid://bvru8a5fhvh2e" path="res://scripts/agents/phoenix/components/hot_hands_ability.gd" id="1_hot_hands"]
+[ext_resource type="PackedScene" uid="uid://bjbhbjwum6q01" path="res://scenes/agents/phoenix/hot_hands.tscn" id="2_hot_hands_scene"]
+[ext_resource type="Script" uid="uid://7vjw3623ehpc" path="res://scripts/agents/phoenix/components/blaze_ability.gd" id="3_blaze"]
+[ext_resource type="PackedScene" uid="uid://dtjmrsc3p5dft" path="res://scenes/agents/phoenix/blaze_wall.tscn" id="4_blaze_scene"]
+[ext_resource type="Script" uid="uid://u8sem1enmopc" path="res://scripts/agents/phoenix/components/curveball_ability.gd" id="5_curveball"]
+[ext_resource type="PackedScene" uid="uid://d0l3ssskbiuc7" path="res://scenes/agents/phoenix/curva_ball.tscn" id="6_curveball_scene"]
+[ext_resource type="Script" uid="uid://bbet3klxi83vv" path="res://scripts/agents/phoenix/components/phoenix_ultimate.gd" id="7_ultimate"]
+[ext_resource type="Script" uid="uid://bqpwsvvu52a02" path="res://scripts/agents/phoenix/components/phoenix_ability_charges.gd" id="8_charges"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="9_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://b2naq68k6yg6t" path="res://assets/audio/sfx/phoenix/hot_hands_cast.ogg" id="10_hot_hands_cast"]
+[ext_resource type="AudioStream" uid="uid://bglfymikv7vxx" path="res://assets/audio/sfx/phoenix/hot_hands_throw.ogg" id="11_hot_hands_throw"]
+[ext_resource type="AudioStream" uid="uid://cxfspi0dyeg7l" path="res://assets/audio/sfx/phoenix/hot_hands_active.ogg" id="12_hot_hands_active"]
+[ext_resource type="AudioStream" uid="uid://cwphybb6g5n1b" path="res://assets/audio/sfx/phoenix/hot_hands_voice.ogg" id="13_hot_hands_voice"]
+[ext_resource type="AudioStream" uid="uid://ds7l75o3eqw1y" path="res://assets/audio/sfx/phoenix/blaze_cast.ogg" id="14_blaze_cast"]
+[ext_resource type="AudioStream" uid="uid://bb56ttpiop12e" path="res://assets/audio/sfx/phoenix/blaze_voice.ogg" id="15_blaze_voice"]
+[ext_resource type="AudioStream" uid="uid://c7whceb8xm3m5" path="res://assets/audio/sfx/phoenix/blaze_active.ogg" id="16_blaze_active"]
+[ext_resource type="AudioStream" uid="uid://qemqayo8spxc" path="res://assets/audio/sfx/phoenix/curveball_cast.ogg" id="17_curveball_cast"]
+[ext_resource type="AudioStream" uid="uid://b58exq6x7gcep" path="res://assets/audio/sfx/phoenix/curveball_voice1.ogg" id="18_curveball_voice1"]
+[ext_resource type="AudioStream" uid="uid://bqu3ftrfv21h4" path="res://assets/audio/sfx/phoenix/curveball_voice2.ogg" id="19_curveball_voice2"]
+[ext_resource type="AudioStream" uid="uid://bdij0u7ssm33w" path="res://assets/audio/sfx/phoenix/curveball_active.ogg" id="20_curveball_active"]
+[ext_resource type="AudioStream" uid="uid://c1ung48tfh5s3" path="res://assets/audio/sfx/phoenix/run_it_back_cast.ogg" id="21_ultimate_cast"]
+[ext_resource type="AudioStream" uid="uid://b1nahlshd37sf" path="res://assets/audio/sfx/phoenix/run_it_back_voice.ogg" id="22_ultimate_voice"]
+[ext_resource type="AudioStream" uid="uid://whoppgnfaf1w" path="res://assets/audio/sfx/phoenix/run_it_back_finish.ogg" id="23_ultimate_finish"]
+[ext_resource type="AudioStream" uid="uid://5bmwk1aiesbo" path="res://assets/audio/sfx/phoenix/hurt.ogg" id="24_phoenix_hurt"]
+[ext_resource type="AudioStream" uid="uid://dkej3gws6ivby" path="res://assets/audio/sfx/phoenix/phoenix_ultimate_ready.ogg" id="25_ultimate_ready"]
+[ext_resource type="Script" uid="uid://wx7j7v3203ul" path="res://scripts/agents/phoenix/components/phoenix_healing.gd" id="26_healing"]
+[ext_resource type="AudioStream" uid="uid://ji5gyo4rkf78" path="res://assets/audio/sfx/healing.ogg" id="27_healing_audio"]
+
+[sub_resource type="Resource" id="AudioCue_HotHandsCast"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("10_hot_hands_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_HotHandsThrow"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("11_hot_hands_throw")
+
+[sub_resource type="Resource" id="AudioCue_HotHandsActive"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("12_hot_hands_active")
+max_distance = 200.0
+
+[sub_resource type="Resource" id="AudioCue_HotHandsVoice"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("13_hot_hands_voice")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_BlazeCast"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("14_blaze_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_BlazeVoice"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("15_blaze_voice")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_BlazeActive"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("16_blaze_active")
+max_distance = 200.0
+
+[sub_resource type="Resource" id="AudioCue_CurveballCast"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("17_curveball_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_CurveballVoice1"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("18_curveball_voice1")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_CurveballVoice2"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("19_curveball_voice2")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_CurveballActive"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("20_curveball_active")
+max_distance = 200.0
+attenuation = 1.5
+
+[sub_resource type="Resource" id="AudioCue_UltimateCast"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("21_ultimate_cast")
+max_distance = 200.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_UltimateVoice"]
+script = ExtResource("9_audio_cue")
+playback_type = 2
+stream = ExtResource("22_ultimate_voice")
+max_distance = 1000.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_UltimateFinish"]
+script = ExtResource("9_audio_cue")
+stream = ExtResource("23_ultimate_finish")
+max_distance = 200.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_PhoenixHurt"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("24_phoenix_hurt")
+max_distance = 1.0
+volume_db = -10.0
+
+[sub_resource type="Resource" id="AudioCue_UltimateReady"]
+script = ExtResource("9_audio_cue")
+playback_type = 1
+stream = ExtResource("25_ultimate_ready")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_PhoenixHealing"]
+script = ExtResource("9_audio_cue")
+playback_type = 0
+stream = ExtResource("27_healing_audio")
+max_distance = 1.0
+
+[node name="PhoenixLoadout" type="Node" unique_id=727208098]
+
+[node name="Components" type="Node" parent="." unique_id=1808302636]
+
+[node name="HotHandsAbility" type="Node" parent="Components" unique_id=798614147]
+script = ExtResource("1_hot_hands")
+cast_audio = SubResource("AudioCue_HotHandsCast")
+throw_audio = SubResource("AudioCue_HotHandsThrow")
+active_audio = SubResource("AudioCue_HotHandsActive")
+voice_audio = SubResource("AudioCue_HotHandsVoice")
+primary_flight_time = 1.5
+
+[node name="BlazeAbility" type="Node" parent="Components" unique_id=423394306]
+script = ExtResource("3_blaze")
+cast_audio = SubResource("AudioCue_BlazeCast")
+voice_audio = SubResource("AudioCue_BlazeVoice")
+active_audio = SubResource("AudioCue_BlazeActive")
+
+[node name="CurveballAbility" type="Node" parent="Components" unique_id=1841854369]
+script = ExtResource("5_curveball")
+cast_audio = SubResource("AudioCue_CurveballCast")
+voice_audio_1 = SubResource("AudioCue_CurveballVoice1")
+voice_audio_2 = SubResource("AudioCue_CurveballVoice2")
+active_audio = SubResource("AudioCue_CurveballActive")
+projectile_range_meters = 5.0
+
+[node name="PhoenixUltimate" type="Node" parent="Components" unique_id=2144902501]
+script = ExtResource("7_ultimate")
+cast_audio = SubResource("AudioCue_UltimateCast")
+voice_audio = SubResource("AudioCue_UltimateVoice")
+finish_audio = SubResource("AudioCue_UltimateFinish")
+hurt_audio = SubResource("AudioCue_PhoenixHurt")
+
+[node name="PhoenixAbilityCharges" type="Node" parent="Components" unique_id=788710083]
+script = ExtResource("8_charges")
+ultimate_ready_audio = SubResource("AudioCue_UltimateReady")
+
+[node name="PhoenixHealing" type="Node" parent="Components" unique_id=353637025]
+script = ExtResource("26_healing")
+healing_audio = SubResource("AudioCue_PhoenixHealing")
+
+[node name="Visuals" type="Node2D" parent="." unique_id=811951253]
+
+[node name="HotHands" parent="Visuals" unique_id=215844311 instance=ExtResource("2_hot_hands_scene")]
+visible = false
+
+[node name="BlazeHeld" parent="Visuals" unique_id=732991547 instance=ExtResource("4_blaze_scene")]
+visible = false
+
+[node name="CurveballHeld" parent="Visuals" unique_id=1648862622 instance=ExtResource("6_curveball_scene")]
+visible = false

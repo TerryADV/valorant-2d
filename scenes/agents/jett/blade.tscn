@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://c4wt3hivs7twq"]
+
+[ext_resource type="Texture2D" uid="uid://dc3r0v66egv81" path="res://assets/sprites/abilities/jett/blade_storm.png" id="1_h3wlq"]
+[ext_resource type="Script" path="res://scripts/agents/jett/abilities/blade_projectile.gd" id="2_blade_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km01e"]
+size = Vector2(1.375, 3.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h3wlq"]
+light_mode = 2
+
+[node name="Blade" type="Area2D" unique_id=1958675245]
+script = ExtResource("2_blade_script")
+collision_layer = 0
+collision_mask = 27
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1823347401]
+shape = SubResource("RectangleShape2D_km01e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=263917169]
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_h3wlq")
+position = Vector2(1.3877788e-17, 0)
+rotation = -1.5707964
+scale = Vector2(0.016, 0.016)
+texture = ExtResource("1_h3wlq")

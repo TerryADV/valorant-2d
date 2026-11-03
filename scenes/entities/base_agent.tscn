@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://xo7f7wwo8jns"]
+
+[ext_resource type="Script" uid="uid://bj4rk8m338xfx" path="res://scripts/entities/base_agent.gd" id="1_agent_script"]
+[ext_resource type="Script" uid="uid://d2tds37ppufc4" path="res://scripts/components/health_component.gd" id="2_health"]
+[ext_resource type="Script" uid="uid://cxqve2ti1lrrx" path="res://scripts/components/weapon_controller.gd" id="4_weapon_controller"]
+[ext_resource type="Texture2D" uid="uid://b1fweidl5ou6g" path="res://assets/sprites/agents/phoenix.png" id="5_dx2wt"]
+[ext_resource type="Script" uid="uid://de6lfjqqrpwn5" path="res://scripts/components/movement_controller.gd" id="5_movement_controller"]
+[ext_resource type="Texture2D" uid="uid://y2g3p6jmv53b" path="res://assets/sprites/abilities/phoenix/curve_ball_explosion.png" id="5_vwxdm"]
+[ext_resource type="Script" uid="uid://bfxli3s7mtbns" path="res://scripts/components/camera_controller.gd" id="6_camera_controller"]
+[ext_resource type="Shader" uid="uid://r1q4lfx6tk7n" path="res://scenes/shaders/resurrection.gdshader" id="6_dx2wt"]
+[ext_resource type="Texture2D" uid="uid://b5u6ik75d2vub" path="res://assets/sprites/abilities/sage/resurrection.png" id="6_h3fsd"]
+[ext_resource type="Script" uid="uid://c2h2iwl8gnjcf" path="res://scripts/components/agent_visual_controller.gd" id="7_visual_controller"]
+[ext_resource type="Script" uid="uid://cxcfmsbctw0m3" path="res://scripts/components/interaction_controller.gd" id="8_interaction_controller"]
+[ext_resource type="Script" uid="uid://w2gf84egrysk" path="res://scripts/components/agent_circle_visual.gd" id="10_circle_visual"]
+[ext_resource type="Texture2D" uid="uid://cmog87ju12pan" path="res://assets/sprites/ui/damageIndicator.png" id="11_damage_indicator"]
+[ext_resource type="Script" uid="uid://c21vs12ahlfdb" path="res://scripts/components/credits_component.gd" id="12_credits"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1lvh"]
+radius = 6.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3we1e"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s1up4"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bbqsk"]
+light_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vf2jk"]
+shader = ExtResource("6_dx2wt")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
+light_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_dx56b"]
+offsets = PackedFloat32Array(0.61778843, 0.74759614)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_km01e"]
+gradient = SubResource("Gradient_dx56b")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_p2r7x"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.075, 0.927)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w07y7"]
+gradient = SubResource("Gradient_p2r7x")
+width = 2048
+height = 1024
+fill = 3
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oln2k"]
+light_mode = 2
+
+[node name="BaseAgent" type="CharacterBody2D" unique_id=210653413]
+visibility_layer = 2
+z_index = 1
+collision_layer = 16
+collision_mask = 31
+script = ExtResource("1_agent_script")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1181128116]
+shape = SubResource("CircleShape2D_l1lvh")
+debug_color = Color(0, 1, 1, 0.5529412)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=88319237]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+metadata/_edit_lock_ = true
+
+[node name="DamageIndicator" type="Sprite2D" parent="." unique_id=1837629041]
+visible = false
+visibility_layer = 2
+z_index = 5
+texture_filter = 1
+position = Vector2(0, -30)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("11_damage_indicator")
+metadata/_edit_lock_ = true
+
+[node name="Visuals" type="Node2D" parent="." unique_id=1693169419]
+visibility_layer = 2
+script = ExtResource("7_visual_controller")
+
+[node name="AgentCircle" type="Node2D" parent="Visuals" unique_id=2106534131]
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_3we1e")
+script = ExtResource("10_circle_visual")
+
+[node name="Polygon2D" type="Polygon2D" parent="Visuals" unique_id=2123840657]
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_s1up4")
+position = Vector2(0, -6)
+color = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(0, -6, 5, 0, -5, 0)
+metadata/_edit_lock_ = true
+
+[node name="BodySprite" type="Sprite2D" parent="Visuals" unique_id=575347110]
+visibility_layer = 2
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_s1up4")
+position = Vector2(1.7881393e-07, -5.9604645e-08)
+scale = Vector2(0.194, 0.194)
+texture = ExtResource("5_dx2wt")
+
+[node name="WeaponPivot" type="Node2D" parent="Visuals/BodySprite" unique_id=1402791551]
+position = Vector2(41.23711, 3.0724044e-07)
+
+[node name="WeaponSprite" type="Sprite2D" parent="Visuals/BodySprite/WeaponPivot" unique_id=318474979]
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_bbqsk")
+position = Vector2(1.9073486e-06, -4.2632564e-14)
+rotation = -1.5707964
+scale = Vector2(0.27, 0.27)
+flip_h = true
+
+[node name="Muzzle" type="Marker2D" parent="Visuals/BodySprite/WeaponPivot" unique_id=1401636385]
+position = Vector2(-41.23711, -30.927834)
+
+[node name="ResurrectionGradient" type="Sprite2D" parent="Visuals/BodySprite" unique_id=2042573322]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_vf2jk")
+position = Vector2(-9.217215e-07, 3.072405e-07)
+texture = ExtResource("6_h3fsd")
+
+[node name="AbilityIndicator" type="Sprite2D" parent="Visuals" unique_id=938445981]
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_g4v7s")
+position = Vector2(1.3256073e-07, -4.296303e-07)
+scale = Vector2(0.194, 0.194)
+
+[node name="Lights" type="Node2D" parent="Visuals" unique_id=1221122182]
+metadata/_edit_lock_ = true
+
+[node name="Alrededor" type="PointLight2D" parent="Visuals/Lights" unique_id=1621495914]
+visibility_layer = 2
+texture_filter = 1
+position = Vector2(-2.3841858e-07, 1.4305115e-06)
+scale = Vector2(0.375, 0.37500003)
+energy = 0.2
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_km01e")
+metadata/_edit_lock_ = true
+
+[node name="Vision" type="PointLight2D" parent="Visuals/Lights" unique_id=798009665]
+texture_filter = 1
+position = Vector2(0, 6)
+energy = 0.2
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_w07y7")
+offset = Vector2(0, -512)
+metadata/_edit_lock_ = true
+
+[node name="Flashed" type="Sprite2D" parent="Visuals" unique_id=1211423865]
+visible = false
+z_index = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_oln2k")
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("5_vwxdm")
+
+[node name="Components" type="Node2D" parent="." unique_id=1865687959]
+
+[node name="HealthComponent" type="Node" parent="Components" unique_id=88319232]
+script = ExtResource("2_health")
+
+[node name="CreditsComponent" type="Node" parent="Components" unique_id=854403733]
+script = ExtResource("12_credits")
+
+[node name="WeaponController" type="Node" parent="Components" unique_id=88319233]
+script = ExtResource("4_weapon_controller")
+
+[node name="MovementController" type="Node" parent="Components" unique_id=88319234]
+script = ExtResource("5_movement_controller")
+
+[node name="CameraController" type="Node" parent="Components" unique_id=88319235]
+script = ExtResource("6_camera_controller")
+
+[node name="InteractionController" type="Node" parent="Components" unique_id=88319236]
+script = ExtResource("8_interaction_controller")

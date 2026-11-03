@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="AgentData" format=3 uid="uid://beta0gq2a1ml6"]
+
+[ext_resource type="Script" uid="uid://dr5y3256n783k" path="res://scripts/resources/agent_data.gd" id="1_agent_data"]
+[ext_resource type="Texture2D" uid="uid://b1fweidl5ou6g" path="res://assets/sprites/agents/phoenix.png" id="2_agent_sprite"]
+[ext_resource type="PackedScene" uid="uid://cqmqq1q2i4k83" path="res://scenes/agents/phoenix/loadout.tscn" id="3_phoenix_loadout"]
+[ext_resource type="Texture2D" uid="uid://bif2s0lcn5a3" path="res://assets/sprites/ui/abilities/phoenix/blaze.png" id="4_blaze_icon"]
+[ext_resource type="Texture2D" uid="uid://dyytxleouvjm6" path="res://assets/sprites/ui/abilities/phoenix/hot_hands.png" id="5_hot_hands_icon"]
+[ext_resource type="Texture2D" uid="uid://rtcx4oftk0sh" path="res://assets/sprites/ui/abilities/phoenix/curve_ball.png" id="6_curveball_icon"]
+[ext_resource type="Texture2D" uid="uid://ci7wb81ejuhpb" path="res://assets/sprites/ui/abilities/phoenix/run_it_back.png" id="7_ultimate_icon"]
+[ext_resource type="Texture2D" uid="uid://y2g3p6jmv53b" path="res://assets/sprites/abilities/phoenix/curve_ball_explosion.png" id="8_flash_effect"]
+
+[resource]
+script = ExtResource("1_agent_data")
+agent_name = "Phoenix"
+agent_id = "phoenix"
+agent_sprite = ExtResource("2_agent_sprite")
+agent_color = Color(0.8235294, 0.6862745, 0.23137255, 1)
+loadout_scene = ExtResource("3_phoenix_loadout")
+flash_effect_texture = ExtResource("8_flash_effect")
+show_ability_bar = false
+ability_names = Array[String](["Blaze", "Hot Hands", "Curveball", "Run It Back"])
+ability_component_ids = Array[String](["Blaze", "HotHands", "Curveball"])
+ability_component_paths = Array[NodePath]([NodePath("Components/BlazeAbility"), NodePath("Components/HotHandsAbility"), NodePath("Components/CurveballAbility")])
+ability_input_actions = Array[String](["ability_slot_1", "ability_slot_2", "ability_slot_3"])
+ability_icons = Array[Texture2D]([ExtResource("4_blaze_icon"), ExtResource("5_hot_hands_icon"), ExtResource("6_curveball_icon"), ExtResource("7_ultimate_icon")])
+ability_key_labels = Array[String](["C", "Q", "E", "X"])
+ability_charge_keys = Array[String](["blaze", "hot_hands", "curveball", "ultimate"])
+ability_max_charges = Array[int]([1, 1, 2, 7])
+ability_kill_progress_keys = Array[String](["", "", "curveball_kill_progress", ""])
+ability_kills_per_charge = Array[int]([0, 0, 2, 0])
+ability_kill_markers_always_visible = Array[bool]([false, false, true])
+ultimate_charge_key = "ultimate"
+ultimate_charges_required = 7

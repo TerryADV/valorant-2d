@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bttbajdrtcbdx"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://l656a5qomln1" path="res://assets/sprites/ui/guns/operator.png" id="2_operator_tex"]
+[ext_resource type="Texture2D" uid="uid://cgpml256t4pb6" path="res://assets/sprites/weapons/operator.png" id="3_operator_game"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://dvq55g8oglhfj" path="res://assets/audio/sfx/weapons/operator_shot1.ogg" id="5_operator_shot_local"]
+[ext_resource type="AudioStream" uid="uid://b115hdt6v1qct" path="res://assets/audio/sfx/weapons/operator_shot2.ogg" id="6_operator_shot_range"]
+[ext_resource type="AudioStream" uid="uid://7p1a6dtlhlko" path="res://assets/audio/sfx/weapons/operator_reload.ogg" id="7_operator_reload"]
+[ext_resource type="AudioStream" uid="uid://bx55bk7aojfue" path="res://assets/audio/sfx/weapons/operator_equip.ogg" id="8_operator_equip"]
+
+[sub_resource type="Resource" id="OperatorEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("8_operator_equip")
+
+[sub_resource type="Resource" id="OperatorReloadAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_operator_reload")
+
+[sub_resource type="Resource" id="OperatorShotRangeAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_operator_shot_range")
+max_distance = 1000.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="OperatorShotLocalAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_operator_shot_local")
+volume_db = -5.0
+
+[resource]
+script = ExtResource("1_weapon")
+weapon_name = "Operator"
+weapon_type = "Sniper"
+is_automatic = false
+can_aim = true
+aim_zoom = 1.75
+aim_zoom_secondary = 2.5
+wall_penetration = "High"
+short_range = 0.0
+medium_range = 0.0
+short_damage = 150.0
+medium_damage = 150.0
+long_damage = 150.0
+fire_rate = 0.6
+hipfire_spread_degrees = 18.0
+magazine_size = 5
+reserve_ammo = 15
+reload_time = 3.7
+shot_audio = SubResource("OperatorShotRangeAudio")
+shot_local_audio = SubResource("OperatorShotLocalAudio")
+reload_audio = SubResource("OperatorReloadAudio")
+equip_audio = SubResource("OperatorEquipAudio")
+run_speed_multiplier = 0.75
+aim_move_speed_multiplier = 0.72
+aim_recoil_multiplier = 0.5
+equip_time = 1.1
+recoil_per_shot_degrees = 3.5
+max_recoil_degrees = 7.0
+recoil_recovery_speed = 4.0
+recoil_randomness_degrees = 0.2
+weapon_sprite = ExtResource("3_operator_game")
+ui_sprite = ExtResource("2_operator_tex")

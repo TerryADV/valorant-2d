@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://blwm6skfa5jve"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weap"]
+[ext_resource type="Texture2D" uid="uid://hkbjxl2w2ato" path="res://assets/sprites/weapons/vandal.png" id="2_vandal_tex"]
+[ext_resource type="Texture2D" uid="uid://dhx7js5mjm3im" path="res://assets/sprites/ui/guns/vandal.png" id="3_vandal_ui"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://cvg7kjmdda2ur" path="res://assets/audio/sfx/weapons/vandal_shot.ogg" id="5_vandal_shot"]
+[ext_resource type="AudioStream" uid="uid://byrd05mg2vvsn" path="res://assets/audio/sfx/weapons/vandal_reload.ogg" id="6_vandal_reload"]
+[ext_resource type="AudioStream" uid="uid://derxcoukt15iu" path="res://assets/audio/sfx/weapons/vandal_equip.ogg" id="7_vandal_equip"]
+
+[sub_resource type="Resource" id="VandalEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_vandal_equip")
+
+[sub_resource type="Resource" id="VandalReloadAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_vandal_reload")
+
+[sub_resource type="Resource" id="VandalShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_vandal_shot")
+max_distance = 800.0
+
+[resource]
+script = ExtResource("1_weap")
+can_aim = true
+aim_zoom = 1.25
+short_range = 0.0
+medium_range = 0.0
+medium_damage = 40.0
+long_damage = 40.0
+reserve_ammo = 50
+shot_audio = SubResource("VandalShotAudio")
+reload_audio = SubResource("VandalReloadAudio")
+equip_audio = SubResource("VandalEquipAudio")
+aim_fire_rate_multiplier = 0.9
+aim_move_speed_multiplier = 0.76
+aim_recoil_multiplier = 0.7
+equip_time = 1.0
+recoil_per_shot_degrees = 1.8
+max_recoil_degrees = 10.0
+recoil_recovery_speed = 7.0
+recoil_randomness_degrees = 0.45
+weapon_sprite = ExtResource("2_vandal_tex")
+ui_sprite = ExtResource("3_vandal_ui")

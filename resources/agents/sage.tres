@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="AgentData" format=3 uid="uid://de84jk77xfk2t"]
+
+[ext_resource type="Script" uid="uid://dr5y3256n783k" path="res://scripts/resources/agent_data.gd" id="1_agent_data"]
+[ext_resource type="Texture2D" uid="uid://3h1rfxvgrovm" path="res://assets/sprites/agents/sage.png" id="2_agent_sprite"]
+[ext_resource type="Texture2D" uid="uid://jdouf4b5kx5l" path="res://assets/sprites/ui/abilities/sage/barrier_orb.png" id="3_barrier_orb"]
+[ext_resource type="Texture2D" uid="uid://cepqfdydjqml8" path="res://assets/sprites/ui/abilities/sage/slow_orb.png" id="4_slow_orb"]
+[ext_resource type="Texture2D" uid="uid://mm75uedvmajo" path="res://assets/sprites/ui/abilities/sage/healing_orb.png" id="5_healing_orb"]
+[ext_resource type="Texture2D" uid="uid://cnn3bvfrakyuo" path="res://assets/sprites/ui/abilities/sage/resurrection.png" id="6_resurrection"]
+[ext_resource type="PackedScene" path="res://scenes/agents/sage/loadout.tscn" id="7_sage_loadout"]
+
+[resource]
+script = ExtResource("1_agent_data")
+agent_name = "Sage"
+agent_id = "sage"
+agent_sprite = ExtResource("2_agent_sprite")
+agent_color = Color(0.435294, 0.745098, 0.568627, 1)
+loadout_scene = ExtResource("7_sage_loadout")
+show_ability_bar = false
+ability_names = Array[String](["Barrier Orb", "Slow Orb", "Healing Orb", "Resurrection"])
+ability_component_ids = Array[String](["BarrierOrb", "SlowOrb", "HealingOrb", "Resurrection"])
+ability_component_paths = Array[NodePath]([NodePath("Components/BarrierOrbAbility"), NodePath("Components/SlowOrbAbility"), NodePath("Components/SageOrbAbility"), NodePath("Components/Resurrection")])
+ability_input_actions = Array[String](["ability_slot_1", "ability_slot_2", "ability_slot_3"])
+ability_icons = Array[Texture2D]([ExtResource("3_barrier_orb"), ExtResource("4_slow_orb"), ExtResource("5_healing_orb"), ExtResource("6_resurrection")])
+ability_key_labels = Array[String](["C", "Q", "E", "X"])
+ability_charge_keys = Array[String](["barrier_orb", "slow_orb", "healing_orb"])
+ability_max_charges = Array[int]([1, 2, 1])
+ability_recharge_times = Array[float]([0.0, 0.0, 45.0])
+ultimate_charge_key = "ultimate"
+ultimate_charges_required = 7

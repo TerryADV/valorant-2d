@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dw5rgc71l2y7s"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://drlrilayhoqyx" path="res://assets/sprites/weapons/spectre.png" id="2_spectre_tex"]
+[ext_resource type="Texture2D" uid="uid://crmts6kqqr0bu" path="res://assets/sprites/ui/guns/spectre.png" id="3_spectre_ui"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://dycgrvautb4b8" path="res://assets/audio/sfx/weapons/spectre_shoot.ogg" id="5_spectre_shoot"]
+[ext_resource type="AudioStream" uid="uid://c58k7tjjxmldr" path="res://assets/audio/sfx/weapons/spectre_equip.ogg" id="6_spectre_equip"]
+
+[sub_resource type="Resource" id="SpectreEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_spectre_equip")
+
+[sub_resource type="Resource" id="SpectreShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_spectre_shoot")
+max_distance = 400.0
+
+[resource]
+script = ExtResource("1_weapon")
+weapon_name = "Spectre"
+weapon_type = "SMG"
+can_aim = true
+aim_zoom = 1.15
+wall_penetration = "Low"
+short_damage = 26.0
+medium_damage = 22.0
+long_damage = 20.0
+fire_rate = 13.33
+magazine_size = 30
+reserve_ammo = 90
+reload_time = 2.25
+shot_audio = SubResource("SpectreShotAudio")
+equip_audio = SubResource("SpectreEquipAudio")
+run_speed_multiplier = 0.95
+aim_fire_rate_multiplier = 0.9
+aim_move_speed_multiplier = 0.76
+aim_recoil_multiplier = 0.7
+equip_time = 0.75
+recoil_per_shot_degrees = 1.2
+max_recoil_degrees = 7.0
+recoil_recovery_speed = 8.5
+recoil_randomness_degrees = 0.4
+tracer_enabled = false
+weapon_sprite = ExtResource("2_spectre_tex")
+ui_sprite = ExtResource("3_spectre_ui")

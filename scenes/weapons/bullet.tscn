@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://g6qxxbutsakb"]
+
+[ext_resource type="Script" uid="uid://bnct5veq4rq75" path="res://scripts/weapons/bullet.gd" id="1_bullet_script"]
+[ext_resource type="Texture2D" uid="uid://cqh4pqjp6xd7u" path="res://assets/sprites/weapons/bullet.png" id="1_mx1hr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uvjy3"]
+light_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km01e"]
+size = Vector2(2, 8)
+
+[node name="bullet" type="Area2D" unique_id=370829436]
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_bullet_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=434843982]
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_uvjy3")
+texture = ExtResource("1_mx1hr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2085009352]
+shape = SubResource("RectangleShape2D_km01e")

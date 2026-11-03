@@ -1,0 +1,3727 @@
+[gd_scene format=3 uid="uid://ctrlb3b3dyx3c"]
+
+[ext_resource type="Script" uid="uid://x3gk2bqttij0" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://c1h3c4nt38bab" path="res://assets/sprites/ui/main/timer.png" id="2_bo48s"]
+[ext_resource type="Texture2D" uid="uid://bg6ljco76s544" path="res://assets/sprites/ui/main/ally.png" id="3_h022r"]
+[ext_resource type="Texture2D" uid="uid://brdec6og6f4ry" path="res://assets/sprites/ui/main/ultimate.png" id="5_kicr4"]
+[ext_resource type="Texture2D" uid="uid://by3ntalnrlf4y" path="res://assets/sprites/ui/scoreboard/backgroundEnemy.png" id="6_evlmr"]
+[ext_resource type="Texture2D" uid="uid://bwpwfstcwju5q" path="res://assets/sprites/ui/main/ultimate_active.png" id="6_mj13f"]
+[ext_resource type="Texture2D" uid="uid://c4fipe7iusvcf" path="res://assets/sprites/ui/main/enemy.png" id="7_0h1do"]
+[ext_resource type="Texture2D" uid="uid://b1agduwtpfgv0" path="res://assets/sprites/ui/abilities/bar_under.png" id="10_erw67"]
+[ext_resource type="Texture2D" uid="uid://bvnftue4te5k6" path="res://assets/sprites/ui/main/decor1.png" id="10_kicr4"]
+[ext_resource type="Texture2D" uid="uid://xcvm382u4vyg" path="res://assets/sprites/ui/abilities/bar_progress.png" id="11_gonto"]
+[ext_resource type="Texture2D" uid="uid://cp6bp2v2p2ayb" path="res://assets/sprites/ui/main/Deathmach/decor1.png" id="13_27rlx"]
+[ext_resource type="Texture2D" uid="uid://dns82yq5m4mqs" path="res://assets/sprites/ui/main/decor2.png" id="13_cwdlq"]
+[ext_resource type="Texture2D" uid="uid://bquf2ywgfk8so" path="res://assets/sprites/ui/abilities/charge_ult.png" id="13_o6xly"]
+[ext_resource type="Texture2D" uid="uid://cc0cjau38l2t3" path="res://assets/sprites/ui/main/Deathmach/backgroundKillEnemy.png" id="14_kfdjh"]
+[ext_resource type="Texture2D" uid="uid://bswekotqkinus" path="res://assets/sprites/ui/main/decor3.png" id="14_o6xly"]
+[ext_resource type="Texture2D" uid="uid://1prmia53jik5" path="res://assets/sprites/ui/main/hp_under.png" id="14_ox568"]
+[ext_resource type="Texture2D" uid="uid://dsd2iu5q6hkl4" path="res://assets/sprites/ui/main/hp_progress.png" id="15_jl6hv"]
+[ext_resource type="Texture2D" uid="uid://dhx7js5mjm3im" path="res://assets/sprites/ui/guns/vandal.png" id="15_xdlig"]
+[ext_resource type="Texture2D" uid="uid://dw366uywbs3i6" path="res://assets/sprites/ui/abilities/kill.png" id="16_7yoph"]
+[ext_resource type="Texture2D" uid="uid://bju0c7hajd044" path="res://assets/sprites/ui/main/Deathmach/streak.png" id="16_lptj4"]
+[ext_resource type="Texture2D" uid="uid://c8bj13b35hygo" path="res://assets/sprites/ui/main/bullet.png" id="17_4mi7y"]
+[ext_resource type="Texture2D" uid="uid://jijiy7u5qhpu" path="res://assets/sprites/ui/main/shield1.png" id="17_kfdjh"]
+[ext_resource type="Texture2D" uid="uid://bkoucotmclahr" path="res://assets/sprites/ui/main/credits.png" id="18_gmc6u"]
+[ext_resource type="Texture2D" uid="uid://drx6tmi4kskr1" path="res://assets/sprites/ui/main/shield_ren_under.png" id="24_p0y6y"]
+[ext_resource type="Texture2D" uid="uid://cmrtqnos516gn" path="res://assets/sprites/ui/guns/knife.png" id="24_qmm8d"]
+[ext_resource type="Texture2D" uid="uid://dku5hlqheh6qd" path="res://assets/sprites/ui/main/shield_ren_progress.png" id="25_0sg42"]
+[ext_resource type="Texture2D" uid="uid://dosv3dsnhtxry" path="res://assets/sprites/ui/main/decorGun.png" id="25_t0png"]
+[ext_resource type="Texture2D" uid="uid://bh6o6o07hiyy8" path="res://assets/sprites/ui/main/Deathmach/characterContainer.png" id="26_character"]
+[ext_resource type="Texture2D" uid="uid://thhhinbcxuy1" path="res://assets/sprites/ui/main/Deathmach/bestPlayers.png" id="28_best"]
+[ext_resource type="Texture2D" uid="uid://ft4wrrwvb4yh" path="res://assets/sprites/ui/main/Deathmach/underbar.png" id="29_underbar"]
+[ext_resource type="Texture2D" uid="uid://ddx56p5qrvcst" path="res://assets/sprites/ui/state_good.png" id="30_83uk5"]
+[ext_resource type="Texture2D" uid="uid://8tmiolc0n0ss" path="res://assets/sprites/ui/main/Deathmach/playerBar.png" id="30_playerbar"]
+[ext_resource type="Texture2D" uid="uid://dyytxleouvjm6" path="res://assets/sprites/ui/abilities/phoenix/hot_hands.png" id="31_d778v"]
+[ext_resource type="Texture2D" uid="uid://cvpanelq18t2n" path="res://assets/sprites/abilities/ability_timer_under.png" id="32_83uk5"]
+[ext_resource type="Texture2D" uid="uid://dsggwvh6oadbw" path="res://assets/sprites/ui/main/state_bar_under.png" id="32_vul6o"]
+[ext_resource type="Texture2D" uid="uid://7bqq0lkxv5t4" path="res://assets/sprites/abilities/ability_timer_bar.png" id="33_d778v"]
+[ext_resource type="Texture2D" uid="uid://bj4xbabffig2" path="res://assets/sprites/ui/scoreboard/backgroundAlly.png" id="33_lptj4"]
+[ext_resource type="Texture2D" uid="uid://du8qlrte2vpsg" path="res://assets/sprites/ui/main/state_bar_progress.png" id="33_n8oob"]
+[ext_resource type="Texture2D" uid="uid://cbedqah741h8c" path="res://assets/sprites/ui/guns/shieldLarge.png" id="34_74gae"]
+[ext_resource type="Texture2D" uid="uid://56hxgeuqaktw" path="res://assets/sprites/ui/state_bad.png" id="34_evlmr"]
+[ext_resource type="Texture2D" uid="uid://bxxppu6t3evfh" path="res://assets/sprites/ui/guns/classic.png" id="35_33vp1"]
+[ext_resource type="Texture2D" uid="uid://l656a5qomln1" path="res://assets/sprites/ui/guns/operator.png" id="36_jpd3y"]
+[ext_resource type="Texture2D" uid="uid://c4vitycq28ol6" path="res://assets/sprites/ui/guns/judge.png" id="36_t4m8u"]
+[ext_resource type="Texture2D" uid="uid://crmts6kqqr0bu" path="res://assets/sprites/ui/guns/spectre.png" id="37_04enw"]
+[ext_resource type="Texture2D" uid="uid://h6gp2s38tfqg" path="res://assets/sprites/ui/guns/odin.png" id="38_rvhgw"]
+[ext_resource type="Texture2D" uid="uid://gtqu24h6p5tt" path="res://assets/sprites/ui/main/healing.png" id="40_kwu3u"]
+[ext_resource type="Texture2D" uid="uid://ceffu7lkfnht4" path="res://assets/sprites/ui/guns/shieldSmall.png" id="40_sj4ew"]
+[ext_resource type="Texture2D" uid="uid://pko4ugx0wddc" path="res://assets/sprites/ui/main/killbase.png" id="41_50c8b"]
+[ext_resource type="Texture2D" uid="uid://c45ieoeatlgan" path="res://assets/sprites/ui/guns/shieldMedium.png" id="41_83uk5"]
+[ext_resource type="Texture2D" uid="uid://cl05gywq0gary" path="res://assets/sprites/ui/main/kill5.png" id="42_50c8b"]
+[ext_resource type="Script" uid="uid://db7j4je3nwnk8" path="res://scripts/ui/shop_controller.gd" id="42_shop_controller"]
+[ext_resource type="Texture2D" uid="uid://cixtt858sm2ng" path="res://assets/sprites/ui/shop/shop_normal.png" id="44_owfu1"]
+[ext_resource type="Texture2D" uid="uid://dii1kb8qw46yr" path="res://assets/sprites/abilities/jett/tailwind.png" id="46_83uk5"]
+[ext_resource type="Texture2D" uid="uid://bgdrqrl6xr3ho" path="res://assets/sprites/ui/shop/shop_press.png" id="46_p0y6y"]
+[ext_resource type="Texture2D" uid="uid://dvtui5ae5mkqb" path="res://assets/sprites/ui/shop/shop_hover.png" id="47_0sg42"]
+[ext_resource type="Texture2D" uid="uid://b1fweidl5ou6g" path="res://assets/sprites/agents/phoenix.png" id="47_n8oob"]
+[ext_resource type="Texture2D" uid="uid://ug4qwl25xbvd" path="res://assets/sprites/agents/jett.png" id="47_vul6o"]
+[ext_resource type="Texture2D" uid="uid://3h1rfxvgrovm" path="res://assets/sprites/agents/sage.png" id="50_n5jjw"]
+[ext_resource type="Texture2D" uid="uid://c63fqm4q8frhd" path="res://assets/sprites/ui/abilities/charge1.png" id="51_charge1"]
+[ext_resource type="Texture2D" uid="uid://qsm4mls25rq4" path="res://assets/sprites/ui/abilities/sage/resurrection_hud.png" id="51_jl6hv"]
+[ext_resource type="Texture2D" uid="uid://c8yrj1yfu6skj" path="res://assets/sprites/ui/shield.png" id="60_tbigm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2pyt"]
+font_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_lpu0g"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpd3y"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_3nhxa"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_psd77"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_atrr0"]
+font_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_ujt0b"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_ox568"]
+font_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_uaxt0"]
+font_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_km01e"]
+font_size = 19
+shadow_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h022r"]
+shadow_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l4ybk"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_id7h0"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_74gae"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_kfdjh"]
+font_size = 6
+outline_size = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_l1lvh"]
+font_size = 11
+
+[sub_resource type="FontVariation" id="FontVariation_kicr4"]
+spacing_glyph = -2
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jqwt"]
+font_size = 27
+
+[sub_resource type="LabelSettings" id="LabelSettings_w07y7"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_mukf7"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxuhk"]
+font_size = 7
+
+[sub_resource type="FontVariation" id="FontVariation_ihb60"]
+spacing_glyph = -1
+
+[sub_resource type="LabelSettings" id="LabelSettings_6cuqg"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_pkwgd"]
+font_size = 12
+
+[sub_resource type="FontVariation" id="FontVariation_2gqpy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ihb60"]
+font_size = 11
+
+[sub_resource type="FontVariation" id="FontVariation_l4ybk"]
+spacing_glyph = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_2gqpy"]
+font_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_pqkln"]
+font_size = 9
+
+[sub_resource type="LabelSettings" id="LabelSettings_04enw"]
+font_size = 8
+
+[sub_resource type="FontVariation" id="FontVariation_uaxt0"]
+spacing_glyph = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_wdh2p"]
+font = SubResource("FontVariation_uaxt0")
+font_size = 17
+
+[node name="GameHud" type="CanvasLayer" unique_id=359321923]
+script = ExtResource("1_hud")
+metadata/_custom_type_script = "uid://x3gk2bqttij0"
+
+[node name="Control" type="Control" parent="." unique_id=573118190]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheatsPanel" type="PanelContainer" parent="Control" unique_id=997837893]
+visible = false
+z_index = 30
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = -55.0
+offset_right = 91.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Margin" type="MarginContainer" parent="Control/CheatsPanel" unique_id=1040601765]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 6
+
+[node name="VBox" type="VBoxContainer" parent="Control/CheatsPanel/Margin" unique_id=1088748914]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Title" type="Label" parent="Control/CheatsPanel/Margin/VBox" unique_id=1116500800]
+layout_mode = 2
+text = "MENU DE PRUEBAS (F1)"
+horizontal_alignment = 1
+
+[node name="InfiniteAbilities" type="CheckButton" parent="Control/CheatsPanel/Margin/VBox" unique_id=764898031]
+layout_mode = 2
+text = "Habilidades infinitas"
+
+[node name="InfiniteAmmo" type="CheckButton" parent="Control/CheatsPanel/Margin/VBox" unique_id=2048683817]
+layout_mode = 2
+text = "Munición infinita"
+
+[node name="InfiniteCredits" type="CheckButton" parent="Control/CheatsPanel/Margin/VBox" unique_id=670181054]
+layout_mode = 2
+text = "Créditos infinitos"
+
+[node name="Invulnerability" type="CheckButton" parent="Control/CheatsPanel/Margin/VBox" unique_id=1931242435]
+layout_mode = 2
+text = "Invulnerabilidad"
+
+[node name="Scoreboard" type="Control" parent="Control" unique_id=8529757]
+z_index = 21
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Deathmatch" type="Control" parent="Control/Scoreboard" unique_id=1693367978]
+visible = false
+layout_mode = 1
+anchor_left = 0.29900002
+anchor_top = 0.252
+anchor_right = 0.70100003
+anchor_bottom = 0.74100006
+offset_left = -0.44802856
+offset_top = -0.29600525
+offset_right = 1.447937
+offset_bottom = -0.16802979
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Scoreboard/Deathmatch" unique_id=73055574]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+alignment = 1
+
+[node name="Tittles" type="Control" parent="Control/Scoreboard/Deathmatch/VBoxContainer" unique_id=1495320516]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=1198522420]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097
+anchor_top = 0.11800001
+anchor_right = 0.142
+anchor_bottom = 0.76500005
+offset_left = -0.10499954
+offset_top = -0.005997181
+offset_right = -0.02999878
+offset_bottom = -0.004998207
+text = "NAME"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=1551084604]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34800002
+anchor_top = 0.11800001
+anchor_right = 0.42800003
+anchor_bottom = 0.76500005
+offset_left = 0.17999268
+offset_top = -0.005997181
+offset_right = -0.020019531
+offset_bottom = -0.004998207
+text = "ULTIMATE"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=652796210]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.11800001
+anchor_right = 0.563
+anchor_bottom = 0.76500005
+offset_left = -0.19500732
+offset_top = -0.005997181
+offset_right = 0.20498657
+offset_bottom = -0.004998207
+text = "KDA"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=34715830]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67700005
+anchor_top = 0.11800001
+anchor_right = 0.753
+anchor_bottom = 0.76500005
+offset_left = 0.1949768
+offset_top = -0.005997181
+offset_right = -0.14501953
+offset_bottom = -0.004998207
+text = "LOADOUT"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=1885907250]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9480001
+anchor_top = 0.11800001
+anchor_right = 0.99100006
+anchor_bottom = 0.76500005
+offset_left = 0.17996216
+offset_top = -0.005997181
+offset_right = 0.18496704
+offset_bottom = -0.004998207
+text = "PING"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Tittles" unique_id=452920727]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.84300005
+anchor_top = 0.11800001
+anchor_right = 0.901
+anchor_bottom = 0.76500005
+offset_left = 0.0049743652
+offset_top = -0.005997181
+offset_right = 0.035003662
+offset_bottom = -0.004998207
+text = "CREDS"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player" type="Control" parent="Control/Scoreboard/Deathmatch/VBoxContainer" unique_id=1094605854]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=2081045675]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.086
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 427.01
+offset_bottom = 14.0
+texture = ExtResource("33_lptj4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Agent" type="TextureRect" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=1931369010]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.002
+anchor_right = 0.045
+offset_left = -0.06999993
+offset_top = -6.0
+offset_right = 0.074998856
+offset_bottom = 14.0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=956628533]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097
+anchor_right = 0.323
+offset_left = -0.10499954
+offset_top = -6.0
+offset_right = -0.19500732
+offset_bottom = 13.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_lpu0g")
+vertical_alignment = 1
+
+[node name="Ult" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=24868335]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 0.20500183
+offset_top = -6.0
+offset_right = 0.16499329
+offset_bottom = 13.0
+text = "0 / 7"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KDA" type="Control" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=485302654]
+anchors_preset = 0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 22.0
+
+[node name="Kill" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player/KDA" unique_id=847275892]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 204.48
+offset_top = 12.0
+offset_right = 222.23999
+offset_bottom = 31.0
+text = "12"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dead" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player/KDA" unique_id=1531640210]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 232.48
+offset_top = 12.0
+offset_right = 242.23999
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Assits" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player/KDA" unique_id=79879294]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 255.48
+offset_top = 12.0
+offset_right = 266.24
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="TextureRect" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=1680305742]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 0.21496582
+offset_top = -5.0
+offset_right = 0.10998535
+offset_bottom = 12.0
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Shield" type="TextureRect" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=48675393]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 60.214966
+offset_top = -4.0
+offset_right = 30.109985
+offset_bottom = 10.0
+texture = ExtResource("34_74gae")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Creds" type="Control" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=935006575]
+layout_mode = 1
+anchor_left = 0.832
+anchor_right = 0.91
+offset_left = 0.11999512
+offset_top = -6.0
+offset_right = -0.15002441
+offset_bottom = 13.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player/Creds" unique_id=2030582916]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.316
+anchor_right = 0.22200002
+anchor_bottom = 0.684
+offset_left = -0.008000016
+offset_top = -0.004000187
+offset_right = 0.00799942
+offset_bottom = 0.00399971
+texture = ExtResource("18_gmc6u")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Label" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player/Creds" unique_id=1566506363]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_right = -4.0040016
+text = "99,999"
+label_settings = SubResource("LabelSettings_jpd3y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Control/Scoreboard/Deathmatch/VBoxContainer/Player" unique_id=1810179418]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_left = 324.75
+offset_top = -6.0
+offset_right = -67.63501
+offset_bottom = 12.0
+text = "50"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skirmish" type="Control" parent="Control/Scoreboard" unique_id=1182659837]
+visible = false
+layout_mode = 1
+anchor_left = 0.298
+anchor_top = 0.409
+anchor_right = 0.702
+anchor_bottom = 0.563
+
+[node name="Allies" type="VBoxContainer" parent="Control/Scoreboard/Skirmish" unique_id=149176185]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.001
+anchor_top = -0.091000006
+anchor_right = 1.0
+anchor_bottom = 0.38200003
+offset_left = 0.16937277
+offset_top = -12.950941
+offset_right = 0.16937256
+offset_bottom = -13.0329895
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+alignment = 2
+
+[node name="Player" type="Control" parent="Control/Scoreboard/Skirmish/Allies" unique_id=871121875]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=1196739320]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.086
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 427.01
+offset_bottom = 14.0
+texture = ExtResource("33_lptj4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Agent" type="TextureRect" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=354269921]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.002
+anchor_right = 0.045
+offset_left = -0.06999993
+offset_top = -6.0
+offset_right = 0.074998856
+offset_bottom = 14.0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=1379655059]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097
+anchor_right = 0.323
+offset_left = -0.10499954
+offset_top = -6.0
+offset_right = -0.19500732
+offset_bottom = 13.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_lpu0g")
+vertical_alignment = 1
+
+[node name="Ult" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=1406195397]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 0.20500183
+offset_top = -6.0
+offset_right = 0.16499329
+offset_bottom = 13.0
+text = "0 / 7"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KDA" type="Control" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=435333853]
+anchors_preset = 0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 22.0
+
+[node name="Kill" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player/KDA" unique_id=1023921043]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 204.48
+offset_top = 12.0
+offset_right = 222.23999
+offset_bottom = 31.0
+text = "12"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dead" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player/KDA" unique_id=138691459]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 232.48
+offset_top = 12.0
+offset_right = 242.23999
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Assits" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player/KDA" unique_id=135254511]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 255.48
+offset_top = 12.0
+offset_right = 266.24
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="TextureRect" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=843855046]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 0.21496582
+offset_top = -5.0
+offset_right = 0.10998535
+offset_bottom = 12.0
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Shield" type="TextureRect" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=1551188943]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 60.214966
+offset_top = -4.0
+offset_right = 30.109985
+offset_bottom = 10.0
+texture = ExtResource("34_74gae")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Creds" type="Control" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=812788806]
+layout_mode = 1
+anchor_left = 0.832
+anchor_right = 0.91
+offset_left = 0.11999512
+offset_top = -6.0
+offset_right = -0.15002441
+offset_bottom = 13.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Scoreboard/Skirmish/Allies/Player/Creds" unique_id=192691680]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.316
+anchor_right = 0.22200002
+anchor_bottom = 0.684
+offset_left = -0.008000016
+offset_top = -0.004000187
+offset_right = 0.00799942
+offset_bottom = 0.00399971
+texture = ExtResource("18_gmc6u")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Label" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player/Creds" unique_id=565625335]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_right = -4.0040016
+text = "99,999"
+label_settings = SubResource("LabelSettings_jpd3y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Control/Scoreboard/Skirmish/Allies/Player" unique_id=1969937907]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_left = 324.75
+offset_top = -6.0
+offset_right = -67.63501
+offset_bottom = 12.0
+text = "50"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemies" type="VBoxContainer" parent="Control/Scoreboard/Skirmish" unique_id=1894974024]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.587
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.2960205
+offset_top = 6.390072
+offset_right = -0.2960205
+offset_bottom = 6.3900757
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 21
+
+[node name="Player" type="Control" parent="Control/Scoreboard/Skirmish/Enemies" unique_id=1357491740]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1477097335]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.086
+offset_left = -2.0
+offset_top = -7.0
+offset_right = 427.01
+offset_bottom = 14.0
+texture = ExtResource("6_evlmr")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Agent" type="TextureRect" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1649339489]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.002
+anchor_right = 0.045
+offset_left = -0.06999993
+offset_top = -6.0
+offset_right = 0.074998856
+offset_bottom = 14.0
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1323763969]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097
+anchor_right = 0.323
+offset_left = -0.10499954
+offset_top = -6.0
+offset_right = -0.19500732
+offset_bottom = 13.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_lpu0g")
+vertical_alignment = 1
+
+[node name="Ult" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=2006088692]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 0.20500183
+offset_top = -6.0
+offset_right = 0.16499329
+offset_bottom = 13.0
+text = "0 / 7"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KDA" type="Control" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1374799766]
+anchors_preset = 0
+offset_top = -18.0
+offset_right = 40.0
+offset_bottom = 22.0
+
+[node name="Kill" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player/KDA" unique_id=1864030986]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 204.48
+offset_top = 12.0
+offset_right = 222.23999
+offset_bottom = 31.0
+text = "12"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dead" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player/KDA" unique_id=595819663]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 232.48
+offset_top = 12.0
+offset_right = 242.23999
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Assits" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player/KDA" unique_id=834176303]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.41900003
+offset_left = 255.48
+offset_top = 12.0
+offset_right = 266.24
+offset_bottom = 31.0
+text = "10"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="TextureRect" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=594448355]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 0.21496582
+offset_top = -5.0
+offset_right = 0.10998535
+offset_bottom = 12.0
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Shield" type="TextureRect" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=106038176]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64900005
+anchor_right = 0.74600005
+offset_left = 60.214966
+offset_top = -4.0
+offset_right = 30.109985
+offset_bottom = 10.0
+texture = ExtResource("34_74gae")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Creds" type="Control" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1225141914]
+layout_mode = 1
+anchor_left = 0.832
+anchor_right = 0.91
+offset_left = 0.11999512
+offset_top = -6.0
+offset_right = -0.15002441
+offset_bottom = 13.0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Scoreboard/Skirmish/Enemies/Player/Creds" unique_id=513216143]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.316
+anchor_right = 0.22200002
+anchor_bottom = 0.684
+offset_left = -0.008000016
+offset_top = -0.004000187
+offset_right = 0.00799942
+offset_bottom = 0.00399971
+texture = ExtResource("18_gmc6u")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Label" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player/Creds" unique_id=574647434]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_right = -4.0040016
+text = "99,999"
+label_settings = SubResource("LabelSettings_jpd3y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Control/Scoreboard/Skirmish/Enemies/Player" unique_id=1227700357]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 1.139
+anchor_bottom = 1.0
+offset_left = 324.75
+offset_top = -6.0
+offset_right = -67.63501
+offset_bottom = 12.0
+text = "50"
+label_settings = SubResource("LabelSettings_lpu0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tittles" type="Panel" parent="Control/Scoreboard/Skirmish" unique_id=1686677734]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.39000002
+anchor_right = 0.998
+anchor_bottom = 0.58100003
+offset_left = -0.29601997
+offset_top = 0.049110413
+offset_bottom = -0.011161804
+
+[node name="Label" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=1689733872]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.097
+anchor_top = 0.11800001
+anchor_right = 0.142
+anchor_bottom = 0.76500005
+offset_left = -0.10499954
+offset_top = -0.005997181
+offset_right = -0.02999878
+offset_bottom = -0.004998207
+text = "NAME"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=1248426631]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.34800002
+anchor_top = 0.11800001
+anchor_right = 0.42800003
+anchor_bottom = 0.76500005
+offset_left = 0.17999268
+offset_top = -0.005997181
+offset_right = -0.020019531
+offset_bottom = -0.004998207
+text = "ULTIMATE"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=1764970836]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 0.11800001
+anchor_right = 0.563
+anchor_bottom = 0.76500005
+offset_left = -0.19500732
+offset_top = -0.005997181
+offset_right = 0.20498657
+offset_bottom = -0.004998207
+text = "KDA"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=1224571715]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.67700005
+anchor_top = 0.11800001
+anchor_right = 0.753
+anchor_bottom = 0.76500005
+offset_left = 0.1949768
+offset_top = -0.005997181
+offset_right = -0.14501953
+offset_bottom = -0.004998207
+text = "LOADOUT"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=690430564]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9480001
+anchor_top = 0.11800001
+anchor_right = 0.99100006
+anchor_bottom = 0.76500005
+offset_left = 0.17996216
+offset_top = -0.005997181
+offset_right = 0.18496704
+offset_bottom = -0.004998207
+text = "PING"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Scoreboard/Skirmish/Tittles" unique_id=469349577]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.84300005
+anchor_top = 0.11800001
+anchor_right = 0.901
+anchor_bottom = 0.76500005
+offset_left = 0.0049743652
+offset_top = -0.005997181
+offset_right = 0.035003662
+offset_bottom = -0.004998207
+text = "CREDS"
+label_settings = SubResource("LabelSettings_g2pyt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Combat Report" type="Panel" parent="Control" unique_id=1566668812]
+z_index = 21
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.786
+anchor_top = 0.36600003
+anchor_right = 0.99000007
+anchor_bottom = 0.514
+offset_bottom = -0.07199097
+metadata/_edit_lock_ = true
+
+[node name="Report" type="VBoxContainer" parent="Control/Combat Report" unique_id=450375409]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.546
+anchor_right = 1.0
+anchor_bottom = 2.2700002
+offset_top = 43.50772
+offset_right = 0.00012207031
+offset_bottom = 0.020019531
+theme_override_constants/separation = 36
+
+[node name="Container" type="Control" parent="Control/Combat Report/Report" unique_id=478776328]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Combat Report/Report/Container" unique_id=80282152]
+modulate = Color(0.18039216, 0.18039216, 0.18039216, 0.78431374)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+offset_right = -0.0020446777
+offset_bottom = 35.01544
+texture = ExtResource("33_n8oob")
+
+[node name="Outgoing" type="Label" parent="Control/Combat Report/Report/Container" unique_id=779279694]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_right = 0.18300001
+offset_left = 0.06499958
+offset_right = -0.005004883
+offset_bottom = 35.0
+text = "55"
+label_settings = SubResource("LabelSettings_3nhxa")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Control/Combat Report/Report/Container/Outgoing" unique_id=627619635]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.54300004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.005001068
+grow_horizontal = 2
+grow_vertical = 2
+text = "ASSIST"
+label_settings = SubResource("LabelSettings_psd77")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Incoming" type="Label" parent="Control/Combat Report/Report/Container" unique_id=1754895082]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82600003
+anchor_right = 0.98700005
+offset_left = -0.11000061
+offset_right = 0.054992676
+offset_bottom = 35.0
+text = "55"
+label_settings = SubResource("LabelSettings_3nhxa")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Control/Combat Report/Report/Container/Incoming" unique_id=1554473626]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.54300004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.005001068
+grow_horizontal = 2
+grow_vertical = 2
+text = "ASSIST"
+label_settings = SubResource("LabelSettings_psd77")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Agent" type="TextureRect" parent="Control/Combat Report/Report/Container" unique_id=1050116245]
+texture_filter = 1
+layout_mode = 0
+offset_left = 63.0
+offset_right = 103.0
+offset_bottom = 35.0
+texture = ExtResource("47_n8oob")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Weapon" type="TextureRect" parent="Control/Combat Report/Report/Container" unique_id=877748559]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48100004
+anchor_right = 0.768
+offset_left = -0.03501129
+offset_top = 5.0
+offset_right = 0.047958374
+offset_bottom = 30.0
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Tittles" type="Control" parent="Control/Combat Report" unique_id=244433622]
+layout_mode = 1
+anchor_top = 0.83300006
+anchor_right = 0.998
+anchor_bottom = 1.0
+offset_left = -0.4720459
+offset_top = 0.0039367676
+offset_right = -0.002029419
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/Combat Report/Tittles" unique_id=455119931]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.187
+anchor_bottom = 1.0
+offset_right = 0.055000305
+text = "OUTGOING"
+label_settings = SubResource("LabelSettings_atrr0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Combat Report/Tittles" unique_id=1889064836]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31500003
+anchor_right = 0.71500003
+anchor_bottom = 1.0
+offset_left = -0.025009155
+offset_right = -0.025009155
+text = "COMBAT REPORT"
+label_settings = SubResource("LabelSettings_ujt0b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Combat Report/Tittles" unique_id=1260077511]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.81700003
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.004989624
+text = "INCOMING"
+label_settings = SubResource("LabelSettings_ox568")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Murdered" type="Control" parent="Control/Combat Report" unique_id=1273175997]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.83300006
+offset_bottom = 0.0039367676
+
+[node name="Kill" type="Label" parent="Control/Combat Report/Murdered" unique_id=888661603]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.35000002
+text = "KILLED BY VYPER"
+label_settings = SubResource("LabelSettings_uaxt0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Control/Combat Report/Murdered" unique_id=1311064656]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.35000002
+anchor_right = 0.22100002
+anchor_bottom = 1.0
+offset_right = 0.06499481
+texture = ExtResource("47_n8oob")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Main" type="Control" parent="Control" unique_id=106043275]
+z_index = 20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Top" type="Control" parent="Control/Main" unique_id=1472805882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Normal" type="Control" parent="Control/Main/Top" unique_id=600791289]
+layout_mode = 1
+anchor_left = 0.20600002
+anchor_top = 0.028
+anchor_right = 0.795
+anchor_bottom = 0.065000005
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Top/Normal" unique_id=2084970808]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.307
+anchor_top = -0.34
+anchor_right = 1.3080001
+anchor_bottom = 2.663
+offset_left = -0.00390625
+offset_top = 0.007839203
+offset_right = 0.17327881
+offset_bottom = 0.007904053
+texture = ExtResource("10_kicr4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Timer" type="MarginContainer" parent="Control/Main/Top/Normal" unique_id=1956861078]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = -0.13100001
+anchor_right = 0.554
+anchor_bottom = 1.0
+offset_left = 3.0517578e-05
+offset_right = 3.0517578e-05
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Normal/Timer" unique_id=1810659590]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_bo48s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Top/Normal/Timer" unique_id=803209523]
+layout_mode = 2
+text = "1:00"
+label_settings = SubResource("LabelSettings_km01e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AllysContainer" type="Control" parent="Control/Main/Top/Normal" unique_id=728400890]
+layout_mode = 1
+anchor_right = 0.41200003
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Normal/AllysContainer" unique_id=661610507]
+texture_filter = 1
+layout_mode = 0
+offset_right = 279.0
+offset_bottom = 23.0
+texture = ExtResource("3_h022r")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AgentContainer" type="MarginContainer" parent="Control/Main/Top/Normal/AllysContainer" unique_id=1833716541]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08400001
+anchor_top = -0.006
+anchor_right = 0.799
+anchor_bottom = 0.95900005
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Normal/AllysContainer/AgentContainer" unique_id=1431922363]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="Player1" type="TextureRect" parent="Control/Main/Top/Normal/AllysContainer/AgentContainer/HBoxContainer" unique_id=1783081760]
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("47_n8oob")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="UltimateInactive" type="TextureRect" parent="Control/Main/Top/Normal/AllysContainer/AgentContainer/HBoxContainer/Player1" unique_id=1780827477]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.078
+anchor_top = -0.312
+anchor_right = 1.0960001
+anchor_bottom = 1.0
+texture = ExtResource("5_kicr4")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="UltimateActive" type="TextureRect" parent="Control/Main/Top/Normal/AllysContainer/AgentContainer/HBoxContainer/Player1" unique_id=1875874708]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.078
+anchor_top = -0.312
+anchor_right = 1.0960001
+anchor_bottom = 1.0
+texture = ExtResource("6_mj13f")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Health" type="TextureProgressBar" parent="Control/Main/Top/Normal/AllysContainer/AgentContainer/HBoxContainer/Player1" unique_id=568861484]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009000001
+anchor_top = 1.0430001
+anchor_right = 1.023
+anchor_bottom = 1.274
+scale = Vector2(0.53, 0.53)
+value = 50.0
+texture_under = ExtResource("14_ox568")
+texture_progress = ExtResource("15_jl6hv")
+tint_under = Color(0.49803922, 0.49803922, 0.49803922, 0.49803922)
+
+[node name="Round" type="MarginContainer" parent="Control/Main/Top/Normal/AllysContainer" unique_id=606140884]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.83800006
+anchor_top = -0.006
+anchor_right = 0.93700004
+anchor_bottom = 0.99500006
+
+[node name="Label" type="Label" parent="Control/Main/Top/Normal/AllysContainer/Round" unique_id=1337538659]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_h022r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyContainer" type="Control" parent="Control/Main/Top/Normal" unique_id=1536113338]
+layout_mode = 1
+anchor_left = 0.588
+anchor_right = 1.001
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Normal/EnemyContainer" unique_id=238375178]
+texture_filter = 1
+layout_mode = 0
+offset_right = 279.7135
+offset_bottom = 23.0
+texture = ExtResource("7_0h1do")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="AgentContainer" type="MarginContainer" parent="Control/Main/Top/Normal/EnemyContainer" unique_id=1783986394]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.19700001
+anchor_top = -0.006
+anchor_right = 0.9110001
+anchor_bottom = 0.95900005
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Normal/EnemyContainer/AgentContainer" unique_id=1398398742]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Player1" type="TextureRect" parent="Control/Main/Top/Normal/EnemyContainer/AgentContainer/HBoxContainer" unique_id=1118750108]
+visible = false
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="UltimateInactive" type="TextureRect" parent="Control/Main/Top/Normal/EnemyContainer/AgentContainer/HBoxContainer/Player1" unique_id=1584945016]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.078
+anchor_top = -0.312
+anchor_right = 1.0960001
+anchor_bottom = 1.0
+texture = ExtResource("5_kicr4")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="UltimateActive" type="TextureRect" parent="Control/Main/Top/Normal/EnemyContainer/AgentContainer/HBoxContainer/Player1" unique_id=1767492404]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.078
+anchor_top = -0.312
+anchor_right = 1.0960001
+anchor_bottom = 1.0
+texture = ExtResource("6_mj13f")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Round" type="MarginContainer" parent="Control/Main/Top/Normal/EnemyContainer" unique_id=1781555306]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.061000004
+anchor_top = -0.006
+anchor_right = 0.15900001
+anchor_bottom = 0.99500006
+
+[node name="Label" type="Label" parent="Control/Main/Top/Normal/EnemyContainer/Round" unique_id=1425942152]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_h022r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Deathmatch" type="Control" parent="Control/Main/Top" unique_id=469028633]
+visible = false
+layout_mode = 1
+anchor_left = 0.20600002
+anchor_top = 0.028
+anchor_right = 0.795
+anchor_bottom = 0.065000005
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Timer" type="MarginContainer" parent="Control/Main/Top/Deathmatch" unique_id=1190505962]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44500002
+anchor_top = -0.423
+anchor_right = 0.554
+anchor_bottom = 0.95300007
+offset_left = -0.25698853
+offset_top = -0.002152443
+offset_right = -0.21655273
+offset_bottom = 0.0068683624
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Deathmatch/Timer" unique_id=1509216419]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_bo48s")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Top/Deathmatch/Timer" unique_id=1204295569]
+layout_mode = 2
+text = "1:00"
+label_settings = SubResource("LabelSettings_km01e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FirstPlayers" type="Control" parent="Control/Main/Top/Deathmatch" unique_id=1160157509]
+z_index = 1
+layout_mode = 1
+anchor_right = 0.41200003
+anchor_bottom = 1.0
+
+[node name="PlayersContainer" type="MarginContainer" parent="Control/Main/Top/Deathmatch/FirstPlayers" unique_id=668607582]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.069000006
+anchor_top = -0.423
+anchor_right = 0.99000007
+anchor_bottom = 0.95900005
+offset_left = 0.9771862
+offset_top = -0.002152443
+offset_right = -1.0700684
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer" unique_id=35456571]
+layout_mode = 2
+theme_override_constants/separation = 51
+
+[node name="Player" type="Control" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer" unique_id=858828385]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer/Player" unique_id=1804079301]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091000006
+anchor_bottom = 0.93900007
+offset_top = -0.0030002594
+offset_right = 42.0
+offset_bottom = 0.012998581
+texture = ExtResource("26_character")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Agent" type="TextureRect" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer/Player" unique_id=2107581742]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091000006
+anchor_bottom = 0.90900004
+offset_top = -0.0030002594
+offset_right = 28.0
+offset_bottom = 0.002998352
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kill" type="Label" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer/Player" unique_id=958551600]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.39400002
+anchor_bottom = 0.87900007
+offset_left = 28.0
+offset_top = -0.0020008087
+offset_right = 42.0
+offset_bottom = -0.007001877
+text = "40"
+label_settings = SubResource("LabelSettings_l4ybk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Best" type="TextureRect" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer/Player" unique_id=331544402]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.21200001
+offset_left = 37.0
+offset_right = 44.0
+offset_bottom = 0.00399971
+texture = ExtResource("28_best")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer/Player" unique_id=582796841]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0300001
+anchor_bottom = 1.0910001
+offset_top = 0.0099983215
+offset_right = 63.0
+offset_bottom = 1.9969978
+scale = Vector2(0.67, 0.5)
+max_value = 40.0
+value = 1.0
+texture_under = ExtResource("29_underbar")
+texture_progress = ExtResource("30_playerbar")
+
+[node name="LastPlayers" type="Control" parent="Control/Main/Top/Deathmatch" unique_id=1480472755]
+z_index = 1
+layout_mode = 1
+anchor_right = 0.41200003
+anchor_bottom = 1.0
+offset_left = 422.688
+offset_top = -0.144001
+offset_right = 422.68802
+offset_bottom = -0.144001
+
+[node name="PlayersContainer" type="MarginContainer" parent="Control/Main/Top/Deathmatch/LastPlayers" unique_id=2107819346]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.069000006
+anchor_top = -0.423
+anchor_right = 0.99000007
+anchor_bottom = 0.95900005
+offset_left = -0.7108002
+offset_top = 0.14184856
+offset_right = 23.241913
+offset_bottom = 0.1439991
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer" unique_id=1651834691]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Player" type="Control" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer" unique_id=735266067]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer/Player" unique_id=165308053]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091000006
+anchor_bottom = 0.93900007
+offset_top = -0.0030002594
+offset_right = 42.0
+offset_bottom = 0.012998581
+texture = ExtResource("26_character")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Agent" type="TextureRect" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer/Player" unique_id=1542057610]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.091000006
+anchor_bottom = 0.90900004
+offset_top = -0.0030002594
+offset_right = 28.0
+offset_bottom = 0.002998352
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kill" type="Label" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer/Player" unique_id=1618232953]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.39400002
+anchor_bottom = 0.87900007
+offset_left = 28.0
+offset_top = -0.0020008087
+offset_right = 42.0
+offset_bottom = -0.007001877
+text = "40"
+label_settings = SubResource("LabelSettings_l4ybk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Best" type="TextureRect" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer/Player" unique_id=656712221]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 0.21200001
+offset_left = 37.0
+offset_right = 44.0
+offset_bottom = 0.00399971
+texture = ExtResource("28_best")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer/Player" unique_id=1637002301]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0300001
+anchor_bottom = 1.0910001
+offset_top = 0.0099983215
+offset_right = 63.0
+offset_bottom = 1.9969978
+scale = Vector2(0.67, 0.5)
+max_value = 40.0
+value = 1.0
+texture_under = ExtResource("29_underbar")
+texture_progress = ExtResource("30_playerbar")
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Top/Deathmatch" unique_id=21246999]
+texture_filter = 1
+layout_mode = 0
+offset_left = -19.312012
+offset_top = -10.144001
+offset_right = 696.688
+offset_bottom = 54.856
+texture = ExtResource("13_27rlx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="KillsContainer" type="Control" parent="Control/Main/Top" unique_id=512694016]
+layout_mode = 1
+anchor_left = 0.79600006
+anchor_top = 0.102000006
+anchor_right = 0.998
+anchor_bottom = 0.28500003
+offset_left = 0.00793457
+offset_top = -0.09600067
+offset_right = 0.30395508
+offset_bottom = 0.3199768
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main/Top/KillsContainer" unique_id=2081353782]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Control" type="Control" parent="Control/Main/Top/KillsContainer/VBoxContainer" unique_id=2017913149]
+layout_mode = 2
+
+[node name="Bakcground" type="TextureRect" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control" unique_id=1225619542]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.026
+anchor_right = 0.97900003
+offset_left = 0.058000088
+offset_right = -0.10700989
+offset_bottom = 40.0
+texture = ExtResource("14_kfdjh")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Killer" type="TextureRect" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground" unique_id=745668358]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 0.085
+anchor_bottom = 0.75000006
+offset_right = 0.11000061
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground/Killer" unique_id=1127098598]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.1
+anchor_right = 4.5
+anchor_bottom = 1.0
+text = "Player"
+label_settings = SubResource("LabelSettings_id7h0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dead" type="TextureRect" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground" unique_id=1621497892]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.915
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.75000006
+offset_left = -0.11000061
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Label" type="Label" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground/Dead" unique_id=857866702]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -3.45
+anchor_right = -0.05
+anchor_bottom = 1.0
+text = "Player"
+label_settings = SubResource("LabelSettings_74gae")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon" type="TextureRect" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground" unique_id=1586424872]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.393
+anchor_top = 0.275
+anchor_right = 0.59800005
+anchor_bottom = 0.725
+offset_left = 0.038002014
+offset_right = 0.067993164
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Streak" type="TextureRect" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground" unique_id=556689561]
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.034
+anchor_top = 0.47500002
+anchor_right = 0.026
+anchor_bottom = 0.77500004
+offset_left = -0.043999672
+offset_right = -0.08400011
+texture = ExtResource("16_lptj4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Top/KillsContainer/VBoxContainer/Control/Bakcground/Streak" unique_id=685202108]
+z_index = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 11.0
+offset_bottom = 11.0
+text = "VIII"
+label_settings = SubResource("LabelSettings_kfdjh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="Control" parent="Control/Main" unique_id=199709673]
+layout_mode = 1
+anchor_left = 0.279
+anchor_top = 0.87700003
+anchor_right = 0.721
+anchor_bottom = 1.0
+
+[node name="HealthContainer" type="Control" parent="Control/Main/Bottom" unique_id=1136587246]
+layout_mode = 1
+anchor_top = 0.46500003
+anchor_right = 0.133
+anchor_bottom = 0.744
+
+[node name="Shield" type="Control" parent="Control/Main/Bottom/HealthContainer" unique_id=78529770]
+z_index = 1
+layout_mode = 1
+anchor_right = 0.37800002
+anchor_bottom = 1.0
+
+[node name="Shield1" type="TextureRect" parent="Control/Main/Bottom/HealthContainer/Shield" unique_id=790347739]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.016
+anchor_top = -0.106000006
+anchor_right = 0.961
+anchor_bottom = 1.018
+offset_left = 0.0015594959
+offset_top = -0.001232624
+offset_right = -0.008388519
+offset_bottom = 0.0039157867
+texture = ExtResource("17_kfdjh")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Bottom/HealthContainer/Shield" unique_id=1537190837]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.062000003
+anchor_top = 0.119
+anchor_right = 0.92200005
+anchor_bottom = 0.83800006
+offset_left = 0.0048593283
+offset_top = -0.0046503544
+offset_right = -0.010040283
+offset_bottom = 0.0066490173
+text = "50"
+label_settings = SubResource("LabelSettings_l1lvh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bar" type="TextureProgressBar" parent="Control/Main/Bottom/HealthContainer/Shield" unique_id=1714075365]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.25
+anchor_top = 0.119
+anchor_right = -0.063
+anchor_bottom = 0.82000005
+offset_left = -0.008349419
+offset_top = -0.004645586
+offset_right = 3.20469
+offset_bottom = 10.406927
+scale = Vector2(0.6, 0.6)
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("24_p0y6y")
+texture_progress = ExtResource("25_0sg42")
+
+[node name="Label" type="Label" parent="Control/Main/Bottom/HealthContainer/Shield/Bar" unique_id=1471918625]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.25
+anchor_top = 0.897
+anchor_right = 1.125
+anchor_bottom = 1.6570001
+text = "50
+"
+
+[node name="Health" type="MarginContainer" parent="Control/Main/Bottom/HealthContainer" unique_id=1293857593]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.37800002
+anchor_top = -0.46600002
+anchor_right = 1.013
+anchor_bottom = 1.439
+
+[node name="Label" type="Label" parent="Control/Main/Bottom/HealthContainer/Health" unique_id=1385384085]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_kicr4")
+text = "100"
+label_settings = SubResource("LabelSettings_4jqwt")
+horizontal_alignment = 1
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Bottom/HealthContainer" unique_id=1215636597]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.021000002
+anchor_top = -0.286
+anchor_right = 1.8550001
+anchor_bottom = 1.2880001
+offset_left = 0.014131069
+offset_top = 0.0015015602
+offset_right = -0.03136444
+offset_bottom = -0.00018692017
+texture = ExtResource("13_cwdlq")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Ability&Bar" type="Control" parent="Control/Main/Bottom" unique_id=782204321]
+layout_mode = 1
+anchor_left = 0.245
+anchor_top = -0.004
+anchor_right = 0.757
+anchor_bottom = 1.0
+
+[node name="Bar" type="Control" parent="Control/Main/Bottom/Ability&Bar" unique_id=2037476836]
+layout_mode = 1
+anchor_left = 0.004
+anchor_right = 0.99500006
+anchor_bottom = 0.15300001
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Main/Bottom/Ability&Bar/Bar" unique_id=1092620320]
+layout_mode = 0
+offset_right = 258.0
+offset_bottom = 12.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/Main/Bottom/Ability&Bar/Bar/MarginContainer" unique_id=64139199]
+texture_filter = 1
+layout_mode = 2
+nine_patch_stretch = true
+texture_under = ExtResource("10_erw67")
+texture_progress = ExtResource("11_gonto")
+
+[node name="Label" type="Label" parent="Control/Main/Bottom/Ability&Bar/Bar" unique_id=675162365]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 1.2270001
+anchor_right = 0.55300003
+anchor_bottom = 2.697
+text = "100"
+label_settings = SubResource("LabelSettings_w07y7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar" unique_id=595174591]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.469
+anchor_top = 0.063
+anchor_right = 1.1960001
+anchor_bottom = 0.82500005
+offset_left = -0.8887558
+offset_top = -1.0186701
+offset_right = -0.9580078
+offset_bottom = -0.996048
+texture = ExtResource("14_o6xly")
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="AbilityTimer" type="TextureProgressBar" parent="Control/Main/Bottom/Ability&Bar" unique_id=117264757]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21300001
+anchor_top = -1.8220001
+anchor_right = 0.794
+anchor_bottom = -1.6190001
+scale = Vector2(0.6, 0.6)
+value = 10.0
+texture_under = ExtResource("32_83uk5")
+texture_progress = ExtResource("33_d778v")
+
+[node name="Name" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityTimer" unique_id=327936325]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.009000001
+anchor_top = 1.0760001
+anchor_right = 0.994
+anchor_bottom = 1.705
+offset_left = -0.08082819
+offset_top = -0.0114860535
+offset_right = 0.032470703
+offset_bottom = 0.0055160522
+text = "RUN IT BACK"
+label_settings = SubResource("LabelSettings_mukf7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityContainer" type="HBoxContainer" parent="Control/Main/Bottom/Ability&Bar" unique_id=1670515553]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.163
+anchor_right = 0.99300003
+anchor_bottom = 0.98800004
+offset_top = -1.5258789e-05
+offset_right = 0.122680664
+offset_bottom = -0.018821716
+theme_override_constants/separation = 68
+alignment = 1
+
+[node name="Ability1" type="Control" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer" unique_id=2022313608]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1" unique_id=2035582653]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.80300003
+anchor_right = 0.015000001
+anchor_bottom = 1.0150001
+offset_left = -2.5
+offset_top = -0.018924713
+offset_right = 5.8418884
+offset_bottom = -0.010925293
+grow_horizontal = 2
+grow_vertical = 2
+text = "C"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cooldown" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1" unique_id=1615985428]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.060000002
+anchor_right = 0.015000001
+anchor_bottom = 0.272
+offset_left = 14.841919
+offset_top = 0.019076347
+offset_right = 23.183807
+offset_bottom = 0.027078629
+grow_horizontal = 2
+grow_vertical = 2
+text = "30"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1" unique_id=1246490999]
+texture_filter = 1
+layout_mode = 0
+offset_left = -14.5
+offset_top = 7.788025
+offset_right = 14.5
+offset_bottom = 36.788025
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Charge" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1" unique_id=95145929]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57500005
+anchor_bottom = 0.90900004
+offset_left = -27.158081
+offset_top = 0.029060364
+offset_right = 28.841919
+offset_bottom = -0.0149383545
+texture = ExtResource("51_charge1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kill" type="HBoxContainer" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1" unique_id=2130621738]
+layout_mode = 0
+offset_left = -27.158081
+offset_right = 28.841919
+offset_bottom = 6.0
+alignment = 1
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1/Kill" unique_id=408232357]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability1/Kill" unique_id=1538578039]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Ability2" type="Control" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer" unique_id=347319885]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2" unique_id=609242104]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.80300003
+anchor_right = 0.015000001
+anchor_bottom = 1.0150001
+offset_left = -2.5
+offset_top = -0.018924713
+offset_right = 5.8418884
+offset_bottom = -0.010925293
+grow_horizontal = 2
+grow_vertical = 2
+text = "Q"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cooldown" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2" unique_id=1261317676]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.060000002
+anchor_right = 0.015000001
+anchor_bottom = 0.272
+offset_left = 14.841919
+offset_top = 0.019076347
+offset_right = 23.183807
+offset_bottom = 0.027078629
+grow_horizontal = 2
+grow_vertical = 2
+text = "30"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2" unique_id=2128407513]
+texture_filter = 1
+layout_mode = 0
+offset_left = -14.5
+offset_top = 7.788025
+offset_right = 14.5
+offset_bottom = 36.788025
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Charge" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2" unique_id=424474532]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57500005
+anchor_bottom = 0.90900004
+offset_left = -27.158081
+offset_top = 0.029060364
+offset_right = 28.841919
+offset_bottom = -0.0149383545
+texture = ExtResource("51_charge1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kill" type="HBoxContainer" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2" unique_id=372283364]
+layout_mode = 0
+offset_left = -27.158081
+offset_right = 28.841919
+offset_bottom = 6.0
+alignment = 1
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2/Kill" unique_id=1248213277]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability2/Kill" unique_id=1041980077]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Ability3" type="Control" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer" unique_id=1768852211]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3" unique_id=2049021561]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.80300003
+anchor_right = 0.015000001
+anchor_bottom = 1.0150001
+offset_left = -2.5
+offset_top = -0.018924713
+offset_right = 5.8418884
+offset_bottom = -0.010925293
+grow_horizontal = 2
+grow_vertical = 2
+text = "E"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cooldown" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3" unique_id=2031979593]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.060000002
+anchor_right = 0.015000001
+anchor_bottom = 0.272
+offset_left = 14.841919
+offset_top = 0.019076347
+offset_right = 23.183807
+offset_bottom = 0.027078629
+grow_horizontal = 2
+grow_vertical = 2
+text = "30"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3" unique_id=1950127233]
+texture_filter = 1
+layout_mode = 0
+offset_left = -14.5
+offset_top = 7.788025
+offset_right = 14.5
+offset_bottom = 36.788025
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Charge" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3" unique_id=163796669]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57500005
+anchor_bottom = 0.90900004
+offset_left = -27.158081
+offset_top = 0.029060364
+offset_right = 28.841919
+offset_bottom = -0.0149383545
+texture = ExtResource("51_charge1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kill" type="HBoxContainer" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3" unique_id=38117318]
+layout_mode = 0
+offset_left = -27.158081
+offset_right = 28.841919
+offset_bottom = 6.0
+alignment = 1
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3/Kill" unique_id=684188279]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ability3/Kill" unique_id=310958602]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("16_7yoph")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Ultimate" type="Control" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer" unique_id=545455916]
+layout_mode = 2
+
+[node name="Key" type="Label" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ultimate" unique_id=796987732]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.015000001
+anchor_top = 0.80300003
+anchor_right = 0.015000001
+anchor_bottom = 1.0150001
+offset_left = -2.5
+offset_top = -0.018924713
+offset_right = 5.8418884
+offset_bottom = -0.010925293
+grow_horizontal = 2
+grow_vertical = 2
+text = "X"
+label_settings = SubResource("LabelSettings_fxuhk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Image" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ultimate" unique_id=1265268727]
+texture_filter = 1
+layout_mode = 0
+offset_left = -14.5
+offset_top = 7.788025
+offset_right = 14.5
+offset_bottom = 36.788025
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Charge" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ultimate" unique_id=216826760]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57500005
+anchor_bottom = 0.90900004
+offset_left = -27.158081
+offset_top = 0.029060364
+offset_right = 28.841919
+offset_bottom = -0.0149383545
+texture = ExtResource("51_charge1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ultimate" unique_id=881769615]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.57500005
+anchor_bottom = 0.651
+offset_left = -27.158081
+offset_top = 0.029060364
+offset_right = 28.841919
+offset_bottom = 0.013061523
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/Ability&Bar/AbilityContainer/Ultimate/HBoxContainer" unique_id=229339512]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("13_o6xly")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="BulletContainer" type="Control" parent="Control/Main/Bottom" unique_id=1366723972]
+layout_mode = 1
+anchor_left = 0.88100004
+anchor_top = 0.46100003
+anchor_right = 0.99100006
+anchor_bottom = 0.749
+offset_bottom = 16.045258
+
+[node name="Bullets" type="Label" parent="Control/Main/Bottom/BulletContainer" unique_id=745227216]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.5
+anchor_top = -0.20600002
+anchor_right = 0.767
+anchor_bottom = 0.794
+offset_left = 0.0059509277
+offset_right = 0.0156059265
+theme_override_fonts/font = SubResource("FontVariation_ihb60")
+text = "100"
+label_settings = SubResource("LabelSettings_6cuqg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ammunition" type="Label" parent="Control/Main/Bottom/BulletContainer" unique_id=841401674]
+z_index = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.80300003
+anchor_top = 0.05
+anchor_right = 1.143
+anchor_bottom = 0.48600003
+offset_left = 0.02462387
+offset_top = 0.010437012
+offset_right = -0.018844604
+offset_bottom = 0.010437012
+theme_override_fonts/font = SubResource("FontVariation_ihb60")
+text = "200"
+label_settings = SubResource("LabelSettings_pkwgd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/Main/Bottom/BulletContainer" unique_id=577059884]
+z_index = 1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.55300003
+anchor_top = 0.127
+anchor_right = 0.767
+anchor_bottom = 0.409
+offset_left = 0.027189255
+offset_top = 0.007446289
+offset_right = 0.027191162
+offset_bottom = 0.007446289
+texture = ExtResource("17_4mi7y")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Bottom/BulletContainer" unique_id=1897940923]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.393
+anchor_top = -0.12900001
+anchor_right = 1.2850001
+anchor_bottom = 0.717
+offset_left = 0.023155212
+offset_top = -0.008489609
+offset_right = 0.027770996
+offset_bottom = -0.0024909973
+texture = ExtResource("13_cwdlq")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+metadata/_edit_lock_ = true
+
+[node name="States" type="Control" parent="Control/Main/Bottom" unique_id=838571497]
+layout_mode = 1
+anchor_left = 0.064
+anchor_top = -0.81900007
+anchor_right = 0.93600005
+anchor_bottom = 0.24700001
+offset_left = 0.0041999817
+offset_top = -0.018455505
+offset_right = -0.0043029785
+offset_bottom = 0.017095566
+
+[node name="Good" type="VBoxContainer" parent="Control/Main/Bottom/States" unique_id=814287518]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.187
+anchor_bottom = 1.0
+offset_right = 55.305313
+offset_bottom = 56.666687
+scale = Vector2(0.6, 0.6)
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/States/Good" unique_id=108751330]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("30_83uk5")
+stretch_mode = 5
+
+[node name="Effect" type="Label" parent="Control/Main/Bottom/States/Good/1" unique_id=392778923]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.072000004
+anchor_right = 0.76100004
+anchor_bottom = 0.85600007
+offset_left = 0.063999176
+offset_right = -0.018005371
+offset_bottom = -0.013254166
+text = "HEALING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Control/Main/Bottom/States/Good/1" unique_id=1428750093]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.777
+anchor_top = 0.066
+anchor_right = 0.966
+anchor_bottom = 0.924
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_d778v")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Time" type="TextureProgressBar" parent="Control/Main/Bottom/States/Good/1" unique_id=2128569641]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.162
+anchor_top = 0.83500004
+anchor_right = 0.76500005
+anchor_bottom = 0.9850001
+value = 40.0
+fill_mode = 1
+texture_under = ExtResource("32_vul6o")
+texture_progress = ExtResource("33_n8oob")
+
+[node name="Bad" type="VBoxContainer" parent="Control/Main/Bottom/States" unique_id=286792000]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.187
+anchor_bottom = 1.0
+offset_left = 362.19998
+offset_top = 8.0
+offset_right = 417.17212
+offset_bottom = 49.666687
+scale = Vector2(0.6, 0.6)
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="1" type="TextureRect" parent="Control/Main/Bottom/States/Bad" unique_id=1430885114]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("34_evlmr")
+stretch_mode = 5
+
+[node name="Effect" type="Label" parent="Control/Main/Bottom/States/Bad/1" unique_id=2024497414]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23900001
+anchor_right = 0.94000006
+anchor_bottom = 0.85600007
+offset_left = 0.018119812
+offset_right = -0.053253174
+offset_bottom = -0.013254166
+text = "HEALING"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Control/Main/Bottom/States/Bad/1" unique_id=467119057]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.034
+anchor_top = 0.078
+anchor_right = 0.223
+anchor_bottom = 0.93600005
+offset_left = -0.025206566
+offset_top = -0.006606579
+offset_right = -0.025205612
+offset_bottom = -0.0066070557
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("31_d778v")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Time" type="TextureProgressBar" parent="Control/Main/Bottom/States/Bad/1" unique_id=502076378]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.23300001
+anchor_top = 0.83500004
+anchor_right = 0.83400005
+anchor_bottom = 1.0020001
+offset_right = -21.114006
+offset_bottom = -0.06000328
+value = 40.0
+texture_under = ExtResource("32_vul6o")
+texture_progress = ExtResource("33_n8oob")
+
+[node name="Credits" type="Control" parent="Control/Main" unique_id=1977185886]
+layout_mode = 1
+anchor_left = 0.943
+anchor_top = 0.961
+anchor_right = 0.97400004
+anchor_bottom = 0.97700006
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Main/Credits" unique_id=415026407]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.009000001
+anchor_top = 0.026
+anchor_right = 0.187
+anchor_bottom = 0.89400005
+offset_left = -0.0146484375
+texture = ExtResource("18_gmc6u")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Control/Main/Credits" unique_id=1852991504]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.215
+anchor_top = -0.36
+anchor_right = 1.0270001
+anchor_bottom = 1.184
+theme_override_fonts/font = SubResource("FontVariation_2gqpy")
+text = "9,000"
+label_settings = SubResource("LabelSettings_ihb60")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Guns" type="Control" parent="Control/Main" unique_id=2134722754]
+layout_mode = 1
+anchor_left = 0.882
+anchor_top = 0.611
+anchor_right = 1.0
+anchor_bottom = 0.84300005
+
+[node name="Knife" type="Control" parent="Control/Main/Guns" unique_id=1783740157]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.333
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="MarginContainer" parent="Control/Main/Guns/Knife" unique_id=548386427]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.081
+anchor_right = 0.65400004
+anchor_bottom = 0.5
+offset_left = 0.022032738
+offset_right = 0.033821106
+offset_bottom = 0.04103279
+
+[node name="TextureRect" type="TextureRect" parent="Control/Main/Guns/Knife/Image" unique_id=55792239]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("24_qmm8d")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Name" type="Label" parent="Control/Main/Guns/Knife" unique_id=968888935]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36
+anchor_top = 0.601
+anchor_right = 0.647
+anchor_bottom = 0.82100004
+offset_left = -0.0010070801
+offset_top = -0.015209198
+offset_right = -0.014633179
+offset_bottom = -0.015209198
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "MELEE"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Control/Main/Guns/Knife" unique_id=209726089]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846
+anchor_top = 0.38000003
+anchor_right = 0.89000005
+anchor_bottom = 0.59900004
+offset_left = -0.06591797
+offset_top = -0.023519516
+offset_right = -0.04710388
+offset_bottom = 0.012924194
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "3"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Guns/Knife" unique_id=1660840475]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.71300006
+anchor_right = 0.85300004
+anchor_bottom = 0.97900003
+offset_left = 0.013679504
+offset_right = -0.017356873
+offset_bottom = -0.010597229
+texture = ExtResource("25_t0png")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Gun2" type="Control" parent="Control/Main/Guns" unique_id=1921487253]
+layout_mode = 1
+anchor_top = 0.333
+anchor_right = 1.0
+anchor_bottom = 0.666
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="MarginContainer" parent="Control/Main/Guns/Gun2" unique_id=182394652]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.081
+anchor_right = 0.65400004
+anchor_bottom = 0.5
+offset_left = 0.022032738
+offset_right = 0.033821106
+offset_bottom = 0.04103279
+
+[node name="TextureRect" type="TextureRect" parent="Control/Main/Guns/Gun2/Image" unique_id=234593993]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("24_qmm8d")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Name" type="Label" parent="Control/Main/Guns/Gun2" unique_id=1939156444]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36
+anchor_top = 0.601
+anchor_right = 0.647
+anchor_bottom = 0.82100004
+offset_left = -0.0010070801
+offset_top = -0.015209198
+offset_right = -0.014633179
+offset_bottom = -0.015209198
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "MELEE"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Control/Main/Guns/Gun2" unique_id=237297614]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846
+anchor_top = 0.38000003
+anchor_right = 0.89000005
+anchor_bottom = 0.59900004
+offset_left = -0.06591797
+offset_top = -0.023519516
+offset_right = -0.04710388
+offset_bottom = 0.012924194
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "3"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Guns/Gun2" unique_id=1886883248]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.71300006
+anchor_right = 0.85300004
+anchor_bottom = 0.97900003
+offset_left = 0.013679504
+offset_right = -0.017356873
+offset_bottom = -0.010597229
+texture = ExtResource("25_t0png")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Gun1" type="Control" parent="Control/Main/Guns" unique_id=1013914677]
+layout_mode = 1
+anchor_top = 0.666
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="MarginContainer" parent="Control/Main/Guns/Gun1" unique_id=413861941]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.095000006
+anchor_top = 0.081
+anchor_right = 0.65400004
+anchor_bottom = 0.5
+offset_left = 0.022032738
+offset_right = 0.033821106
+offset_bottom = 0.04103279
+
+[node name="TextureRect" type="TextureRect" parent="Control/Main/Guns/Gun1/Image" unique_id=196478876]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("24_qmm8d")
+expand_mode = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="Name" type="Label" parent="Control/Main/Guns/Gun1" unique_id=1909057016]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.36
+anchor_top = 0.601
+anchor_right = 0.647
+anchor_bottom = 0.82100004
+offset_left = -0.0010070801
+offset_top = -0.015209198
+offset_right = -0.014633179
+offset_bottom = -0.015209198
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "MELEE"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="Control/Main/Guns/Gun1" unique_id=959444123]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846
+anchor_top = 0.38000003
+anchor_right = 0.89000005
+anchor_bottom = 0.59900004
+offset_left = -0.06591797
+offset_top = -0.023519516
+offset_right = -0.04710388
+offset_bottom = 0.012924194
+theme_override_fonts/font = SubResource("FontVariation_l4ybk")
+text = "3"
+label_settings = SubResource("LabelSettings_2gqpy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Decor" type="TextureRect" parent="Control/Main/Guns/Gun1" unique_id=1658227890]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.71300006
+anchor_right = 0.85300004
+anchor_bottom = 0.97900003
+offset_left = 0.013679504
+offset_right = -0.017356873
+offset_bottom = -0.010597229
+texture = ExtResource("25_t0png")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Kill" type="TextureRect" parent="Control/Main" unique_id=600878382]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.448
+anchor_top = 0.711
+anchor_right = 0.551
+anchor_bottom = 0.89500004
+texture = ExtResource("41_50c8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Count" type="TextureRect" parent="Control/Main/Kill" unique_id=693501403]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(59.904, 57.75)
+texture = ExtResource("42_50c8b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Shop" type="Panel" parent="Control" unique_id=886080987]
+visible = false
+z_index = 100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("42_shop_controller")
+metadata/_edit_lock_ = true
+
+[node name="Classic" type="TextureButton" parent="Control/Shop" unique_id=230381989]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.22000001
+anchor_top = 0.134
+anchor_right = 0.296
+anchor_bottom = 0.23300001
+offset_bottom = -7.1279907
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Classic" unique_id=1893873238]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31500003
+anchor_top = 0.16100001
+anchor_right = 0.69200003
+anchor_bottom = 0.652
+offset_left = -0.018903732
+offset_top = -0.012867928
+offset_right = -0.026000977
+offset_bottom = -0.01166153
+texture = ExtResource("35_33vp1")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Classic" unique_id=154652023]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.661
+anchor_top = 0.49400002
+anchor_right = 0.89800006
+anchor_bottom = 0.72200006
+offset_left = 0.021835327
+offset_top = -0.001865387
+offset_right = 0.033111572
+offset_bottom = -0.0033454895
+text = "FREE"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Classic" unique_id=1010020228]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.514
+anchor_top = 0.70400006
+anchor_right = 0.91
+anchor_bottom = 0.93200004
+offset_left = 0.040138245
+offset_top = 0.023086548
+offset_right = -0.02961731
+offset_bottom = 0.021614075
+text = "CLASSIC"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vandal" type="TextureButton" parent="Control/Shop" unique_id=1239712902]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.432
+anchor_top = 0.57900006
+anchor_right = 0.56600004
+anchor_bottom = 0.68500006
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Vandal" unique_id=334439779]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.14500001
+anchor_top = 0.16100001
+anchor_right = 0.84400004
+anchor_bottom = 0.85600007
+offset_left = -0.04739189
+offset_top = -0.012867928
+offset_right = 0.049331665
+offset_bottom = 0.0110321045
+texture = ExtResource("15_xdlig")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Vandal" unique_id=1401776131]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.80500007
+anchor_top = 0.59400004
+anchor_right = 0.961
+anchor_bottom = 0.78300005
+offset_left = 0.06969452
+offset_top = 0.007293701
+offset_right = -0.01171875
+offset_bottom = 0.025260925
+text = "2,900"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Vandal" unique_id=110608021]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.74100006
+anchor_top = 0.754
+anchor_right = 0.98
+anchor_bottom = 0.94400007
+offset_left = -0.050712585
+offset_top = 0.01720047
+offset_right = 0.05532837
+offset_bottom = -0.03352356
+text = "VANDAL"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Judge" type="TextureButton" parent="Control/Shop" unique_id=2126903441]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.568
+anchor_right = 0.43
+anchor_bottom = 0.68500006
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Judge" unique_id=746035766]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.14500001
+anchor_top = 0.16100001
+anchor_right = 0.84400004
+anchor_bottom = 0.85600007
+offset_left = 1.8652668
+offset_top = -0.012867928
+offset_right = -0.15400696
+offset_bottom = 0.0110321045
+texture = ExtResource("36_t4m8u")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Judge" unique_id=804844618]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.777
+anchor_top = 0.632
+anchor_right = 0.95300007
+anchor_bottom = 0.804
+offset_left = -0.046272278
+offset_top = 0.020263672
+offset_right = 0.02897644
+offset_bottom = -0.020088196
+text = "1,850"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Judge" unique_id=414809440]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.725
+anchor_top = 0.777
+anchor_right = 0.96500003
+anchor_bottom = 0.96700007
+offset_left = 0.022399902
+offset_top = 0.026943207
+offset_right = -0.007507324
+offset_bottom = -0.023780823
+text = "JUDGE"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spectre" type="TextureButton" parent="Control/Shop" unique_id=2101639900]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.312
+anchor_top = 0.27600002
+anchor_right = 0.43
+anchor_bottom = 0.41300002
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Spectre" unique_id=1978439102]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15900001
+anchor_top = 0.16100001
+anchor_right = 0.84400004
+anchor_bottom = 0.85600007
+offset_left = -0.037837982
+offset_top = -0.012867928
+offset_right = -0.15400696
+offset_bottom = 0.0110321045
+texture = ExtResource("37_04enw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Spectre" unique_id=314822272]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.777
+anchor_top = 0.67800003
+anchor_right = 0.95300007
+anchor_bottom = 0.82400006
+offset_left = -0.046272278
+offset_top = -0.038150787
+offset_right = 0.02897644
+offset_bottom = 0.0005493164
+text = "1,850"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Spectre" unique_id=474600442]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.65900004
+anchor_top = 0.79
+anchor_right = 0.93900007
+anchor_bottom = 0.98
+offset_left = -0.0058288574
+offset_top = 0.018936157
+offset_right = -0.06791687
+offset_bottom = -0.03177643
+text = "SPECTRE"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Odin" type="TextureButton" parent="Control/Shop" unique_id=2143917058]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.568
+anchor_top = 0.568
+anchor_right = 0.689
+anchor_bottom = 0.68500006
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Odin" unique_id=711808429]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15900001
+anchor_top = 0.16100001
+anchor_right = 0.84400004
+anchor_bottom = 0.85600007
+offset_left = -0.037837982
+offset_top = -0.012867928
+offset_right = -0.15400696
+offset_bottom = 0.0110321045
+texture = ExtResource("38_rvhgw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Odin" unique_id=260588650]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.777
+anchor_top = 0.632
+anchor_right = 0.95600003
+anchor_bottom = 0.804
+offset_left = 0.35637665
+offset_top = 0.020244598
+offset_right = 0.013442993
+offset_bottom = -0.02010727
+text = "1,850"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Odin" unique_id=1979061096]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78000003
+anchor_top = 0.777
+anchor_right = 0.952
+anchor_bottom = 0.96700007
+offset_left = -0.061775208
+offset_top = 0.026947021
+offset_right = -0.037216187
+offset_bottom = -0.023773193
+text = "ODIN"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Operator" type="TextureButton" parent="Control/Shop" unique_id=2059297424]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.568
+anchor_top = 0.323
+anchor_right = 0.688
+anchor_bottom = 0.41300002
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/Operator" unique_id=1485760815]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.157
+anchor_top = 0.16100001
+anchor_right = 0.84400004
+anchor_bottom = 0.85200006
+offset_left = -0.039707184
+offset_top = -0.012867928
+offset_right = 0.049331665
+offset_bottom = 0.0073432922
+texture = ExtResource("36_jpd3y")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/Operator" unique_id=741203598]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.786
+anchor_top = 0.509
+anchor_right = 0.96000004
+anchor_bottom = 0.73200005
+offset_left = 0.007293701
+offset_top = 0.011096954
+offset_right = -0.04647827
+offset_bottom = 0.00573349
+text = "4,700"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/Operator" unique_id=1999817099]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.62700003
+anchor_top = 0.698
+anchor_right = 0.97400004
+anchor_bottom = 0.92100006
+offset_left = -0.012535095
+offset_top = -0.011375427
+offset_right = 0.018157959
+offset_bottom = -0.016738892
+text = "OPERATOR"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LightArmor" type="TextureButton" parent="Control/Shop" unique_id=1936859922]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70400006
+anchor_top = 0.134
+anchor_right = 0.781
+anchor_bottom = 0.31500003
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/LightArmor" unique_id=526086212]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.158
+anchor_top = 0.257
+anchor_right = 0.83400005
+anchor_bottom = 0.75200003
+offset_left = -0.023308754
+offset_top = 0.02498436
+offset_right = 0.012794495
+offset_bottom = -0.032585144
+texture = ExtResource("40_sj4ew")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/LightArmor" unique_id=780691645]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73300004
+anchor_top = 0.76000005
+anchor_right = 0.91300005
+anchor_bottom = 0.87100005
+offset_left = -0.02809143
+offset_top = 0.02910614
+offset_right = 0.0051879883
+offset_bottom = 0.010139465
+text = "400"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/LightArmor" unique_id=1066780904]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.259
+anchor_top = 0.85400003
+anchor_right = 0.95800006
+anchor_bottom = 0.96500003
+offset_left = 0.017616272
+offset_top = 0.0040359497
+offset_right = 0.0135269165
+offset_bottom = -0.014930725
+text = "LIGHT ARMOR"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldRegen" type="TextureButton" parent="Control/Shop" unique_id=1002947419]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70400006
+anchor_top = 0.32000002
+anchor_right = 0.781
+anchor_bottom = 0.50100005
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/ShieldRegen" unique_id=443157888]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.158
+anchor_top = 0.257
+anchor_right = 0.83400005
+anchor_bottom = 0.75200003
+offset_left = -0.023308754
+offset_top = 0.02498436
+offset_right = 0.012794495
+offset_bottom = -0.032585144
+texture = ExtResource("41_83uk5")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/ShieldRegen" unique_id=238124401]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73300004
+anchor_top = 0.76000005
+anchor_right = 0.91300005
+anchor_bottom = 0.87100005
+offset_left = -0.02809143
+offset_top = 0.02910614
+offset_right = 0.0051879883
+offset_bottom = 0.010139465
+text = "400"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/ShieldRegen" unique_id=642513788]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.259
+anchor_top = 0.85400003
+anchor_right = 0.95800006
+anchor_bottom = 0.96500003
+offset_left = 0.017616272
+offset_top = 0.0040359497
+offset_right = 0.0135269165
+offset_bottom = -0.014930725
+text = "SHIELD REGEN"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeavyArmor" type="TextureButton" parent="Control/Shop" unique_id=293042312]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.70400006
+anchor_top = 0.505
+anchor_right = 0.781
+anchor_bottom = 0.68500006
+texture_normal = ExtResource("44_owfu1")
+texture_pressed = ExtResource("46_p0y6y")
+texture_hover = ExtResource("47_0sg42")
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/Shop/HeavyArmor" unique_id=493765992]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.18
+anchor_top = 0.272
+anchor_right = 0.81200004
+anchor_bottom = 0.72700006
+offset_left = 0.02520752
+offset_top = 0.033927917
+offset_right = -0.035713196
+offset_bottom = -0.03729248
+texture = ExtResource("34_74gae")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="Control/Shop/HeavyArmor" unique_id=1817686050]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.665
+anchor_top = 0.76100004
+anchor_right = 0.93600005
+anchor_bottom = 0.87200004
+offset_left = 0.003780365
+offset_top = -0.0030593872
+offset_right = -0.035003662
+offset_bottom = 0.04989624
+text = "1,000"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="Control/Shop/HeavyArmor" unique_id=1699616870]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.259
+anchor_top = 0.85400003
+anchor_right = 0.95800006
+anchor_bottom = 0.96500003
+offset_left = 0.017616272
+offset_top = 0.0040359497
+offset_right = 0.0135269165
+offset_bottom = -0.014930725
+text = "LIGHT ARMOR"
+label_settings = SubResource("LabelSettings_pqkln")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tittles" type="Control" parent="Control/Shop" unique_id=52098257]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control/Shop/Tittles" unique_id=1652575319]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 6.925
+anchor_top = 1.7500001
+anchor_right = 7.925
+anchor_bottom = 2.0500002
+text = "SIDEARMS"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Shop/Tittles" unique_id=1037014685]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 10.175
+anchor_top = 1.725
+anchor_right = 11.175
+anchor_bottom = 2.025
+text = "SMGS"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Shop/Tittles" unique_id=796198606]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 13.875001
+anchor_top = 1.725
+anchor_right = 14.875001
+anchor_bottom = 2.025
+offset_left = -6.1035156e-05
+offset_right = -6.1035156e-05
+text = "RIFLES"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control/Shop/Tittles" unique_id=192084208]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 17.400002
+anchor_top = 1.725
+anchor_right = 18.775002
+anchor_bottom = 2.025
+offset_left = -6.1035156e-05
+offset_right = -6.1035156e-05
+text = "SNIPER RIFLES"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Shop/Tittles" unique_id=645468189]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 20.925001
+anchor_top = 1.7500001
+anchor_right = 21.800001
+anchor_bottom = 2.0500002
+offset_left = -6.1035156e-05
+offset_right = -6.1035156e-05
+text = "DEFENSE"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/Shop/Tittles" unique_id=51350061]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 17.35
+anchor_top = 6.775
+anchor_right = 18.900002
+anchor_bottom = 7.0750003
+offset_right = -6.1035156e-05
+text = "MACHINE GUNS"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="Control/Shop/Tittles" unique_id=894654593]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 10.125001
+anchor_top = 6.775
+anchor_right = 11.225
+anchor_bottom = 7.0750003
+offset_left = -3.0517578e-05
+text = "SHOTGUNS"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="Control/Shop/Tittles" unique_id=1657855316]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 13.975
+anchor_top = 11.500001
+anchor_right = 14.875001
+anchor_bottom = 11.8
+offset_top = -3.0517578e-05
+offset_right = -6.1035156e-05
+text = "ABILITIES"
+label_settings = SubResource("LabelSettings_04enw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="States" type="Control" parent="Control" unique_id=15625956]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="Control/States" unique_id=778169684]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.4, 0.26666668, 0.23529412, 1)
+metadata/_edit_lock_ = true
+
+[node name="Flash" type="Sprite2D" parent="Control/States" unique_id=818770884]
+visible = false
+z_index = 11
+position = Vector2(573.00006, 304.99997)
+scale = Vector2(0.73329085, 0.6039142)
+offset = Vector2(4.0911255, 31.461426)
+
+[node name="Healing" type="TextureRect" parent="Control/States" unique_id=2075232539]
+visible = false
+z_index = 12
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("40_kwu3u")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Jett" type="Control" parent="Control/States" unique_id=1033374467]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/States/Jett" unique_id=1705526313]
+z_index = 9
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 1.0
+texture = ExtResource("46_83uk5")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/States/Jett" unique_id=929662533]
+z_index = 9
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("46_83uk5")
+flip_h = true
+
+[node name="Sage" type="Control" parent="Control/States" unique_id=1716394863]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/States/Sage" unique_id=1406403589]
+z_index = 9
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.05
+anchor_bottom = 1.0
+scale = Vector2(6, 1)
+texture = ExtResource("51_jl6hv")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/States/Sage" unique_id=448786300]
+z_index = 9
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -314.40002
+offset_right = -310.0
+scale = Vector2(6, 1)
+texture = ExtResource("51_jl6hv")
+flip_h = true
+
+[node name="Select Agent" type="Panel" parent="Control" unique_id=4521455]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Control/Select Agent" unique_id=2091069421]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.43600002
+anchor_top = 0.319
+anchor_right = 0.568
+anchor_bottom = 0.356
+offset_left = -0.2720337
+offset_top = 0.28799438
+offset_right = -0.33599854
+offset_bottom = 0.31199646
+text = "SELECT AGENT"
+label_settings = SubResource("LabelSettings_wdh2p")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Phoenix" type="Button" parent="Control/Select Agent" unique_id=1837605420]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.521
+anchor_top = 0.44900003
+anchor_right = 0.559
+anchor_bottom = 0.51500005
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Select Agent/Phoenix" unique_id=1650171850]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("47_n8oob")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Jett" type="Button" parent="Control/Select Agent" unique_id=1874474001]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.284
+anchor_top = 0.44900003
+anchor_right = 0.321
+anchor_bottom = 0.51500005
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Select Agent/Jett" unique_id=3144016]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("47_vul6o")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Sage" type="Button" parent="Control/Select Agent" unique_id=664330193]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64000005
+anchor_top = 0.44900003
+anchor_right = 0.67700005
+anchor_bottom = 0.51500005
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control/Select Agent/Sage" unique_id=33578963]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("50_n5jjw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=67672724]
+visible = false
+modulate = Color(1, 1, 1, 0.3019608)
+z_index = -1
+texture_filter = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("60_tbigm")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true

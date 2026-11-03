@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://c63bmlobqvod1"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://rggapf1txra" path="res://assets/sprites/weapons/knife.png" id="2_knife"]
+[ext_resource type="Texture2D" uid="uid://cmrtqnos516gn" path="res://assets/sprites/ui/guns/knife.png" id="3_knife_ui"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://bhj0dqgabyoht" path="res://assets/audio/sfx/weapons/knife_attack1.ogg" id="5_knife_attack1"]
+[ext_resource type="AudioStream" uid="uid://cd107aek08aeb" path="res://assets/audio/sfx/weapons/knife_attack2.ogg" id="6_knife_attack2"]
+[ext_resource type="AudioStream" uid="uid://b2kge50ij0a3" path="res://assets/audio/sfx/weapons/knife_equip.ogg" id="7_knife_equip"]
+
+[sub_resource type="Resource" id="KnifeEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_knife_equip")
+
+[sub_resource type="Resource" id="KnifeHeavyAttackAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_knife_attack2")
+max_distance = 50.0
+
+[sub_resource type="Resource" id="KnifeLightAttackAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_knife_attack1")
+max_distance = 50.0
+volume_db = -5.0
+
+[resource]
+script = ExtResource("1_weapon")
+weapon_name = "Knife"
+weapon_type = "Melee"
+is_automatic = false
+is_melee = true
+wall_penetration = "Low"
+short_range = 24.0
+medium_range = 24.0
+short_damage = 50.0
+medium_damage = 50.0
+long_damage = 50.0
+melee_range = 15.0
+melee_light_cooldown = 0.4
+melee_heavy_cooldown = 0.8
+melee_light_audio = SubResource("KnifeLightAttackAudio")
+melee_heavy_audio = SubResource("KnifeHeavyAttackAudio")
+equip_audio = SubResource("KnifeEquipAudio")
+run_speed_multiplier = 1.0
+equip_time = 0.5
+weapon_sprite = ExtResource("2_knife")
+ui_sprite = ExtResource("3_knife_ui")

@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://xttjxeodbylf"]
+
+[ext_resource type="Texture2D" uid="uid://dq6tlrrcr44i7" path="res://assets/sprites/abilities/sage/barrier_orb.png" id="1_phjq4"]
+[ext_resource type="Texture2D" uid="uid://ch278fc1whpy0" path="res://assets/sprites/abilities/sage/barrier_orb_cracked.png" id="2_n7t05"]
+[ext_resource type="Script" uid="uid://boq7bqtl3t5gk" path="res://scripts/agents/sage/abilities/barrier_orb_wall.gd" id="3_barrier_wall"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(34, 20)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_phjq4"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g4v7s"]
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g4v7s"]
+cull_mode = 2
+polygon = PackedVector2Array(-17, -10, 17, -10, 17, 10, -17, 10)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3gngh"]
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yf5fn"]
+cull_mode = 2
+polygon = PackedVector2Array(17, -10, 51, -10, 51, 10, 17, 10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_57qmd"]
+cull_mode = 2
+polygon = PackedVector2Array(51, -10, 84, -10, 84, 10, 51, 10)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_d0u6y"]
+cull_mode = 2
+polygon = PackedVector2Array(-51, -10, -17, -10, -17, 10, -51, 10)
+
+[node name="barrier_orb" type="StaticBody2D" unique_id=1987182657 groups=["updraft_traversable"]]
+script = ExtResource("3_barrier_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=201030838]
+position = Vector2(-17, 0)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=740206807]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_phjq4")
+position = Vector2(-17, 0)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("1_phjq4")
+
+[node name="cracked" type="Sprite2D" parent="Sprite2D" unique_id=1620135783]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_g4v7s")
+texture = ExtResource("2_n7t05")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=186801661]
+position = Vector2(-17, 0)
+occluder = SubResource("OccluderPolygon2D_g4v7s")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=628392709]
+position = Vector2(16.783998, -0.018000603)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=779864814]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_3gngh")
+position = Vector2(16.783998, -0.018000603)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("1_phjq4")
+
+[node name="cracked2" type="Sprite2D" parent="Sprite2D2" unique_id=875723299]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_g4v7s")
+texture = ExtResource("2_n7t05")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1707621109]
+position = Vector2(-17, 0)
+occluder = SubResource("OccluderPolygon2D_yf5fn")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=1337207386]
+position = Vector2(50.783997, -0.018000603)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=639936666]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_3gngh")
+position = Vector2(50.783997, -0.018000603)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("1_phjq4")
+
+[node name="cracked3" type="Sprite2D" parent="Sprite2D3" unique_id=1627944028]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_g4v7s")
+texture = ExtResource("2_n7t05")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=1341567368]
+position = Vector2(-17, 0)
+occluder = SubResource("OccluderPolygon2D_57qmd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="." unique_id=1474513719]
+position = Vector2(-51.216003, -0.018000603)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=314579717]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_3gngh")
+position = Vector2(-51.216003, -0.018000603)
+scale = Vector2(0.076, 0.076)
+texture = ExtResource("1_phjq4")
+
+[node name="cracked4" type="Sprite2D" parent="Sprite2D4" unique_id=91122853]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_g4v7s")
+texture = ExtResource("2_n7t05")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="." unique_id=1061357734]
+position = Vector2(-17, 0)
+occluder = SubResource("OccluderPolygon2D_d0u6y")

@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://cutdq20456uep"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weapon"]
+[ext_resource type="Texture2D" uid="uid://h6gp2s38tfqg" path="res://assets/sprites/ui/guns/odin.png" id="2_odin_tex"]
+[ext_resource type="Texture2D" uid="uid://bjebdca6d1web" path="res://assets/sprites/weapons/odin.png" id="3_odin_game"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://brwr007pb0fym" path="res://assets/audio/sfx/weapons/odin_shot.ogg" id="5_odin_shot"]
+[ext_resource type="AudioStream" uid="uid://o15m26enc62w" path="res://assets/audio/sfx/weapons/odin_reload.ogg" id="6_odin_reload"]
+[ext_resource type="AudioStream" uid="uid://2v630gdtncop" path="res://assets/audio/sfx/weapons/odin_equip.ogg" id="7_odin_equip"]
+
+[sub_resource type="Resource" id="OdinEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_odin_equip")
+volume_db = 5.0
+
+[sub_resource type="Resource" id="OdinReloadAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_odin_reload")
+
+[sub_resource type="Resource" id="OdinShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_odin_shot")
+max_distance = 700.0
+
+[resource]
+script = ExtResource("1_weapon")
+weapon_name = "Odin"
+weapon_type = "Heavy"
+can_aim = true
+aim_zoom = 1.15
+wall_penetration = "High"
+short_range = 0.0
+short_damage = 38.0
+medium_damage = 38.0
+long_damage = 31.0
+fire_rate = 12.0
+magazine_size = 100
+reserve_ammo = 200
+reload_time = 5.0
+shot_audio = SubResource("OdinShotAudio")
+reload_audio = SubResource("OdinReloadAudio")
+equip_audio = SubResource("OdinEquipAudio")
+run_speed_multiplier = 0.85
+aim_fire_rate_multiplier = 1.3
+aim_move_speed_multiplier = 0.76
+aim_recoil_multiplier = 0.7
+equip_time = 1.25
+max_recoil_degrees = 12.0
+recoil_recovery_speed = 6.0
+recoil_randomness_degrees = 0.55
+weapon_sprite = ExtResource("3_odin_game")
+ui_sprite = ExtResource("2_odin_tex")

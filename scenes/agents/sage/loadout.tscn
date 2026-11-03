@@ -1,0 +1,174 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/agents/sage/components/sage_orb_ability.gd" id="1_sage_orb_ability"]
+[ext_resource type="Script" path="res://scripts/agents/sage/abilities/barrier_orb.gd" id="2_barrier_orb"]
+[ext_resource type="Script" path="res://scripts/agents/sage/abilities/slow_orb.gd" id="3_slow_orb"]
+[ext_resource type="Script" path="res://scripts/agents/sage/components/ability_charges.gd" id="4_sage_ability_charges"]
+[ext_resource type="Script" path="res://scripts/agents/sage/abilities/healing_orb.gd" id="5_healing_orb"]
+[ext_resource type="Script" path="res://scripts/agents/sage/abilities/resurrection.gd" id="6_resurrection"]
+[ext_resource type="Script" path="res://scripts/audio/audio_cue.gd" id="7_audio_cue"]
+[ext_resource type="Script" path="res://scripts/agents/sage/components/sage_audio.gd" id="19_sage_audio"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/barrier_orb_cast.ogg" id="8_barrier_cast"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/barrier_orb_active.ogg" id="9_barrier_active"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/barrier_orb_voice1.ogg" id="10_barrier_voice1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/barrier_orb_voice2.ogg" id="11_barrier_voice2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/slow_orb_cast.ogg" id="12_slow_cast"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/slow_orb_throw.ogg" id="13_slow_throw"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/slow_orb_voice.ogg" id="14_slow_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/slow_orb_active.ogg" id="15_slow_active"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/healing_orb_cast.ogg" id="16_healing_cast"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/healing_orb_active.ogg" id="17_healing_active"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/healing_orb_voice.ogg" id="18_healing_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/hurt.ogg" id="20_sage_hurt"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/resurrection_cast.ogg" id="21_resurrection_cast"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/resurrection_active.ogg" id="22_resurrection_active"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/resurrection_voice.ogg" id="23_resurrection_voice"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/ultimate_ready.ogg" id="24_ultimate_ready"]
+
+[sub_resource type="Resource" id="AudioCue_UltimateReady"]
+script = ExtResource("7_audio_cue")
+playback_type = 1
+stream = ExtResource("24_ultimate_ready")
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_SageHurt"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("20_sage_hurt")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_ResurrectionCast"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("21_resurrection_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_ResurrectionActive"]
+script = ExtResource("7_audio_cue")
+playback_type = 2
+stream = ExtResource("22_resurrection_active")
+max_distance = 200.0
+
+[sub_resource type="Resource" id="AudioCue_ResurrectionVoice"]
+script = ExtResource("7_audio_cue")
+playback_type = 3
+stream = ExtResource("23_resurrection_voice")
+
+[sub_resource type="Resource" id="AudioCue_BarrierCast"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("8_barrier_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_BarrierActive"]
+script = ExtResource("7_audio_cue")
+playback_type = 2
+stream = ExtResource("9_barrier_active")
+max_distance = 200.0
+
+[sub_resource type="Resource" id="AudioCue_BarrierVoice1"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("10_barrier_voice1")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_BarrierVoice2"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("11_barrier_voice2")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_SlowCast"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("12_slow_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_SlowThrow"]
+script = ExtResource("7_audio_cue")
+playback_type = 2
+stream = ExtResource("13_slow_throw")
+max_distance = 100.0
+
+[sub_resource type="Resource" id="AudioCue_SlowVoice"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("14_slow_voice")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_SlowActive"]
+script = ExtResource("7_audio_cue")
+playback_type = 2
+stream = ExtResource("15_slow_active")
+max_distance = 200.0
+
+[sub_resource type="Resource" id="AudioCue_HealingCast"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("16_healing_cast")
+max_distance = 1.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_HealingActive"]
+script = ExtResource("7_audio_cue")
+playback_type = 2
+stream = ExtResource("17_healing_active")
+max_distance = 100.0
+volume_db = -5.0
+
+[sub_resource type="Resource" id="AudioCue_HealingVoice"]
+script = ExtResource("7_audio_cue")
+playback_type = 0
+stream = ExtResource("18_healing_voice")
+max_distance = 1.0
+volume_db = -5.0
+
+[node name="SageLoadout" type="Node"]
+
+[node name="Components" type="Node" parent="."]
+
+[node name="SageAbilityCharges" type="Node" parent="Components"]
+script = ExtResource("4_sage_ability_charges")
+ultimate_ready_audio = SubResource("AudioCue_UltimateReady")
+
+[node name="SageOrbAbility" type="Node" parent="Components"]
+script = ExtResource("1_sage_orb_ability")
+
+[node name="BarrierOrbAbility" type="Node" parent="Components"]
+script = ExtResource("2_barrier_orb")
+cast_audio = SubResource("AudioCue_BarrierCast")
+active_audio = SubResource("AudioCue_BarrierActive")
+voice_audio_1 = SubResource("AudioCue_BarrierVoice1")
+voice_audio_2 = SubResource("AudioCue_BarrierVoice2")
+
+[node name="SlowOrbAbility" type="Node" parent="Components"]
+script = ExtResource("3_slow_orb")
+cast_audio = SubResource("AudioCue_SlowCast")
+throw_audio = SubResource("AudioCue_SlowThrow")
+voice_audio = SubResource("AudioCue_SlowVoice")
+active_audio = SubResource("AudioCue_SlowActive")
+
+[node name="HealingOrbAbility" type="Node" parent="Components"]
+script = ExtResource("5_healing_orb")
+cast_audio = SubResource("AudioCue_HealingCast")
+active_audio = SubResource("AudioCue_HealingActive")
+voice_audio = SubResource("AudioCue_HealingVoice")
+
+[node name="Resurrection" type="Node" parent="Components"]
+script = ExtResource("6_resurrection")
+cast_audio = SubResource("AudioCue_ResurrectionCast")
+active_audio = SubResource("AudioCue_ResurrectionActive")
+voice_audio = SubResource("AudioCue_ResurrectionVoice")
+
+[node name="SageAudio" type="Node" parent="Components"]
+script = ExtResource("19_sage_audio")
+hurt_audio = SubResource("AudioCue_SageHurt")
+
+[node name="Visuals" type="Node2D" parent="."]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/audio/audio_manager.gd" id="1_audio_manager"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="2_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://dsonic7fonxcn" path="res://assets/audio/sfx/steps.ogg" id="3_steps"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/sage/slow_orb_step.ogg" id="4_slow_orb_step"]
+
+[sub_resource type="Resource" id="StepsAudioCue"]
+script = ExtResource("2_audio_cue")
+stream = ExtResource("3_steps")
+max_distance = 250.0
+attenuation = 1.2
+volume_db = -4.0
+pitch_min = 0.95
+pitch_max = 1.05
+
+[sub_resource type="Resource" id="SlowOrbStepAudioCue"]
+script = ExtResource("2_audio_cue")
+stream = ExtResource("4_slow_orb_step")
+max_distance = 250.0
+attenuation = 1.2
+volume_db = -4.0
+pitch_min = 0.95
+pitch_max = 1.05
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_audio_manager")
+event_cues = {
+"steps": SubResource("StepsAudioCue"),
+"slow_orb_step": SubResource("SlowOrbStepAudioCue")
+}

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="AgentData" format=3 uid="uid://cnb53du7bx7qg"]
+
+[ext_resource type="Script" uid="uid://dr5y3256n783k" path="res://scripts/resources/agent_data.gd" id="1_agent_data"]
+[ext_resource type="Texture2D" uid="uid://ug4qwl25xbvd" path="res://assets/sprites/agents/jett.png" id="2_agent_sprite"]
+[ext_resource type="Texture2D" uid="uid://c58bwbchok570" path="res://assets/sprites/ui/abilities/jett/cloud_burst.png" id="3_cloud_burst"]
+[ext_resource type="Texture2D" uid="uid://bnkksverf5pjn" path="res://assets/sprites/ui/abilities/jett/updraft.png" id="4_updraft"]
+[ext_resource type="Texture2D" uid="uid://vgljipqiseqg" path="res://assets/sprites/ui/abilities/jett/tailwind.png" id="5_tailwind"]
+[ext_resource type="Texture2D" uid="uid://bkfsmydcilh4t" path="res://assets/sprites/ui/abilities/jett/blade_storm.png" id="6_blade_storm"]
+[ext_resource type="PackedScene" uid="uid://bcehfvqwkhg41" path="res://scenes/agents/jett/loadout.tscn" id="7_jett_loadout"]
+
+[resource]
+script = ExtResource("1_agent_data")
+agent_name = "Jett"
+agent_id = "jett"
+agent_sprite = ExtResource("2_agent_sprite")
+agent_color = Color(0.42352942, 0.68235296, 0.75686276, 1)
+loadout_scene = ExtResource("7_jett_loadout")
+show_ability_bar = false
+ability_names = Array[String](["Cloudburst", "Updraft", "Tailwind", "Blade Storm"])
+ability_component_ids = Array[String](["Cloudburst", "Updraft", "Tailwind"])
+ability_component_paths = Array[NodePath]([NodePath("Components/CloudburstAbility"), NodePath("Components/UpdraftAbility"), NodePath("Components/TailwindAbility")])
+ability_input_actions = Array[String](["ability_slot_1", "ability_slot_2", "ability_slot_3"])
+ability_icons = Array[Texture2D]([ExtResource("3_cloud_burst"), ExtResource("4_updraft"), ExtResource("5_tailwind"), ExtResource("6_blade_storm")])
+ability_key_labels = Array[String](["C", "Q", "E", "X"])
+ability_charge_keys = Array[String](["cloudburst", "updraft", "tailwind", ""])
+ability_max_charges = Array[int]([2, 1, 1, 0])
+ability_kill_progress_keys = Array[String](["", "", "tailwind_kill_progress", ""])
+ability_kills_per_charge = Array[int]([0, 0, 2, 0])
+ability_kill_markers_always_visible = Array[bool]([false, false, true])
+ultimate_charge_key = "ultimate"
+ultimate_charges_required = 7

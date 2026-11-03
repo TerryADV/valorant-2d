@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101113">
+  <meta name="description" content="Meet the agents and explore their abilities in Valorant 2D.">
+  <title>VALORANT 2D — Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="imagenes/logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+  <div class="page-grain" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Valorant 2D, home"><img class="brand-logo" src="imagenes/logo.png" alt=""><span class="brand-name">VALORANT <b>2D</b></span></a>
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="nav-links" aria-label="Main navigation"><a href="index.html">HOME</a><a href="agentes.html" aria-current="page">AGENTS</a><a href="modos.html">MODES</a><a href="actualizaciones.html">UPDATES</a></nav>
+    <a class="nav-cta" href="versions/valorant2d.exe" download="valorant2d.exe">PLAY NOW <span>↗</span></a>
+  </header>
+  <main>
+    <section class="agents section-wrap" id="agentes">
+      <div class="section-kicker"><span>02 / AGENT SELECT</span><span>3 PLAYABLE AGENTS</span></div>
+      <div class="agents-heading"><h2>CHOOSE YOUR<br><em>EDGE.</em></h2><p>Three styles. Three ways to turn the tide of a round.<br>Which one is yours?</p></div>
+      <div class="agent-grid">
+        <article class="agent-card jett-card"><div class="agent-card-top"><span>01 / DUELIST</span></div><img src="imagenes/agents/jett.png" alt=""><div class="agent-card-bottom"><div><h3>JETT</h3><p>AGILE · AGGRESSIVE · UNPREDICTABLE</p></div><button class="agent-select" type="button" data-agent="jett" aria-controls="agent-abilities" aria-expanded="false">ABILITIES <span>↗</span></button></div></article>
+        <article class="agent-card phoenix-card"><div class="agent-card-top"><span>02 / DUELIST</span></div><img src="imagenes/agents/phoenix.png" alt=""><div class="agent-card-bottom"><div><h3>PHOENIX</h3><p>BOLD · SELF-SUFFICIENT · FEARLESS</p></div><button class="agent-select" type="button" data-agent="phoenix" aria-controls="agent-abilities" aria-expanded="false">ABILITIES <span>↗</span></button></div></article>
+        <article class="agent-card sage-card"><div class="agent-card-top"><span>03 / SENTINEL</span></div><img src="imagenes/agents/sage.png" alt=""><div class="agent-card-bottom"><div><h3>SAGE</h3><p>TACTICAL · RESILIENT · ESSENTIAL</p></div><button class="agent-select" type="button" data-agent="sage" aria-controls="agent-abilities" aria-expanded="false">ABILITIES <span>↗</span></button></div></article>
+      </div>
+      <div class="ability-panel" id="agent-abilities" aria-live="polite" hidden><div class="ability-panel-heading"><div><span class="ability-overline">AGENT LOADOUT</span><h3 id="ability-agent-name"></h3></div><button class="ability-close" type="button" aria-label="Close abilities">×</button></div><div class="ability-list" id="ability-list"></div></div>
+      <div class="agent-note"><span class="live-dot"></span> EVERY AGENT CHANGES HOW YOU PLAY</div>
+    </section>
+  </main>
+  <footer class="footer"><a class="brand" href="index.html"><img class="brand-logo" src="imagenes/logo.png" alt=""><span class="brand-name">VALORANT <b>2D</b></span></a><span class="footer-copy">AN INDEPENDENT PROJECT MADE WITH PASSION.</span><a href="index.html" class="back-top">BACK TO HOME ↗</a><span class="copyright">FAN PROJECT</span></footer>
+</body>
+</html>

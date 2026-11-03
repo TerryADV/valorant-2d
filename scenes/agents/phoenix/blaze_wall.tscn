@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dtjmrsc3p5dft"]
+
+[ext_resource type="Script" uid="uid://cy7pascyti2l1" path="res://scripts/agents/phoenix/abilities/blaze_wall.gd" id="1_blaze_wall"]
+[ext_resource type="Texture2D" uid="uid://hfnl1m607bdc" path="res://assets/sprites/abilities/phoenix/blaze.png" id="2_qilpa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_km01e"]
+size = Vector2(2, 2)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qilpa"]
+light_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qilpa"]
+polygon = PackedVector2Array(-0.01, -1, -0.01, 1, 0.01, 1, 0.01, -1)
+
+[node name="BlazeWall" type="Area2D" unique_id=944967844]
+z_index = 3
+scale = Vector2(4, 4)
+collision_layer = 0
+collision_mask = 24
+monitoring = false
+monitorable = false
+script = ExtResource("1_blaze_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1078614385]
+shape = SubResource("RectangleShape2D_km01e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=9725881]
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_qilpa")
+position = Vector2(0, 5.9604645e-08)
+scale = Vector2(0.017699117, 0.015037594)
+texture = ExtResource("2_qilpa")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2006234221]
+occluder = SubResource("OccluderPolygon2D_qilpa")

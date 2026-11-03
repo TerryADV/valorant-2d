@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://d0l3ssskbiuc7"]
+
+[ext_resource type="Texture2D" uid="uid://bgoxf0hj30q0g" path="res://assets/sprites/abilities/phoenix/curve_ball.png" id="1_hl38q"]
+[ext_resource type="Texture2D" uid="uid://cuu8ihwhh7c2h" path="res://assets/sprites/abilities/phoenix/halo_curve_ball.png" id="2_o0axd"]
+[ext_resource type="Script" uid="uid://3xp0eka3xlh3" path="res://scripts/agents/phoenix/abilities/curveball_projectile.gd" id="4_projectile"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_top41"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_km01e"]
+radius = 4.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rvhgw"]
+light_mode = 2
+
+[node name="curva_ball" type="Area2D" unique_id=1251600557]
+scale = Vector2(0.25, 0.25)
+collision_layer = 0
+collision_mask = 27
+script = ExtResource("4_projectile")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=565816496]
+visibility_layer = 2
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_top41")
+position = Vector2(-2.3841858e-07, 1.1920929e-07)
+scale = Vector2(0.049079757, 0.05263158)
+texture = ExtResource("1_hl38q")
+
+[node name="Halo" type="Sprite2D" parent="." unique_id=158669227]
+visible = false
+visibility_layer = 2
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_top41")
+position = Vector2(0.5000076, 0)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_o0axd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1807162388]
+shape = SubResource("CircleShape2D_km01e")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=360343314]
+visible = false
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_rvhgw")
+points = PackedVector2Array(0, 0, 0, 32)
+width = 2.0
+default_color = Color(0.9137255, 0.89411765, 0.63529414, 1)

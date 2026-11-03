@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://r6pqaeqk0bjm"]
+
+[ext_resource type="Script" uid="uid://b6y15vf2j5f3j" path="res://scripts/ui/network_lobby.gd" id="1_lobby"]
+
+[node name="NetworkLobby" type="CanvasLayer" unique_id=417903083]
+visible = false
+script = ExtResource("1_lobby")
+
+[node name="Backdrop" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.015, 0.025, 0.04, 0.88)
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1521183641]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.0
+offset_top = -185.0
+offset_right = 205.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RosterPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 210.0
+offset_top = -185.0
+offset_right = 385.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="RosterPanel"]
+layout_mode = 2
+
+[node name="RosterTitle" type="Label" parent="RosterPanel/Content"]
+layout_mode = 2
+text = "En la sala (0)"
+horizontal_alignment = 1
+
+[node name="PlayerNames" type="VBoxContainer" parent="RosterPanel/Content"]
+layout_mode = 2
+
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=1472780687]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/Content" unique_id=1388964216]
+layout_mode = 2
+text = "Sala local"
+horizontal_alignment = 1
+
+[node name="Address" type="LineEdit" parent="Panel/Content" unique_id=426379595]
+layout_mode = 2
+placeholder_text = "IPv4 del host (ej. 192.168.1.10)"
+
+[node name="Participants" type="Label" parent="Panel/Content"]
+layout_mode = 2
+text = "Jugadores: --/12"
+horizontal_alignment = 1
+
+[node name="BotSettings" type="VBoxContainer" parent="Panel/Content"]
+visible = false
+layout_mode = 2
+
+[node name="BotLabel" type="Label" parent="Panel/Content/BotSettings"]
+layout_mode = 2
+text = "Bots (el máximo depende de jugadores y spawns)"
+horizontal_alignment = 1
+
+[node name="BotCount" type="SpinBox" parent="Panel/Content/BotSettings"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+min_value = 0.0
+max_value = 11.0
+value = 11.0
+rounded = true
+allow_greater = false
+allow_lesser = false
+
+[node name="Difficulty" type="OptionButton" parent="Panel/Content/BotSettings"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+
+[node name="Host" type="Button" parent="Panel/Content" unique_id=1637646941]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Crear partida"
+
+[node name="Join" type="Button" parent="Panel/Content" unique_id=1242087239]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Unirse a sala"
+
+[node name="Back" type="Button" parent="Panel/Content"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+text = "Volver al menú"
+
+[node name="Status" type="Label" parent="Panel/Content" unique_id=550516393]
+layout_mode = 2
+text = "Sin conexión"
+autowrap_mode = 2

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://ogjq0pkhdqom"]
+
+[ext_resource type="Texture2D" uid="uid://bmm4ccrdm2yg3" path="res://assets/sprites/ui/loading_screen/skirmish/a.png" id="1_rqdcv"]
+[ext_resource type="Script" path="res://scripts/ui/loading_screen.gd" id="2_loading"]
+
+[node name="loading_screen" type="Control" unique_id=1836648836]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_loading")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1211952069]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rqdcv")
+expand_mode = 2
+stretch_mode = 5

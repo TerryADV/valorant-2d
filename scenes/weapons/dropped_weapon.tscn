@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cjdkym8rpdoc3"]
+
+[ext_resource type="Script" uid="uid://py5xdmy80hts" path="res://scripts/weapons/dropped_weapon.gd" id="1_drop_script"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dx56b"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_drop"]
+radius = 5.0
+
+[node name="DroppedWeapon" type="Area2D" unique_id=98124019]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_drop_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=31415926]
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_dx56b")
+scale = Vector2(0.07, 0.07)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=27182818]
+shape = SubResource("CircleShape2D_drop")

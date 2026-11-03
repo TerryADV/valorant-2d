@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dpbpc5isiplli"]
+
+[ext_resource type="Texture2D" uid="uid://cpx4u5x6cfpuj" path="res://assets/sprites/abilities/phoenix/run_it_back.png" id="1_o75lr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_km01e"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_km01e"]
+radius = 5.0
+
+[node name="run_it_back" type="StaticBody2D" unique_id=1293244422]
+collision_mask = 25
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=417260321]
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_km01e")
+position = Vector2(2.9802322e-07, 2.0861626e-07)
+scale = Vector2(0.023728814, 0.0237691)
+texture = ExtResource("1_o75lr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1804010016]
+shape = SubResource("CircleShape2D_km01e")

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bidkqmq4rd1t6"]
+
+[ext_resource type="Texture2D" uid="uid://thgi77siip13" path="res://assets/sprites/abilities/jett/cloudburst.png" id="1_em82u"]
+[ext_resource type="Script" uid="uid://qdyyjkslcpuh" path="res://scripts/agents/jett/abilities/cloud_burst_projectile.gd" id="2_projectile_script"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yk64k"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1lvh"]
+radius = 4.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_em82u"]
+polygon = PackedVector2Array(0, -4, 1, -3.9, 2, -3.45, 2.85, -2.8, 3.45, -2, 3.85, -1, 4, 0, 3.85, 1, 3.45, 2, 2.85, 2.8, 2, 3.45, 1, 3.9, 0, 4, -1.05, 3.85, -2, 3.45, -2.85, 2.8, -3.45, 2, -3.85, 1, -4, 0, -3.85, -1, -3.45, -2, -2.85, -2.8, -2, -3.45, -1.05, -3.85)
+
+[node name="cloud_burst" type="Area2D" unique_id=1635705396]
+script = ExtResource("2_projectile_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=447404276]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_yk64k")
+position = Vector2(9.536743e-07, 0)
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_em82u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2092520961]
+shape = SubResource("CircleShape2D_l1lvh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=35300323]
+occluder = SubResource("OccluderPolygon2D_em82u")

@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/agents/phoenix/abilities/blaze_wall_controller.gd" id="1_wall_controller"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(200, 2)
+
+[node name="BlazeWallController" type="Node2D"]
+script = ExtResource("1_wall_controller")
+
+[node name="Segments" type="Node2D" parent="."]
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(100, 0)
+shape = SubResource("RectangleShape2D_wall")

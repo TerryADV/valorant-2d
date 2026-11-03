@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ch5avnulv5xsr"]
+
+[ext_resource type="Texture2D" uid="uid://dxalph6o4sup5" path="res://assets/sprites/abilities/sage/orb.png" id="1_sgsq8"]
+[ext_resource type="Script" uid="uid://ci4umfi8s13as" path="res://scripts/agents/sage/abilities/slow_orb_projectile.gd" id="2_slow_orb_projectile"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 2.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c4i38"]
+light_mode = 2
+
+[node name="orb" type="Area2D" unique_id=1972241303]
+collision_layer = 0
+script = ExtResource("2_slow_orb_projectile")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1290653034]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1002563034]
+z_index = 1
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_c4i38")
+position = Vector2(-9.536743e-07, 0)
+scale = Vector2(0.016, 0.016)
+texture = ExtResource("1_sgsq8")

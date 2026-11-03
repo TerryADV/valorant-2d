@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bjbhbjwum6q01"]
+
+[ext_resource type="Texture2D" uid="uid://b7djh5pwt8b06" path="res://assets/sprites/abilities/phoenix/hot_hands.png" id="1_fghj3"]
+[ext_resource type="Script" uid="uid://b06rphm7jjvav" path="res://scripts/agents/phoenix/abilities/hot_hands_projectile.gd" id="2_projectile_script"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ijd4m"]
+light_mode = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_km01e"]
+radius = 2.0
+
+[node name="hot_hands" type="Area2D" unique_id=1013573114]
+collision_layer = 0
+collision_mask = 25
+script = ExtResource("2_projectile_script")
+wall_collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2079667978]
+visibility_layer = 2
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ijd4m")
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_fghj3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1061577336]
+z_index = 1
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_km01e")

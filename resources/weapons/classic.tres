@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bl3fhkw314ggj"]
+
+[ext_resource type="Script" uid="uid://c13tjeg0ajvey" path="res://scripts/resources/weapon_data.gd" id="1_weap"]
+[ext_resource type="Texture2D" uid="uid://bjmgpaw0ymqkj" path="res://assets/sprites/weapons/classic.png" id="2_classic_tex"]
+[ext_resource type="Texture2D" uid="uid://bxxppu6t3evfh" path="res://assets/sprites/ui/guns/classic.png" id="3_classic_ui"]
+[ext_resource type="Script" uid="uid://6qb154x8tdfe" path="res://scripts/audio/audio_cue.gd" id="4_audio_cue"]
+[ext_resource type="AudioStream" uid="uid://d3fcmwcjn065m" path="res://assets/audio/sfx/weapons/classic_shot.ogg" id="5_classic_shot"]
+[ext_resource type="AudioStream" uid="uid://bt5gxhubwaaiu" path="res://assets/audio/sfx/weapons/classic_reload.ogg" id="6_classic_reload"]
+[ext_resource type="AudioStream" uid="uid://cp7bl6ch60m72" path="res://assets/audio/sfx/weapons/classic_equip.ogg" id="7_classic_equip"]
+[ext_resource type="AudioStream" uid="uid://g6xpu6tggbik" path="res://assets/audio/sfx/weapons/classic_shot3.ogg" id="8_classic_shot3"]
+
+[sub_resource type="Resource" id="ClassicEquipAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("7_classic_equip")
+
+[sub_resource type="Resource" id="ClassicReloadAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("6_classic_reload")
+max_distance = 180.0
+
+[sub_resource type="Resource" id="ClassicSecondaryShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("8_classic_shot3")
+max_distance = 300.0
+
+[sub_resource type="Resource" id="ClassicShotAudio"]
+script = ExtResource("4_audio_cue")
+stream = ExtResource("5_classic_shot")
+max_distance = 300.0
+
+[resource]
+script = ExtResource("1_weap")
+weapon_name = "Classic"
+weapon_type = "Sidearm"
+is_automatic = false
+wall_penetration = "Low"
+short_range = 0.0
+short_damage = 26.0
+medium_damage = 26.0
+long_damage = 22.0
+fire_rate = 6.75
+secondary_fire_pellets = 3
+secondary_pellet_spread_degrees = 10.0
+secondary_fire_ammo_cost = 3
+secondary_fire_cooldown = 0.35
+magazine_size = 12
+reserve_ammo = 36
+shot_audio = SubResource("ClassicShotAudio")
+secondary_shot_audio = SubResource("ClassicSecondaryShotAudio")
+reload_audio = SubResource("ClassicReloadAudio")
+equip_audio = SubResource("ClassicEquipAudio")
+run_speed_multiplier = 0.95
+equip_time = 0.75
+recoil_per_shot_degrees = 0.8
+max_recoil_degrees = 4.0
+recoil_recovery_speed = 10.0
+recoil_randomness_degrees = 0.25
+weapon_sprite = ExtResource("2_classic_tex")
+ui_sprite = ExtResource("3_classic_ui")

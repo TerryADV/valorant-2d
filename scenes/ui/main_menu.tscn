@@ -1,0 +1,319 @@
+[gd_scene format=3 uid="uid://dqnonqumpfbi0"]
+
+[ext_resource type="Script" uid="uid://bibgpetr4xqm1" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://ddo06jn1pomjg" path="res://assets/ui/log_in.png" id="3_x2yvf"]
+[ext_resource type="Texture2D" uid="uid://bmqrurymlts0e" path="res://assets/ui/log_in_button_on.png" id="4_uhagc"]
+[ext_resource type="Texture2D" uid="uid://divqqv5k83o3q" path="res://assets/ui/log_in_button.png" id="5_btxxm"]
+[ext_resource type="Texture2D" uid="uid://cjp0721hvgq1i" path="res://assets/ui/loading_screen.png" id="6_wb0q5"]
+[ext_resource type="Texture2D" uid="uid://cl7qreuajh5jh" path="res://assets/ui/log_in_bar_under.png" id="7_q85j6"]
+[ext_resource type="Texture2D" uid="uid://c8bemuxlkmqh2" path="res://assets/ui/log_in_bar_progress.png" id="8_8g5eo"]
+[ext_resource type="Texture2D" uid="uid://ce60h1maxd5ps" path="res://assets/ui/main/custom.png" id="9_otr3d"]
+[ext_resource type="Texture2D" uid="uid://blpwxhhrwdb3t" path="res://assets/ui/main/custom_hover.png" id="10_8ekit"]
+[ext_resource type="Texture2D" uid="uid://3s0a5727464t" path="res://assets/ui/main/options_backgrund.png" id="11_n4uci"]
+[ext_resource type="Texture2D" uid="uid://dvr3g2jtorxiu" path="res://assets/ui/fgrdhtfyj.png" id="12_877pj"]
+[ext_resource type="Texture2D" uid="uid://b1r8txtyjbwj0" path="res://assets/ui/main/mode_selected.png" id="12_n4uci"]
+[ext_resource type="Texture2D" uid="uid://dvhjy17f80mcl" path="res://assets/ui/main/check.png" id="13_877pj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 5.0
+bg_color = Color(0.9372549, 0.9372549, 0.9372549, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_yf5fn"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
+font_size = 12
+font_color = Color(0.49803922, 0.49803922, 0.49803922, 0.7647059)
+
+[sub_resource type="LabelSettings" id="LabelSettings_57qmd"]
+font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7numd"]
+content_margin_left = 10.0
+bg_color = Color(0.05882353, 0.09803922, 0.13725491, 1)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuhc1"]
+content_margin_left = 6.0
+bg_color = Color(0.22745098, 0.23529412, 0.25882354, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d0u6y"]
+texture = ExtResource("12_n4uci")
+
+[node name="MainMenu" type="Control" unique_id=617025341]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="LogIn" type="Control" parent="." unique_id=66766396]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="LogIn" unique_id=1016810381]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_x2yvf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Username" type="TextEdit" parent="LogIn" unique_id=293296225]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.036000002
+anchor_top = 0.27400002
+anchor_right = 0.22500001
+anchor_bottom = 0.33
+theme_override_colors/font_selected_color = Color(0.8672607, 0.86726063, 0.8672606, 1)
+theme_override_colors/font_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+theme_override_colors/font_placeholder_color = Color(0.3882353, 0.3882353, 0.3882353, 1)
+theme_override_constants/line_spacing = 16
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
+placeholder_text = "Username"
+
+[node name="TextureButton" type="TextureButton" parent="LogIn" unique_id=726555170]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.109000005
+anchor_top = 0.74100006
+anchor_right = 0.15200001
+anchor_bottom = 0.818
+offset_left = -0.5680084
+offset_top = -0.16802979
+offset_right = -0.104003906
+offset_bottom = -0.06402588
+disabled = true
+texture_normal = ExtResource("4_uhagc")
+texture_disabled = ExtResource("5_btxxm")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="LoadingScreen" type="Control" parent="." unique_id=738842751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="LoadingScreen" unique_id=1623589634]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_wb0q5")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Bar" type="TextureProgressBar" parent="LoadingScreen" unique_id=696403601]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75100005
+anchor_top = 0.31
+anchor_right = 0.98600006
+anchor_bottom = 0.335
+offset_left = -0.15203857
+offset_top = 0.11999512
+offset_right = 0.12792969
+offset_bottom = -0.08000183
+value = 10.0
+nine_patch_stretch = true
+texture_under = ExtResource("7_q85j6")
+texture_progress = ExtResource("8_8g5eo")
+metadata/_edit_lock_ = true
+
+[node name="LabelBar" type="Label" parent="LoadingScreen/Bar" unique_id=919627654]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.018000001
+anchor_top = 0.062000003
+anchor_right = 0.98100007
+anchor_bottom = 0.93700004
+offset_left = 0.12199974
+offset_top = 0.007999957
+offset_bottom = 0.00799942
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_yf5fn")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Copyright" type="Label" parent="LoadingScreen" unique_id=2128908540]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.702
+anchor_top = 0.89500004
+anchor_right = 0.9850001
+anchor_bottom = 0.98300004
+offset_left = 0.29595947
+offset_top = 0.039978027
+offset_right = 0.27990723
+offset_bottom = 0.015991211
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Info" type="Label" parent="LoadingScreen" unique_id=312991764]
+layout_mode = 0
+offset_left = 865.0
+offset_top = 220.0
+offset_right = 1135.0
+offset_bottom = 243.0
+text = "Checking for updates..."
+label_settings = SubResource("LabelSettings_57qmd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main" type="Control" parent="." unique_id=2121775149]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainButton" type="TextureButton" parent="Main" unique_id=586794594]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.282
+anchor_right = 0.14600001
+anchor_bottom = 0.39800003
+offset_left = -0.19200134
+offset_top = 0.2639923
+offset_right = -0.1920166
+offset_bottom = 0.09597778
+texture_normal = ExtResource("9_otr3d")
+texture_hover = ExtResource("10_8ekit")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Custom" type="Control" parent="Main" unique_id=1366817991]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mode" type="Button" parent="Main/Custom" unique_id=1962726862]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.40300003
+anchor_right = 0.14600001
+anchor_bottom = 0.43400002
+offset_left = -0.19200134
+offset_top = -0.14401245
+offset_right = -0.1920166
+offset_bottom = -0.23199463
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_7numd")
+text = "MODE: SKIRMISH"
+alignment = 0
+
+[node name="Options" type="Control" parent="Main/Custom" unique_id=1855583771]
+layout_mode = 1
+anchor_left = 0.15300001
+anchor_top = 0.16000001
+anchor_right = 0.363
+anchor_bottom = 0.901
+offset_left = -0.25601196
+offset_top = 0.31999207
+offset_right = -0.17599487
+offset_bottom = 0.15197754
+
+[node name="Background" type="TextureRect" parent="Main/Custom/Options" unique_id=516524627]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_right = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_n4uci")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Custom/Options" unique_id=977337516]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.010000001
+anchor_right = 0.95000005
+anchor_bottom = 0.994
+offset_left = -0.082000256
+offset_top = 0.19999981
+offset_right = 0.099990845
+offset_bottom = -0.11999512
+
+[node name="Label" type="Button" parent="Main/Custom/Options/VBoxContainer" unique_id=1961050319]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_uuhc1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_d0u6y")
+text = "DEATHMATCH"
+alignment = 0
+
+[node name="Selected" type="TextureRect" parent="Main/Custom/Options/VBoxContainer/Label" unique_id=1291366076]
+modulate = Color(0.13333334, 1, 0.77254903, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9110001
+anchor_top = 0.21700001
+anchor_right = 0.98200005
+anchor_bottom = 0.739
+offset_left = 0.024978638
+offset_top = 0.0089998245
+offset_right = 0.049987793
+offset_bottom = 0.0030002594
+texture = ExtResource("13_877pj")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1083444329]
+visible = false
+modulate = Color(1, 1, 1, 0.5372549)
+z_index = -1
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_877pj")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true
