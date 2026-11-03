@@ -52,19 +52,20 @@ func check_and_download_update(current_version: String) -> Dictionary:
 	var remote_version := str(release.get("tag_name", "")).trim_prefix("v")
 	if remote_version.is_empty():
 		return _result("error", "The latest release has no version tag.")
+	var release_summary := _get_release_summary(release, remote_version)
 	if not _is_version_newer(remote_version, current_version):
 		if _is_version_newer(current_version, remote_version):
 			return _result(
 				"newer_local_build",
-				"This build (%s) is newer than the latest public release (%s)." % [current_version, remote_version]
+				"Build %s is newer than the latest release, %s." % [current_version, release_summary]
 			)
-		return _result("up_to_date", "You are using the latest version (%s)." % current_version)
+		return _result("up_to_date", release_summary)
 
 	var patch_asset := _find_patch_asset(release.get("assets", []))
 	if patch_asset.is_empty():
 		return _result(
 			"package_missing",
-			"Version %s is available, but its update package is not published yet." % remote_version,
+			"%s Update package not published yet." % release_summary,
 			remote_version
 		)
 
@@ -124,6 +125,16 @@ func _find_patch_asset(assets_value: Variant) -> Dictionary:
 		if asset_value is Dictionary and str(asset_value.get("name", "")) == PATCH_ASSET_NAME:
 			return asset_value
 	return {}
+
+func _get_release_summary(release: Dictionary, version: String) -> String:
+	var summary := str(release.get("body", "")).strip_edges()
+	if summary.is_empty():
+		summary = str(release.get("name", "New update"))
+	else:
+		summary = summary.split("\n", false)[0].strip_edges()
+	if summary.length() > 32:
+		summary = "%s..." % summary.substr(0, 29)
+	return "Latest v%s: %s" % [version, summary]
 
 func _matches_release_digest(path: String, digest: String) -> bool:
 	if not digest.begins_with("sha256:"):

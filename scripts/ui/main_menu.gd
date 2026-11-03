@@ -88,7 +88,7 @@ func _load_deathmatch_resources() -> void:
 				ResourceLoader.load_threaded_get(MAP_PATH)
 				loading_bar.value = 100.0
 				loading_bar_label.text = "100%"
-				loading_info.text = "Game files loaded. %s" % _update_notice
+				loading_info.text = _update_notice
 				await get_tree().create_timer(0.35).timeout
 				loading_screen.hide()
 				main_screen.show()
