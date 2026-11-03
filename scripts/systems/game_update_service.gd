@@ -4,11 +4,11 @@ signal download_progress(bytes_received: int, total_bytes: int)
 
 const RELEASE_API_URL := "https://api.github.com/repos/TerryADV/valorant-2d/releases/latest"
 const PATCH_ASSET_NAME := "valorant2d-patch.pck"
-const REQUEST_HEADERS := PackedStringArray([
+const REQUEST_HEADERS := [
 	"Accept: application/vnd.github+json",
 	"X-GitHub-Api-Version: 2022-11-28",
 	"User-Agent: Valorant2D-Updater"
-])
+]
 const UPDATE_STATE_PATH := "user://installed_update.cfg"
 const PENDING_UPDATE_PATH := "user://pending_update.cfg"
 
@@ -34,7 +34,7 @@ func get_installed_version(project_version: String) -> String:
 	return project_version
 
 func check_and_download_update(current_version: String) -> Dictionary:
-	var request_error := _release_request.request(RELEASE_API_URL, REQUEST_HEADERS)
+	var request_error := _release_request.request(RELEASE_API_URL, PackedStringArray(REQUEST_HEADERS))
 	if request_error != OK:
 		return _result("error", "Could not contact the update service.")
 
@@ -78,7 +78,7 @@ func check_and_download_update(current_version: String) -> Dictionary:
 	var patch_path := "%s/valorant2d_%s.pck" % [update_directory, remote_version]
 	_download_request.download_file = patch_path
 	var download_error := _download_request.request(
-		str(patch_asset.get("browser_download_url", "")), REQUEST_HEADERS
+		str(patch_asset.get("browser_download_url", "")), PackedStringArray(REQUEST_HEADERS)
 	)
 	if download_error != OK:
 		return _result("error", "Could not start downloading the update.")
