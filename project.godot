@@ -13,6 +13,7 @@ config_version=5
 [application]
 
 config/name="Valorant 2D"
+config/version="0.2.2"
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -21,6 +22,7 @@ config/icon="res://icon.svg"
 
 NetworkManager="*res://scripts/network/network_manager.gd"
 AudioManager="*res://scenes/audio/audio_manager.tscn"
+GameUpdateBootstrap="*res://scripts/systems/game_update_bootstrap.gd"
 
 [debug]
 
