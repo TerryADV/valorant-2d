@@ -88,6 +88,7 @@ func check_and_download_update(current_version: String) -> Dictionary:
 	_download_request.download_file = ""
 	if int(download_response[0]) != HTTPRequest.RESULT_SUCCESS or int(download_response[1]) != 200:
 		return _result("error", "The update download failed.")
+	download_progress.emit(_download_request.get_downloaded_bytes(), total_bytes)
 	if not _matches_release_digest(patch_path, str(patch_asset.get("digest", ""))):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(patch_path))
 		return _result("error", "The downloaded update failed its integrity check.")

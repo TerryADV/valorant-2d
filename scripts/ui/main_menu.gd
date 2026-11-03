@@ -28,6 +28,7 @@ func _ready() -> void:
 	deathmatch_option.pressed.connect(_on_deathmatch_option_pressed)
 	_game_update_service.setup(self)
 	_game_update_service.download_progress.connect(_on_update_download_progress)
+	loading_bar_label.hide()
 	copyright_label.text = "A fan-made project. Not affiliated with or endorsed by Riot Games."
 	_on_username_changed()
 
@@ -41,9 +42,9 @@ func _on_login_pressed() -> void:
 	NetworkManager.player_display_name = player_name
 	$LogIn.hide()
 	loading_screen.show()
-	loading_info.text = "Loading game files..."
+	loading_info.text = "Checking for updates..."
 	loading_bar.value = 0.0
-	loading_bar_label.text = "Checking..."
+	loading_bar_label.hide()
 	_check_for_updates_and_load()
 
 func _check_for_updates_and_load() -> void:
@@ -54,10 +55,11 @@ func _check_for_updates_and_load() -> void:
 	loading_info.text = _update_notice
 	if result.get("status", "") != "downloaded":
 		loading_bar.value = 0.0
-		loading_bar_label.text = "--"
+	loading_bar_label.hide()
 	_load_deathmatch_resources()
 
 func _on_update_download_progress(bytes_received: int, total_bytes: int) -> void:
+	loading_bar_label.show()
 	if total_bytes > 0:
 		loading_bar.value = float(bytes_received) / float(total_bytes) * 100.0
 		loading_bar_label.text = "%s / %s" % [
@@ -65,9 +67,11 @@ func _on_update_download_progress(bytes_received: int, total_bytes: int) -> void
 			_format_file_size(total_bytes)
 		]
 	else:
-		loading_bar_label.text = "%s downloaded" % _format_file_size(bytes_received)
+		loading_bar_label.text = _format_file_size(bytes_received)
 
 func _format_file_size(byte_count: int) -> String:
+	if byte_count < 1048576:
+		return "%.0f KB" % (float(byte_count) / 1024.0)
 	return "%.1f MB" % (float(byte_count) / 1048576.0)
 
 func _load_deathmatch_resources() -> void:
@@ -82,12 +86,10 @@ func _load_deathmatch_resources() -> void:
 		if not progress.is_empty():
 			var percentage := int(round(float(progress[0]) * 100.0))
 			loading_bar.value = percentage
-			loading_bar_label.text = "%d%%" % percentage
 		match load_status:
 			ResourceLoader.THREAD_LOAD_LOADED:
 				ResourceLoader.load_threaded_get(MAP_PATH)
 				loading_bar.value = 100.0
-				loading_bar_label.text = "100%"
 				loading_info.text = _update_notice
 				await get_tree().create_timer(0.35).timeout
 				loading_screen.hide()
@@ -100,7 +102,7 @@ func _load_deathmatch_resources() -> void:
 
 func _show_loading_error(message: String) -> void:
 	loading_info.text = message
-	loading_bar_label.text = "Error"
+	loading_bar_label.hide()
 	loading_bar.value = 0.0
 
 func _on_mode_button_pressed() -> void:

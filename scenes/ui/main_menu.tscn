@@ -148,6 +148,7 @@ texture_progress = ExtResource("8_8g5eo")
 metadata/_edit_lock_ = true
 
 [node name="LabelBar" type="Label" parent="LoadingScreen/Bar" unique_id=919627654]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.018000001
