@@ -29,6 +29,7 @@ func trim_teams_to_one_player() -> void:
 		team_peer_ids.sort()
 		for index in range(1, team_peer_ids.size()):
 			assignments.erase(team_peer_ids[index])
+			_manager.get("skirmish_position_assignments").erase(team_peer_ids[index])
 	broadcast_teams()
 
 func request_config(peer_id: int) -> void:
@@ -38,7 +39,8 @@ func request_config(peer_id: int) -> void:
 		return
 	_manager.rpc_id(peer_id, "sync_skirmish_config", _manager.get("skirmish_team_size"), _manager.get("skirmish_dummy_difficulty"))
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
-	_manager.rpc_id(peer_id, "sync_skirmish_teams", assignments.duplicate(true))
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
+	_manager.rpc_id(peer_id, "sync_skirmish_teams", assignments.duplicate(true), positions.duplicate(true))
 
 func apply_config(team_size: int, dummy_difficulty: int) -> void:
 	if not _manager.get("_peer_lifecycle").is_server_rpc_sender():
@@ -59,12 +61,27 @@ func set_local_team(team: int) -> void:
 	else:
 		_manager.rpc_id(1, "request_skirmish_team", team)
 
+func set_local_position(team: int, position: int) -> void:
+	if team < 0 or team > 1 or position < 0 or position >= 5:
+		return
+	if not _manager.call("is_networked") or _manager.get_multiplayer().is_server():
+		apply_position(1, team, position)
+	else:
+		_manager.rpc_id(1, "request_skirmish_position", team, position)
+
 func request_team(team: int, peer_id: int) -> void:
 	if not _manager.get_multiplayer().is_server() or team < 0 or team > 1:
 		return
 	if peer_id <= 1 or not _manager.get_multiplayer().get_peers().has(peer_id):
 		return
 	apply_team(peer_id, team)
+
+func request_position(team: int, position: int, peer_id: int) -> void:
+	if not _manager.get_multiplayer().is_server() or peer_id <= 1:
+		return
+	if not _manager.get_multiplayer().get_peers().has(peer_id):
+		return
+	apply_position(peer_id, team, position)
 
 func apply_team(peer_id: int, team: int) -> void:
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
@@ -78,20 +95,60 @@ func apply_team(peer_id: int, team: int) -> void:
 		if team_player_count >= max_team_players:
 			return
 	assignments[peer_id] = team
+	if not _manager.get("skirmish_position_assignments").has(peer_id):
+		_manager.get("skirmish_position_assignments")[peer_id] = _first_available_position(team)
 	_manager.emit_signal("skirmish_teams_changed", assignments.duplicate(true))
 	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
-		_manager.rpc("sync_skirmish_teams", assignments.duplicate(true))
+		_sync_teams()
+
+func apply_position(peer_id: int, team: int, position: int) -> void:
+	if team < 0 or team > 1 or position < 0 or position >= 5:
+		return
+	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	if int(assignments.get(peer_id, -1)) != team:
+		apply_team(peer_id, team)
+		if int(assignments.get(peer_id, -1)) != team:
+			return
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
+	for assigned_peer in positions:
+		if int(assigned_peer) != peer_id and int(assignments.get(int(assigned_peer), -1)) == team:
+			if int(positions[assigned_peer]) == position:
+				return
+	positions[peer_id] = position
+	_manager.emit_signal("skirmish_teams_changed", assignments.duplicate(true))
+	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
+		_sync_teams()
+
+func _first_available_position(team: int) -> int:
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
+	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	for position in range(5):
+		var occupied := false
+		for peer_id in positions:
+			if int(assignments.get(int(peer_id), -1)) == team and int(positions[peer_id]) == position:
+				occupied = true
+				break
+		if not occupied:
+			return position
+	return 0
+
+func _sync_teams() -> void:
+	_manager.rpc(
+		"sync_skirmish_teams",
+		_manager.get("skirmish_team_assignments").duplicate(true),
+		_manager.get("skirmish_position_assignments").duplicate(true)
+	)
 
 func broadcast_teams() -> void:
 	_manager.emit_signal("skirmish_teams_changed", _manager.get("skirmish_team_assignments").duplicate(true))
 	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
-		var assignments: Dictionary = _manager.get("skirmish_team_assignments")
-		_manager.rpc("sync_skirmish_teams", assignments.duplicate(true))
+		_sync_teams()
 
-func apply_teams(team_assignments: Dictionary) -> void:
+func apply_teams(team_assignments: Dictionary, position_assignments: Dictionary = {}) -> void:
 	if not _manager.get("_peer_lifecycle").is_server_rpc_sender():
 		return
 	_manager.set("skirmish_team_assignments", team_assignments.duplicate(true))
+	_manager.set("skirmish_position_assignments", position_assignments.duplicate(true))
 	_manager.emit_signal("skirmish_teams_changed", team_assignments.duplicate(true))
 
 func start_match(scene_path: String) -> Error:

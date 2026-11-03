@@ -101,6 +101,7 @@ func on_peer_disconnected(peer_id: int) -> void:
 	_manager.get("_lobby_service").broadcast_player_names()
 	var team_assignments: Dictionary = _manager.get("skirmish_team_assignments")
 	team_assignments.erase(peer_id)
+	_manager.get("skirmish_position_assignments").erase(peer_id)
 	_manager.get("_skirmish_service").broadcast_teams()
 	_manager.rpc("remove_player", peer_id)
 	_manager.get("_match_loading_service").on_peer_disconnected(peer_id)

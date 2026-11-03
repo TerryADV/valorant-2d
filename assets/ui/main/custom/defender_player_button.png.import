@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1r8txtyjbwj0"
-path="res://.godot/imported/mode_selected.png-fd0c172587f60449ffdda2224fa56931.ctex"
+uid="uid://ohbrb25fj22e"
+path="res://.godot/imported/defender_player_button.png-ae554a84bd8fc4f426d42b136a72002c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/main/mode_selected.png"
-dest_files=["res://.godot/imported/mode_selected.png-fd0c172587f60449ffdda2224fa56931.ctex"]
+source_file="res://assets/ui/main/custom/defender_player_button.png"
+dest_files=["res://.godot/imported/defender_player_button.png-ae554a84bd8fc4f426d42b136a72002c.ctex"]
 
 [params]
 

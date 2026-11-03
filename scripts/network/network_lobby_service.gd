@@ -70,6 +70,7 @@ func create_skirmish_room(port: int) -> Error:
 	_manager.set("match_started", false)
 	_manager.get("lobby_player_names").clear()
 	_manager.get("skirmish_team_assignments").clear()
+	_manager.get("skirmish_position_assignments").clear()
 	_manager.emit_signal("skirmish_teams_changed", _manager.get("skirmish_team_assignments").duplicate(true))
 	set_local_player_name(str(_manager.get("player_display_name")))
 	publish_lobby_state()

@@ -85,6 +85,7 @@ var lobby_player_names: Dictionary = {}
 var skirmish_team_size := 1
 var skirmish_dummy_difficulty: int = BaseAgent.Difficulty.HARD
 var skirmish_team_assignments: Dictionary = {}
+var skirmish_position_assignments: Dictionary = {}
 @warning_ignore("unused_private_class_variable")
 var _skirmish_ready_peers: Dictionary = {}
 @warning_ignore("unused_private_class_variable")
@@ -155,12 +156,20 @@ func sync_skirmish_config(team_size: int, dummy_difficulty: int) -> void:
 	_skirmish_service.apply_config(team_size, dummy_difficulty)
 func set_local_skirmish_team(team: int) -> void:
 	_skirmish_service.set_local_team(team)
+func set_local_skirmish_position(team: int, position: int) -> void:
+	_skirmish_service.set_local_position(team, position)
 @rpc("any_peer", "reliable")
 func request_skirmish_team(team: int) -> void:
 	_skirmish_service.request_team(team, multiplayer.get_remote_sender_id())
+@rpc("any_peer", "reliable")
+func request_skirmish_position(team: int, position: int) -> void:
+	_skirmish_service.request_position(team, position, multiplayer.get_remote_sender_id())
 @rpc("authority", "call_remote", "reliable")
-func sync_skirmish_teams(team_assignments: Dictionary) -> void:
-	_skirmish_service.apply_teams(team_assignments)
+func sync_skirmish_teams(
+	team_assignments: Dictionary,
+	position_assignments: Dictionary = {}
+) -> void:
+	_skirmish_service.apply_teams(team_assignments, position_assignments)
 @rpc("any_peer", "reliable")
 func request_player_name(player_name: String) -> void:
 	_lobby_service.receive_player_name(player_name, multiplayer.get_remote_sender_id())
@@ -355,6 +364,7 @@ func disconnect_game() -> void:
 	match_started = false
 	lobby_player_names.clear()
 	skirmish_team_assignments.clear()
+	skirmish_position_assignments.clear()
 	lobby_players_updated.emit(lobby_player_names.duplicate(true))
 	skirmish_teams_changed.emit(skirmish_team_assignments.duplicate(true))
 

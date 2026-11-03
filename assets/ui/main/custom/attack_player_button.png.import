@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blpwxhhrwdb3t"
-path="res://.godot/imported/custom_hover.png-0bf1966298d459017ffc95a701927962.ctex"
+uid="uid://c0bjlnt0gyque"
+path="res://.godot/imported/attack_player_button.png-abd0431725fb543fa80e30138e0a1008.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/main/custom_hover.png"
-dest_files=["res://.godot/imported/custom_hover.png-0bf1966298d459017ffc95a701927962.ctex"]
+source_file="res://assets/ui/main/custom/attack_player_button.png"
+dest_files=["res://.godot/imported/attack_player_button.png-abd0431725fb543fa80e30138e0a1008.ctex"]
 
 [params]
 

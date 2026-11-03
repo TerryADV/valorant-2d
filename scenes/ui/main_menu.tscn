@@ -6,13 +6,24 @@
 [ext_resource type="Texture2D" uid="uid://divqqv5k83o3q" path="res://assets/ui/log_in_button.png" id="5_btxxm"]
 [ext_resource type="Texture2D" uid="uid://cjp0721hvgq1i" path="res://assets/ui/loading_screen.png" id="6_wb0q5"]
 [ext_resource type="Texture2D" uid="uid://cl7qreuajh5jh" path="res://assets/ui/log_in_bar_under.png" id="7_q85j6"]
+[ext_resource type="Texture2D" uid="uid://c0bjlnt0gyque" path="res://assets/ui/main/custom/attack_player_button.png" id="8_7suek"]
 [ext_resource type="Texture2D" uid="uid://c8bemuxlkmqh2" path="res://assets/ui/log_in_bar_progress.png" id="8_8g5eo"]
-[ext_resource type="Texture2D" uid="uid://ce60h1maxd5ps" path="res://assets/ui/main/custom.png" id="9_otr3d"]
-[ext_resource type="Texture2D" uid="uid://blpwxhhrwdb3t" path="res://assets/ui/main/custom_hover.png" id="10_8ekit"]
-[ext_resource type="Texture2D" uid="uid://3s0a5727464t" path="res://assets/ui/main/options_backgrund.png" id="11_n4uci"]
+[ext_resource type="Texture2D" uid="uid://1uq1o8vun6ss" path="res://assets/ui/main/custom/custom.png" id="8_e0hcc"]
+[ext_resource type="Texture2D" uid="uid://b8rv1sbq72ryj" path="res://assets/ui/main/custom/options_backgrund.png" id="8_qilvv"]
+[ext_resource type="Texture2D" uid="uid://b4hlwacyo1n84" path="res://assets/ui/main/custom/attack_player_button_hover.png" id="9_otr3d"]
+[ext_resource type="Texture2D" uid="uid://cd62a0qu1olbt" path="res://assets/ui/main/custom/custom_hover.png" id="9_qch7b"]
+[ext_resource type="Texture2D" uid="uid://cwtp415chmfpv" path="res://assets/ui/main/custom/mode_selected.png" id="10_qch7b"]
+[ext_resource type="Texture2D" uid="uid://ohbrb25fj22e" path="res://assets/ui/main/custom/defender_player_button.png" id="11_pw24t"]
+[ext_resource type="Texture2D" uid="uid://cjfrnalj5me43" path="res://assets/ui/main/custom/defender_player_button_hover.png" id="12_5dct7"]
 [ext_resource type="Texture2D" uid="uid://dvr3g2jtorxiu" path="res://assets/ui/fgrdhtfyj.png" id="12_877pj"]
-[ext_resource type="Texture2D" uid="uid://b1r8txtyjbwj0" path="res://assets/ui/main/mode_selected.png" id="12_n4uci"]
-[ext_resource type="Texture2D" uid="uid://dvhjy17f80mcl" path="res://assets/ui/main/check.png" id="13_877pj"]
+[ext_resource type="Texture2D" uid="uid://clh7aokpgaumo" path="res://assets/ui/main/custom/oberserver_player_button.png" id="13_qilvv"]
+[ext_resource type="Texture2D" uid="uid://u3dne4ha74on" path="res://assets/ui/main/custom/oberserver_player_button_hover.png" id="14_jbte4"]
+[ext_resource type="Texture2D" uid="uid://q31awf4ud3s7" path="res://assets/ui/main/custom/invite_player.png" id="15_e0hcc"]
+[ext_resource type="Texture2D" uid="uid://bi71k2tm2e2ts" path="res://assets/ui/main/custom/change_position.png" id="15_y1h5l"]
+[ext_resource type="Texture2D" uid="uid://dcwg6ovwivose" path="res://assets/ui/main/custom/start.png" id="16_qch7b"]
+[ext_resource type="Texture2D" uid="uid://b8ymc3seijd6t" path="res://assets/ui/main/custom/start_hover.png" id="17_4ovp2"]
+[ext_resource type="Texture2D" uid="uid://bf6x0rvdlgjpc" path="res://assets/ui/main/custom/start_disable.png" id="18_1mexh"]
+[ext_resource type="Script" uid="uid://cex1gtxx0i5be" path="res://scripts/ui/main_menu_players.gd" id="19_players"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 content_margin_left = 5.0
@@ -40,12 +51,60 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ovp2"]
+texture = ExtResource("10_qch7b")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uuhc1"]
 content_margin_left = 6.0
 bg_color = Color(0.22745098, 0.23529412, 0.25882354, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d0u6y"]
-texture = ExtResource("12_n4uci")
+content_margin_left = 6.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0u6y"]
+font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
+bg_color = Color(0.9843137, 0.27058825, 0.32941177, 0.47058824)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3gngh"]
+font_size = 9
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40ndv"]
+bg_color = Color(0.16862746, 0.8117647, 0.6509804, 0.47058824)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xcpkd"]
+bg_color = Color(0.44705883, 0.45882353, 0.4627451, 0.47058824)
+
+[sub_resource type="LabelSettings" id="LabelSettings_va03m"]
+font_size = 10
+font_color = Color(0.6156863, 0.54509807, 0.3764706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fcnqv"]
+font_size = 8
+font_color = Color(0.14509805, 0.9411765, 0.73333335, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ud2m"]
+font_size = 7
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqxfm"]
+content_margin_left = 20.0
+bg_color = Color(0.44705883, 0.45882353, 0.4627451, 0.47058824)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57qmd"]
+content_margin_left = 20.0
+bg_color = Color(0.16862746, 0.8117647, 0.6509804, 0.47058824)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.16862746, 0.8117647, 0.6509804, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7numd"]
 
 [node name="MainMenu" type="Control" unique_id=617025341]
 layout_mode = 3
@@ -111,6 +170,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="LoadingScreen" type="Control" parent="." unique_id=738842751]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,7 +252,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Main" type="Control" parent="." unique_id=2121775149]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,8 +271,8 @@ offset_left = -0.19200134
 offset_top = 0.2639923
 offset_right = -0.1920166
 offset_bottom = 0.09597778
-texture_normal = ExtResource("9_otr3d")
-texture_hover = ExtResource("10_8ekit")
+texture_normal = ExtResource("8_e0hcc")
+texture_hover = ExtResource("9_qch7b")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -224,6 +283,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Mode" type="Button" parent="Main/Custom" unique_id=1962726862]
 layout_mode = 1
@@ -238,10 +298,47 @@ offset_right = -0.1920166
 offset_bottom = -0.23199463
 theme_override_font_sizes/font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_7numd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ovp2")
 text = "MODE: SKIRMISH"
 alignment = 0
 
+[node name="Map" type="Button" parent="Main/Custom" unique_id=316290508]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.437
+anchor_right = 0.14600001
+anchor_bottom = 0.46800002
+offset_left = -0.19200134
+offset_top = -0.17599487
+offset_right = -0.1920166
+offset_bottom = -0.26400757
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_7numd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ovp2")
+text = "MAP: ASCENT"
+alignment = 0
+
+[node name="Server" type="Button" parent="Main/Custom" unique_id=730057656]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.50600004
+anchor_right = 0.14600001
+anchor_bottom = 0.537
+offset_left = -0.19200134
+offset_top = 0.111968994
+offset_right = -0.1920166
+offset_bottom = 0.023986816
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_7numd")
+theme_override_styles/hover = SubResource("StyleBoxTexture_4ovp2")
+text = "SERVER: LOCAL"
+alignment = 0
+
 [node name="Options" type="Control" parent="Main/Custom" unique_id=1855583771]
+visible = false
+z_index = 2
 layout_mode = 1
 anchor_left = 0.15300001
 anchor_top = 0.16000001
@@ -253,7 +350,6 @@ offset_right = -0.17599487
 offset_bottom = 0.15197754
 
 [node name="Background" type="TextureRect" parent="Main/Custom/Options" unique_id=516524627]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -263,7 +359,7 @@ offset_left = -119.0
 offset_right = 119.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("11_n4uci")
+texture = ExtResource("8_qilvv")
 expand_mode = 2
 stretch_mode = 5
 
@@ -271,23 +367,23 @@ stretch_mode = 5
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021000002
-anchor_top = 0.010000001
+anchor_top = 0.019000001
 anchor_right = 0.95000005
 anchor_bottom = 0.994
 offset_left = -0.082000256
-offset_top = 0.19999981
+offset_top = -0.12000084
 offset_right = 0.099990845
-offset_bottom = -0.11999512
+offset_bottom = -2.119995
 
-[node name="Label" type="Button" parent="Main/Custom/Options/VBoxContainer" unique_id=1961050319]
+[node name="Deathmatch" type="Button" parent="Main/Custom/Options/VBoxContainer" unique_id=1961050319]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_uuhc1")
 theme_override_styles/hover = SubResource("StyleBoxTexture_d0u6y")
 text = "DEATHMATCH"
 alignment = 0
 
-[node name="Selected" type="TextureRect" parent="Main/Custom/Options/VBoxContainer/Label" unique_id=1291366076]
-modulate = Color(0.13333334, 1, 0.77254903, 1)
+[node name="Selected" type="TextureRect" parent="Main/Custom/Options/VBoxContainer/Deathmatch" unique_id=1291366076]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
@@ -299,9 +395,1096 @@ offset_left = 0.024978638
 offset_top = 0.0089998245
 offset_right = 0.049987793
 offset_bottom = 0.0030002594
-texture = ExtResource("13_877pj")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="Skirmish" type="Button" parent="Main/Custom/Options/VBoxContainer" unique_id=290000996]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_uuhc1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_d0u6y")
+text = "SKIRMISH"
+alignment = 0
+
+[node name="Selected" type="TextureRect" parent="Main/Custom/Options/VBoxContainer/Skirmish" unique_id=2014263049]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9110001
+anchor_top = 0.21700001
+anchor_right = 0.98200005
+anchor_bottom = 0.739
+offset_left = 0.024978638
+offset_top = 0.0089998245
+offset_right = 0.049987793
+offset_bottom = 0.0030002594
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Players" type="Control" parent="Main/Custom" unique_id=962745615]
+layout_mode = 1
+anchor_left = 0.185
+anchor_top = 0.284
+anchor_right = 0.785
+anchor_bottom = 0.74700004
+offset_left = -0.11999512
+offset_top = -0.03201294
+offset_right = -0.32000732
+offset_bottom = -0.056030273
+script = ExtResource("19_players")
+
+[node name="IP" type="Label" parent="Main/Custom/Players" unique_id=1708485934]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33600003
+anchor_top = 0.91
+anchor_right = 0.661
+anchor_bottom = 0.98700005
+offset_left = -0.17601013
+offset_right = 0.24899292
+offset_bottom = -0.1000061
+text = "IP: 192.168.1.7"
+label_settings = SubResource("LabelSettings_d0u6y")
+vertical_alignment = 1
+
+[node name="Tittles" type="Control" parent="Main/Custom/Players" unique_id=237810998]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.093
+offset_bottom = 0.099998474
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Main/Custom/Players/Tittles" unique_id=1639042178]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.33
+anchor_bottom = 0.96400005
+offset_right = -0.030014038
+offset_bottom = 0.00799942
+theme_override_styles/normal = SubResource("StyleBoxFlat_yf5fn")
+text = "ATTACKERS"
+label_settings = SubResource("LabelSettings_3gngh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Main/Custom/Players/Tittles" unique_id=1982427157]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_right = 0.66400003
+anchor_bottom = 0.96400005
+offset_right = 0.17596436
+offset_bottom = 0.00799942
+theme_override_styles/normal = SubResource("StyleBoxFlat_40ndv")
+text = "DEFENDERS"
+label_settings = SubResource("LabelSettings_3gngh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Main/Custom/Players/Tittles" unique_id=927634688]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.669
+anchor_right = 0.9990001
+anchor_bottom = 0.96400005
+offset_right = -0.309021
+offset_bottom = 0.00799942
+theme_override_styles/normal = SubResource("StyleBoxFlat_xcpkd")
+text = "OBSERVERS"
+label_settings = SubResource("LabelSettings_3gngh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Positions" type="Control" parent="Main/Custom/Players" unique_id=1837518882]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Attackers" type="Control" parent="Main/Custom/Players/Positions" unique_id=1776915079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Attacker" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=2139086415]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.097
+anchor_right = 0.33
+anchor_bottom = 0.24700001
+offset_top = -0.10000038
+offset_right = -0.030014038
+offset_bottom = -0.1000061
+texture_normal = ExtResource("8_7suek")
+texture_hover = ExtResource("9_otr3d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=787078559]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=304215038]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1921175870]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1358520513]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Attacker2" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=686633009]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.25
+anchor_right = 0.33
+anchor_bottom = 0.4
+offset_right = -0.030014038
+texture_normal = ExtResource("8_7suek")
+texture_hover = ExtResource("9_otr3d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=1147658068]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=154289563]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=756973625]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=1375660949]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Attacker3" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=1815349881]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.407
+anchor_right = 0.33
+anchor_bottom = 0.55700004
+offset_top = -0.099998474
+offset_right = -0.030014038
+offset_bottom = -0.1000061
+texture_normal = ExtResource("8_7suek")
+texture_hover = ExtResource("9_otr3d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1062148982]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=774818090]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1034796394]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1596070353]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Attacker4" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=1657439045]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.56
+anchor_right = 0.33
+anchor_bottom = 0.71000004
+offset_right = -0.030014038
+offset_bottom = -1.5258789e-05
+texture_normal = ExtResource("8_7suek")
+texture_hover = ExtResource("9_otr3d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=293524426]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=1239285967]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=990637842]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=284068400]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Attacker5" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=27476826]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.71300006
+anchor_right = 0.33
+anchor_bottom = 0.86300004
+offset_top = 0.099975586
+offset_right = -0.030014038
+offset_bottom = 0.099975586
+texture_normal = ExtResource("8_7suek")
+texture_hover = ExtResource("9_otr3d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=97911885]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=1180903034]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=1208775300]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=550017573]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Defenders" type="Control" parent="Main/Custom/Players/Positions" unique_id=1966713971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Defender" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=281149356]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.097
+anchor_right = 0.66400003
+anchor_bottom = 0.24700001
+offset_left = 0.2059784
+offset_top = -0.10000038
+offset_right = 0.17596436
+offset_bottom = -0.1000061
+texture_normal = ExtResource("11_pw24t")
+texture_hover = ExtResource("12_5dct7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=465510712]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=1792456153]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=1853607852]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=309227749]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Defender2" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=868219211]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.25
+anchor_right = 0.66400003
+anchor_bottom = 0.4
+offset_left = 0.2059784
+offset_right = 0.17596436
+texture_normal = ExtResource("11_pw24t")
+texture_hover = ExtResource("12_5dct7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=1049052723]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=247847588]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=1663032510]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=282780501]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Defender3" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=1679596800]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.407
+anchor_right = 0.66400003
+anchor_bottom = 0.55700004
+offset_left = 0.2059784
+offset_top = -0.099998474
+offset_right = 0.17596436
+offset_bottom = -0.1000061
+texture_normal = ExtResource("11_pw24t")
+texture_hover = ExtResource("12_5dct7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=417686686]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=1298300754]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=1390611717]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=577667930]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Defender4" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=1776343896]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.56
+anchor_right = 0.66400003
+anchor_bottom = 0.71000004
+offset_left = 0.2059784
+offset_right = 0.17596436
+offset_bottom = -1.5258789e-05
+texture_normal = ExtResource("11_pw24t")
+texture_hover = ExtResource("12_5dct7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1045092501]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=344077400]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1187730406]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1760833540]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Defender5" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=313139666]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33400002
+anchor_top = 0.71300006
+anchor_right = 0.66400003
+anchor_bottom = 0.86300004
+offset_left = 0.2059784
+offset_top = 0.099975586
+offset_right = 0.17596436
+offset_bottom = 0.099975586
+texture_normal = ExtResource("11_pw24t")
+texture_hover = ExtResource("12_5dct7")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=134196647]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=513755527]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1210588165]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1578207988]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Observers" type="Control" parent="Main/Custom/Players/Positions" unique_id=688624275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Observer" type="TextureButton" parent="Main/Custom/Players/Positions/Observers" unique_id=1278129102]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.669
+anchor_top = 0.097
+anchor_right = 0.9990001
+anchor_bottom = 0.24700001
+offset_left = -0.27902222
+offset_top = -0.10000038
+offset_right = -0.309021
+offset_bottom = -0.1000061
+texture_normal = ExtResource("13_qilvv")
+texture_hover = ExtResource("14_jbte4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=562381496]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=822255022]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=351391678]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=703907203]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Observer2" type="TextureButton" parent="Main/Custom/Players/Positions/Observers" unique_id=1315635549]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.669
+anchor_top = 0.25
+anchor_right = 1.0
+anchor_bottom = 0.4
+offset_left = -0.27902222
+offset_right = -1.0
+texture_normal = ExtResource("13_qilvv")
+texture_hover = ExtResource("14_jbte4")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Change" type="TextureRect" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=984132238]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = -0.10800934
+offset_top = 0.00799942
+offset_right = 0.10799408
+offset_bottom = 0.011997223
+texture = ExtResource("15_y1h5l")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=702456482]
+visible = false
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 171.0
+offset_bottom = 24.0
+text = "TerryADV"
+label_settings = SubResource("LabelSettings_va03m")
+vertical_alignment = 1
+
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=195726810]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.048
+anchor_top = 0.5
+anchor_right = 0.259
+anchor_bottom = 0.77800006
+offset_left = 0.055999756
+offset_top = 0.5
+offset_right = -0.052001953
+offset_bottom = -0.010002136
+text = "READY"
+label_settings = SubResource("LabelSettings_fcnqv")
+vertical_alignment = 1
+
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=1792419334]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.785
+anchor_top = 0.37800002
+anchor_right = 0.90400004
+anchor_bottom = 0.64400005
+offset_left = 0.019989014
+offset_top = -0.010000229
+offset_right = -0.11201477
+offset_bottom = 0.019996643
+text = "24 ms"
+label_settings = SubResource("LabelSettings_6ud2m")
+vertical_alignment = 1
+
+[node name="Invite" type="Button" parent="Main/Custom/Players" unique_id=1226529022]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.897
+anchor_right = 0.113000005
+anchor_bottom = 1.0
+offset_top = -0.1000061
+offset_right = -0.08300018
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_qqxfm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_57qmd")
+text = "INVITE"
+alignment = 0
+
+[node name="TextureRect" type="TextureRect" parent="Main/Custom/Players/Invite" unique_id=844208813]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.64100003
+anchor_top = 0.35500002
+anchor_right = 0.744
+anchor_bottom = 0.61300004
+offset_left = 0.0019989014
+offset_top = -0.005001068
+offset_right = -0.032001495
+offset_bottom = -0.0030002594
+texture = ExtResource("15_e0hcc")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Start" type="TextureButton" parent="Main/Custom" unique_id=2126892268]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.42700002
+anchor_top = 0.892
+anchor_right = 0.54300004
+anchor_bottom = 0.94100004
+offset_left = 0.09597778
+offset_top = -0.015991211
+offset_right = -0.5360718
+offset_bottom = 0.23199463
+texture_normal = ExtResource("16_qch7b")
+texture_hover = ExtResource("17_4ovp2")
+texture_disabled = ExtResource("18_1mexh")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Main/Custom/Start" unique_id=1937572340]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "START"
+label_settings = SubResource("LabelSettings_7numd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Background" type="ColorRect" parent="Main" unique_id=1587873655]
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.16862746, 0.1882353, 0.20784314, 1)
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1083444329]
 visible = false
