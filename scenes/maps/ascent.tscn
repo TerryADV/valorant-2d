@@ -362,6 +362,9 @@ size = Vector2(4, 9)
 cull_mode = 2
 polygon = PackedVector2Array(2, -4.5, -2, -4.5, -2, 4.5, 2, 4.5)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rund2"]
+light_mode = 2
+
 [sub_resource type="Gradient" id="Gradient_uvjy3"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.2509804, 0.2509804, 0.2509804, 1)
@@ -1048,6 +1051,8 @@ shape = SubResource("RectangleShape2D_l1lvh")
 occluder = SubResource("OccluderPolygon2D_ihb60")
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/Breakable objects/Door B" unique_id=2090187578]
+visibility_layer = 2
+material = SubResource("CanvasItemMaterial_rund2")
 position = Vector2(-2.0000024, 0)
 scale = Vector2(3.9999998, 9.000004)
 texture = SubResource("GradientTexture1D_w07y7")

@@ -290,16 +290,16 @@ func _get_deathmatch_team_participants(team_id: int) -> Array[Dictionary]:
 			):
 				continue
 			var agent := NetworkManager.find_player(peer_id) as BaseAgent
-			var fallback_agent_data := NetworkManager.get_agent_data(
+			var player_fallback_agent_data := NetworkManager.get_agent_data(
 				str(NetworkManager.get("selected_agent_id"))
 			) as AgentData
-			var sprite: Texture2D
+			var player_sprite: Texture2D
 			if agent and agent.agent_data:
-				sprite = agent.agent_data.agent_sprite
-			elif fallback_agent_data:
-				sprite = fallback_agent_data.agent_sprite
+				player_sprite = agent.agent_data.agent_sprite
+			elif player_fallback_agent_data:
+				player_sprite = player_fallback_agent_data.agent_sprite
 			participants.append(
-				_make_team_participant(peer_id, agent, sprite, agent != null and agent == player)
+				_make_team_participant(peer_id, agent, player_sprite, agent != null and agent == player)
 			)
 		var dummy_key := "%d:%d" % [team_id, slot_index]
 		var dummy_index := ordered_dummy_keys.find(dummy_key)
@@ -312,15 +312,15 @@ func _get_deathmatch_team_participants(team_id: int) -> Array[Dictionary]:
 				if child is BaseAgent and child.is_ai_dummy and child.get_deathmatch_id() == dummy_id:
 					dummy = child as BaseAgent
 					break
-		var fallback_agent_data := BaseAgent.AVAILABLE_AGENTS[
+		var dummy_fallback_agent_data := BaseAgent.AVAILABLE_AGENTS[
 				posmod(dummy_index, BaseAgent.AVAILABLE_AGENTS.size())
 			] as AgentData
-		var sprite: Texture2D = (
+		var dummy_sprite: Texture2D = (
 			dummy.agent_data.agent_sprite
 			if dummy and dummy.agent_data
-			else fallback_agent_data.agent_sprite
+			else dummy_fallback_agent_data.agent_sprite
 		)
-		participants.append(_make_team_participant(dummy_id, dummy, sprite, false))
+		participants.append(_make_team_participant(dummy_id, dummy, dummy_sprite, false))
 	return participants
 
 func _make_team_participant(
@@ -589,4 +589,3 @@ func _update_deathmatch_row(row: HBoxContainer, agents: Array[Node], start_index
 			progress.max_value = maxi(deathmatch_kill_target, 1)
 			progress.value = clampi(kills, 0, deathmatch_kill_target)
 			progress.texture_progress = PLAYER_BAR_TEXTURE if is_local_player else ENEMY_BAR_TEXTURE
-

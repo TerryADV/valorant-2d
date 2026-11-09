@@ -231,10 +231,23 @@ func _check_for_updates_and_load() -> void:
 	var result: Dictionary = await _game_update_service.check_and_download_update(installed_version)
 	_update_notice = str(result.get("message", ""))
 	loading_info.text = _update_notice
-	if result.get("status", "") != "downloaded":
+	if result.get("status", "") == "downloaded" and _restart_after_update():
+		return
+	if result.get("status", "") != "downloaded" or Engine.is_editor_hint():
 		loading_bar.value = 0.0
-	loading_bar_label.hide()
+		loading_bar_label.hide()
 	_load_selected_map_resources()
+
+func _restart_after_update() -> bool:
+	if Engine.is_editor_hint():
+		return false
+	var executable_path := OS.get_executable_path()
+	var process_id := OS.create_process(executable_path, PackedStringArray())
+	if process_id == -1:
+		push_error("Could not restart the game after downloading the update.")
+		return false
+	get_tree().quit()
+	return true
 
 func _on_update_download_progress(bytes_received: int, total_bytes: int) -> void:
 	loading_bar_label.show()

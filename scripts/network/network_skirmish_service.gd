@@ -297,18 +297,18 @@ func apply_position(peer_id: int, team: int, position: int) -> void:
 	if team == -1:
 		if position >= 2:
 			return
-		var assignments: Dictionary = _manager.get("skirmish_team_assignments")
-		var positions: Dictionary = _manager.get("skirmish_position_assignments")
-		for assigned_peer in positions:
+		var observer_assignments: Dictionary = _manager.get("skirmish_team_assignments")
+		var observer_positions: Dictionary = _manager.get("skirmish_position_assignments")
+		for assigned_peer in observer_positions:
 			if (
 				int(assigned_peer) != peer_id
-				and int(assignments.get(int(assigned_peer), -2)) == -1
-				and int(positions[assigned_peer]) == position
+				and int(observer_assignments.get(int(assigned_peer), -2)) == -1
+				and int(observer_positions[assigned_peer]) == position
 			):
 				return
-		assignments[peer_id] = -1
-		positions[peer_id] = position
-		_manager.emit_signal("skirmish_teams_changed", assignments.duplicate(true))
+		observer_assignments[peer_id] = -1
+		observer_positions[peer_id] = position
+		_manager.emit_signal("skirmish_teams_changed", observer_assignments.duplicate(true))
 		if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
 			_sync_teams()
 		return

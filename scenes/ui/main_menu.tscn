@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://b8ymc3seijd6t" path="res://assets/ui/main/custom/start_hover.png" id="17_4ovp2"]
 [ext_resource type="Texture2D" uid="uid://bf6x0rvdlgjpc" path="res://assets/ui/main/custom/start_disable.png" id="18_1mexh"]
 [ext_resource type="Script" uid="uid://cex1gtxx0i5be" path="res://scripts/ui/main_menu_players.gd" id="19_players"]
+[ext_resource type="Texture2D" uid="uid://c4ahtmq0dljbd" path="res://assets/ui/maps/ascent.png" id="25_1mexh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
 content_margin_left = 5.0
@@ -1764,8 +1765,22 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.16862746, 0.1882353, 0.20784314, 1)
+color = Color(0.0077999993, 0.015630005, 0.06, 0.7058824)
 metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Main/Background" unique_id=815930857]
+modulate = Color(1, 1, 1, 0.49019608)
+z_index = -11
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("25_1mexh")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1083444329]
 visible = false
