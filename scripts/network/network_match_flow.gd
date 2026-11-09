@@ -207,7 +207,7 @@ func on_scene_changed() -> void:
 		var multiplayer_api := _manager.get_multiplayer()
 		if not multiplayer_api.has_multiplayer_peer() or multiplayer_api.is_server():
 			_manager.set("match_started", true)
-			var human_count: int = _manager.call("get_connected_peer_ids").size()
+			var human_count: int = (_manager.call("get_deathmatch_active_peer_ids") as Array).size()
 			var selected_dummy_count: int = int(_manager.get("deathmatch_room_dummy_count")) if multiplayer_api.has_multiplayer_peer() else _pending_dummy_count
 			var spawn_capacity := int(_manager.call("get_max_bot_count", human_count))
 			var allowed_dummy_count := mini(selected_dummy_count, spawn_capacity)
@@ -215,15 +215,16 @@ func on_scene_changed() -> void:
 			if multiplayer_api.has_multiplayer_peer():
 				_manager.set("deathmatch_room_dummy_count", allowed_dummy_count)
 			if not was_loading:
-				_manager.get("_match_loading_service").start_deathmatch(
-					human_count
-				)
+				_manager.get("_match_loading_service").start_deathmatch(human_count)
 			if multiplayer_api.has_multiplayer_peer():
 				_manager.rpc("sync_lobby_state", human_count, true)
 		else:
 			_manager.set("match_started", true)
 			if not was_loading:
-				_manager.get("_match_loading_service").start_deathmatch(1)
+				var active_count: int = (_manager.call("get_deathmatch_active_peer_ids") as Array).size()
+				_manager.get("_match_loading_service").start_deathmatch(active_count)
+		if _manager.call("is_local_deathmatch_spectator"):
+			_manager.call("activate_local_deathmatch_spectator")
 		return
 	if _manager.get("_match_loading_service").is_loading_screen_visible():
 		_manager.get("_match_loading_service").pause_after_scene_change()
@@ -234,7 +235,7 @@ func on_scene_changed() -> void:
 			return
 		_manager.set("match_started", false)
 		_manager.get("_match_loading_service").finish_offline()
-		var local_agent := _manager.call("get_local_agent", current_scene) as BaseAgent
+		var local_agent := current_scene.get_node_or_null("BaseAgent") as BaseAgent
 		if local_agent:
 			local_agent.set_lobby_locked(true)
 			local_agent.visible = false

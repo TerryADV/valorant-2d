@@ -227,12 +227,184 @@ func prepare_deathmatch_cards() -> void:
 	_prepare_deathmatch_row(last_deathmatch_players)
 
 func update_deathmatch_hud() -> void:
-	if not player or not first_deathmatch_players or not last_deathmatch_players:
+	if not first_deathmatch_players or not last_deathmatch_players:
+		return
+	if _is_custom_deathmatch_room():
+		var attackers := _get_deathmatch_team_participants(0)
+		var defenders := _get_deathmatch_team_participants(1)
+		_update_deathmatch_team_row(first_deathmatch_players, attackers)
+		_update_deathmatch_team_row(last_deathmatch_players, defenders)
+		_layout_deathmatch_row(first_deathmatch_players, attackers.size(), false)
+		_layout_deathmatch_row(last_deathmatch_players, defenders.size(), true)
+		return
+	if not player:
 		return
 
 	var agents: Array[Node] = _get_sorted_agents()
-	_update_deathmatch_row(first_deathmatch_players, agents, 0)
-	_update_deathmatch_row(last_deathmatch_players, agents, 6)
+	var first_side: Array[Dictionary] = []
+	var last_side: Array[Dictionary] = []
+	for index in mini(agents.size(), 10):
+		var agent := agents[index] as BaseAgent
+		var participant := _make_team_participant(
+			agent.get_deathmatch_id(), agent, _participant_sprite(agent), agent == player
+		)
+		if index < 5:
+			first_side.append(participant)
+		else:
+			last_side.append(participant)
+	_update_deathmatch_team_row(first_deathmatch_players, first_side)
+	_update_deathmatch_team_row(last_deathmatch_players, last_side)
+	_layout_deathmatch_row(first_deathmatch_players, first_side.size(), false)
+	_layout_deathmatch_row(last_deathmatch_players, last_side.size(), true)
+
+func _is_custom_deathmatch_room() -> bool:
+	var room_mode := str(NetworkManager.get("hosted_room_mode"))
+	if room_mode.is_empty():
+		room_mode = str(NetworkManager.get("expected_room_mode"))
+	return room_mode == "deathmatch" and NetworkManager.is_networked()
+
+func _get_deathmatch_team_participants(team_id: int) -> Array[Dictionary]:
+	var participants: Array[Dictionary] = []
+	var peer_ids := NetworkManager.get_deathmatch_active_peer_ids()
+	peer_ids.sort()
+	var ordered_dummy_keys: Array[String] = []
+	for key_value in NetworkManager.skirmish_dummy_slots.keys():
+		ordered_dummy_keys.append(str(key_value))
+	ordered_dummy_keys.sort_custom(func(first_key: String, second_key: String) -> bool:
+		var first_parts := first_key.split(":")
+		var second_parts := second_key.split(":")
+		var first_team := int(first_parts[0])
+		var second_team := int(second_parts[0])
+		if first_team == second_team:
+			return int(first_parts[1]) < int(second_parts[1])
+		return first_team < second_team
+	)
+	var scene := _hud.get_tree().current_scene
+	var positions: Dictionary = NetworkManager.skirmish_position_assignments
+	var assignments: Dictionary = NetworkManager.skirmish_team_assignments
+	for slot_index in range(5):
+		for peer_id in peer_ids:
+			if (
+				int(assignments.get(peer_id, -1)) != team_id
+				or int(positions.get(peer_id, -1)) != slot_index
+			):
+				continue
+			var agent := NetworkManager.find_player(peer_id) as BaseAgent
+			var fallback_agent_data := NetworkManager.get_agent_data(
+				str(NetworkManager.get("selected_agent_id"))
+			) as AgentData
+			var sprite: Texture2D
+			if agent and agent.agent_data:
+				sprite = agent.agent_data.agent_sprite
+			elif fallback_agent_data:
+				sprite = fallback_agent_data.agent_sprite
+			participants.append(
+				_make_team_participant(peer_id, agent, sprite, agent != null and agent == player)
+			)
+		var dummy_key := "%d:%d" % [team_id, slot_index]
+		var dummy_index := ordered_dummy_keys.find(dummy_key)
+		if dummy_index < 0:
+			continue
+		var dummy_id := -dummy_index - 1
+		var dummy: BaseAgent
+		if scene:
+			for child in scene.get_children():
+				if child is BaseAgent and child.is_ai_dummy and child.get_deathmatch_id() == dummy_id:
+					dummy = child as BaseAgent
+					break
+		var fallback_agent_data := BaseAgent.AVAILABLE_AGENTS[
+				posmod(dummy_index, BaseAgent.AVAILABLE_AGENTS.size())
+			] as AgentData
+		var sprite: Texture2D = (
+			dummy.agent_data.agent_sprite
+			if dummy and dummy.agent_data
+			else fallback_agent_data.agent_sprite
+		)
+		participants.append(_make_team_participant(dummy_id, dummy, sprite, false))
+	return participants
+
+func _make_team_participant(
+	participant_id: int,
+	actor: BaseAgent,
+	sprite: Texture2D,
+	is_local: bool
+) -> Dictionary:
+	return {
+		"actor": actor,
+		"peer_id": participant_id,
+		"sprite": sprite,
+		"is_local": is_local,
+	}
+
+func _update_deathmatch_team_row(row: HBoxContainer, participants: Array[Dictionary]) -> void:
+	for row_index in row.get_child_count():
+		var card := row.get_child(row_index) as Control
+		var has_participant := row_index < participants.size()
+		card.visible = has_participant
+		if not has_participant:
+			continue
+		var participant: Dictionary = participants[row_index]
+		var background := card.get_node_or_null("CharacterContainer") as TextureRect
+		if not background:
+			background = card.get_node_or_null("Background") as TextureRect
+		var agent_icon := card.get_node_or_null("Agent") as TextureRect
+		var kill_label := card.get_node_or_null("Kill") as Label
+		var best_icon := card.get_node_or_null("Best") as TextureRect
+		var progress := card.get_node_or_null("TextureProgressBar") as TextureProgressBar
+		if not progress:
+			progress = card.get_node_or_null("KillProgress") as TextureProgressBar
+		var is_local_player := bool(participant["is_local"])
+		if background:
+			background.texture = CHARACTER_CONTAINER_TEXTURE if is_local_player else ENEMY_CONTAINER_TEXTURE
+		if agent_icon:
+			agent_icon.texture = participant["sprite"] as Texture2D
+			agent_icon.flip_h = false
+			agent_icon.rotation = 0.0
+		if kill_label:
+			var participant_id := int(participant["peer_id"])
+			kill_label.text = str(int(deathmatch_scores.get(participant_id, 0)))
+		if best_icon:
+			best_icon.texture = BEST_TEXTURE
+			best_icon.visible = int(deathmatch_scores.get(participant["peer_id"], 0)) > 0
+		if progress:
+			progress.max_value = maxi(deathmatch_kill_target, 1)
+			progress.value = clampi(
+				int(deathmatch_scores.get(participant["peer_id"], 0)),
+				0,
+				deathmatch_kill_target
+			)
+			progress.texture_progress = PLAYER_BAR_TEXTURE if is_local_player else ENEMY_BAR_TEXTURE
+
+func _layout_deathmatch_row(
+	row: HBoxContainer,
+	visible_card_count: int,
+	align_to_right: bool
+) -> void:
+	if not row:
+		return
+	const CARD_WIDTH := 63.0
+	var available_width := row.size.x
+	var card_width := CARD_WIDTH
+	if available_width > 0.0 and visible_card_count > 0:
+		card_width = minf(CARD_WIDTH, available_width / float(visible_card_count))
+	var horizontal_scale := card_width / CARD_WIDTH
+	for card in row.get_children():
+		(card as Control).custom_minimum_size.x = card_width
+		(card as Control).scale.x = horizontal_scale
+	if visible_card_count <= 1:
+		row.alignment = (
+			BoxContainer.ALIGNMENT_END if align_to_right else BoxContainer.ALIGNMENT_BEGIN
+		)
+		row.add_theme_constant_override("separation", 0)
+		return
+	if available_width <= 0.0:
+		return
+	var separation := maxf(
+		0.0,
+		(available_width - card_width * visible_card_count) / float(visible_card_count - 1)
+	)
+	row.add_theme_constant_override("separation", roundi(separation))
+	row.alignment = BoxContainer.ALIGNMENT_END if align_to_right else BoxContainer.ALIGNMENT_BEGIN
 
 func _get_sorted_agents() -> Array[Node]:
 	var agents: Array[Node] = []
@@ -375,7 +547,7 @@ func _prepare_deathmatch_row(row: HBoxContainer) -> void:
 		if child != template:
 			row.remove_child(child)
 			child.free()
-	for index in range(1, 6):
+	for index in range(1, 5):
 		var card := template.duplicate() as Control
 		card.name = "Player%d" % (index + 1)
 		row.add_child(card)

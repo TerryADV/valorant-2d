@@ -22,9 +22,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -205.0
-offset_top = -185.0
+offset_top = -205.0
 offset_right = 205.0
-offset_bottom = 185.0
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -35,9 +35,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 210.0
-offset_top = -185.0
+offset_top = -205.0
 offset_right = 385.0
-offset_bottom = 185.0
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -66,8 +66,13 @@ placeholder_text = "IPv4 del host (ej. 192.168.1.10)"
 
 [node name="Participants" type="Label" parent="Panel/Content"]
 layout_mode = 2
-text = "Jugadores: --/12"
+text = "Jugadores: --/10"
 horizontal_alignment = 1
+
+[node name="SpectatorMode" type="CheckButton" parent="Panel/Content"]
+layout_mode = 2
+text = "Entrar como espectador"
+tooltip_text = "En partida: clic izquierdo para avanzar y clic derecho para retroceder entre jugadores y dummys."
 
 [node name="BotSettings" type="VBoxContainer" parent="Panel/Content"]
 visible = false

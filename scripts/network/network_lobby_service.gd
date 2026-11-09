@@ -3,7 +3,7 @@ extends RefCounted
 var _manager: Node
 var _port := 7000
 var _max_players := 11
-var _max_participants := 12
+var _max_participants := 10
 
 func setup(manager: Node, port: int, max_players: int, max_participants: int) -> void:
 	_manager = manager
@@ -86,7 +86,7 @@ func create_deathmatch_room(port: int) -> Error:
 		return error
 	_manager.get("_match_flow").mark_deathmatch_room_ready(true)
 	_manager.set("match_started", false)
-	_manager.set("deathmatch_room_dummy_count", _max_participants - 1)
+	_manager.set("deathmatch_room_dummy_count", 0)
 	_manager.set("deathmatch_room_dummy_difficulty", BaseAgent.Difficulty.HARD)
 	_ensure_local_agent_selection()
 	_manager.get("lobby_player_names").clear()
@@ -107,7 +107,7 @@ func leave_deathmatch_room() -> void:
 func refresh_deathmatch_room_bot_count() -> void:
 	if not _manager.get_multiplayer().has_multiplayer_peer() or not _manager.get_multiplayer().is_server():
 		return
-	var maximum_bots := maxi(0, _max_participants - get_connected_peer_ids().size())
+	var maximum_bots := maxi(0, _max_participants - (_manager.call("get_deathmatch_active_peer_ids") as Array).size())
 	var room_bot_count := mini(int(_manager.get("deathmatch_room_dummy_count")), maximum_bots)
 	_manager.set("deathmatch_room_dummy_count", room_bot_count)
 	if _manager.get_multiplayer().get_peers().size() > 0:
@@ -156,9 +156,11 @@ func start_lan_match(dummy_count: int, dummy_difficulty: int) -> Error:
 		return ERR_BUSY
 	if _manager.get("_match_flow").is_transition_pending():
 		return ERR_BUSY
+	if not _manager.call("are_all_room_players_seated"):
+		return ERR_INVALID_DATA
 	if dummy_difficulty < BaseAgent.Difficulty.EASY or dummy_difficulty > BaseAgent.Difficulty.HARD:
 		return ERR_INVALID_PARAMETER
-	var peer_ids := get_connected_peer_ids()
+	var peer_ids: Array = _manager.call("get_deathmatch_active_peer_ids")
 	var maximum_room_bots := maxi(0, _max_participants - peer_ids.size())
 	if dummy_count < 0 or dummy_count > maximum_room_bots:
 		return ERR_INVALID_PARAMETER
@@ -193,7 +195,7 @@ func complete_lan_match_start() -> void:
 	if match_loading_service.is_initializing_match():
 		return
 	match_loading_service.set_initializing_match(true)
-	var peer_ids := get_connected_peer_ids()
+	var peer_ids: Array = _manager.call("get_deathmatch_active_peer_ids")
 	var human_count := peer_ids.size()
 	var dummy_count := int(_manager.get("lan_dummy_count"))
 	var dummy_difficulty := int(_manager.get("lan_dummy_difficulty"))
@@ -273,7 +275,15 @@ func _ensure_local_agent_selection() -> String:
 	return selected_id
 
 func request_lobby_state(peer_id: int) -> void:
+	_manager.rpc_id(
+		peer_id,
+		"sync_deathmatch_spectator_roles",
+		(_manager.get("deathmatch_spectator_peers") as Dictionary).duplicate(true)
+	)
+	_manager.get("_skirmish_service").request_config(peer_id)
 	_manager.rpc_id(peer_id, "sync_lobby_state", get_connected_peer_ids().size(), bool(_manager.get("match_started")))
+
+
 
 func handle_lobby_state_request(peer_id: int) -> void:
 	var multiplayer_api := _manager.get_multiplayer()
@@ -282,6 +292,7 @@ func handle_lobby_state_request(peer_id: int) -> void:
 
 func apply_lobby_state(human_count: int, host_started: bool) -> void:
 	_manager.set("match_started", host_started)
+	_manager.set("lobby_human_count", maxi(human_count, 0))
 	_manager.emit_signal("lobby_state_changed", human_count, host_started)
 
 func apply_match_started() -> void:
@@ -291,6 +302,7 @@ func apply_match_started() -> void:
 func publish_lobby_state() -> void:
 	var human_count := get_connected_peer_ids().size()
 	var host_started: bool = _manager.get("match_started")
+	_manager.set("lobby_human_count", human_count)
 	_manager.emit_signal("lobby_state_changed", human_count, host_started)
 	var multiplayer_api := _manager.get_multiplayer()
 	if multiplayer_api.has_multiplayer_peer() and multiplayer_api.is_server():
@@ -298,6 +310,7 @@ func publish_lobby_state() -> void:
 
 func publish_local_lobby_state() -> void:
 	var human_count := get_connected_peer_ids().size()
+	_manager.set("lobby_human_count", human_count)
 	_manager.emit_signal("lobby_state_changed", human_count, bool(_manager.get("match_started")))
 
 func get_connected_peer_ids() -> Array[int]:

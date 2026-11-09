@@ -6,10 +6,14 @@ var connection_pending := false
 func host(port: int, max_players: int, multiplayer_api: MultiplayerAPI) -> Error:
 	if peer != null or connection_pending:
 		return ERR_BUSY
+	var port_probe := PacketPeerUDP.new()
+	var port_error := port_probe.bind(port)
+	port_probe.close()
+	if port_error != OK:
+		return port_error
 	peer = ENetMultiplayerPeer.new()
 	var error := peer.create_server(port, max_players)
 	if error != OK:
-		peer.close()
 		peer = null
 		return error
 	multiplayer_api.multiplayer_peer = peer

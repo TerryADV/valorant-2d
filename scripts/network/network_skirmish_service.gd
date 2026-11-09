@@ -10,12 +10,13 @@ func publish_config(team_size: int, dummy_difficulty: int) -> void:
 		return
 	if dummy_difficulty < BaseAgent.Difficulty.EASY or dummy_difficulty > BaseAgent.Difficulty.HARD:
 		return
-	var previous_team_size := int(_manager.get("skirmish_team_size"))
+	var previous_team_size: int = int(_manager.get("skirmish_team_size"))
 	_manager.set("skirmish_team_size", team_size)
 	_manager.set("skirmish_dummy_difficulty", dummy_difficulty)
 	_manager.emit_signal("skirmish_config_changed", team_size, dummy_difficulty)
 	if previous_team_size == 2 and team_size == 1:
 		trim_teams_to_one_player()
+		_trim_dummy_slots_to_team_size()
 	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
 		_manager.rpc("sync_skirmish_config", team_size, dummy_difficulty)
 
@@ -37,10 +38,21 @@ func request_config(peer_id: int) -> void:
 		return
 	if not _manager.get_multiplayer().get_peers().has(peer_id):
 		return
-	_manager.rpc_id(peer_id, "sync_skirmish_config", _manager.get("skirmish_team_size"), _manager.get("skirmish_dummy_difficulty"))
+	_manager.rpc_id(
+		peer_id,
+		"sync_skirmish_config",
+		_manager.get("skirmish_team_size"),
+		_manager.get("skirmish_dummy_difficulty")
+	)
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
 	var positions: Dictionary = _manager.get("skirmish_position_assignments")
 	_manager.rpc_id(peer_id, "sync_skirmish_teams", assignments.duplicate(true), positions.duplicate(true))
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots")
+	_manager.rpc_id(
+		peer_id,
+		"sync_skirmish_dummy_slots",
+		dummy_slots.duplicate(true)
+	)
 
 func apply_config(team_size: int, dummy_difficulty: int) -> void:
 	if not _manager.get("_peer_lifecycle").is_server_rpc_sender():
@@ -53,21 +65,194 @@ func apply_config(team_size: int, dummy_difficulty: int) -> void:
 	_manager.set("skirmish_dummy_difficulty", dummy_difficulty)
 	_manager.emit_signal("skirmish_config_changed", team_size, dummy_difficulty)
 
+func set_dummy_slot(team: int, position: int, invited: bool) -> void:
+	var room_mode := _get_room_mode()
+	if team < 0 or team > 1 or position < 0 or position >= 5:
+		return
+	if room_mode != "skirmish" and room_mode != "deathmatch":
+		return
+	if room_mode == "skirmish" and position >= int(_manager.get("skirmish_team_size")):
+		return
+	if bool(_manager.get("match_started")):
+		return
+	if _manager.call("is_networked") and not _manager.get_multiplayer().is_server():
+		return
+	if invited and _is_player_at_position(team, position):
+		return
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots")
+	var slot_key: String = _dummy_slot_key(team, position)
+	if invited:
+		if room_mode == "deathmatch":
+			var max_dummy_count := maxi(0, int(_manager.call("get_max_deathmatch_dummy_count")))
+			if dummy_slots.size() >= max_dummy_count:
+				return
+		dummy_slots[slot_key] = _next_dummy_display_name(dummy_slots)
+	else:
+		dummy_slots.erase(slot_key)
+	_manager.set("skirmish_dummy_slots", dummy_slots)
+	if room_mode == "deathmatch":
+		_manager.call("set_deathmatch_room_bot_count", dummy_slots.size())
+	_manager.emit_signal("skirmish_dummy_slots_changed", dummy_slots.duplicate(true))
+	if _manager.call("is_networked"):
+		_manager.rpc("sync_skirmish_dummy_slots", dummy_slots.duplicate(true))
+
+func fill_room_with_dummies() -> void:
+	var room_mode := _get_room_mode()
+	if room_mode != "skirmish" and room_mode != "deathmatch":
+		return
+	if bool(_manager.get("match_started")):
+		return
+	if _manager.call("is_networked") and not _manager.get_multiplayer().is_server():
+		return
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots")
+	var original_dummy_slots := dummy_slots.duplicate(true)
+	var maximum_dummy_count := -1
+	if room_mode == "deathmatch":
+		maximum_dummy_count = maxi(0, int(_manager.call("get_max_deathmatch_dummy_count")))
+	for team in range(2):
+		for position in range(5):
+			if room_mode == "skirmish" and position >= int(_manager.get("skirmish_team_size")):
+				continue
+			var slot_key := _dummy_slot_key(team, position)
+			if dummy_slots.has(slot_key) or _is_player_at_position(team, position):
+				continue
+			if room_mode == "deathmatch" and dummy_slots.size() >= maximum_dummy_count:
+				return
+			dummy_slots[slot_key] = _next_dummy_display_name(dummy_slots)
+	if dummy_slots == original_dummy_slots:
+		return
+	_manager.set("skirmish_dummy_slots", dummy_slots)
+	if room_mode == "deathmatch":
+		_manager.call("set_deathmatch_room_bot_count", dummy_slots.size())
+	_manager.emit_signal("skirmish_dummy_slots_changed", dummy_slots.duplicate(true))
+	if _manager.call("is_networked"):
+		_manager.rpc("sync_skirmish_dummy_slots", dummy_slots.duplicate(true))
+
+func apply_dummy_slots(dummy_slots: Dictionary, server_sender: bool) -> void:
+	if not server_sender:
+		return
+	var valid_slots: Dictionary = {}
+	for key_value in dummy_slots:
+		var key: String = str(key_value)
+		var parts: PackedStringArray = key.split(":")
+		if parts.size() != 2:
+			continue
+		var team: int = int(parts[0])
+		var position: int = int(parts[1])
+		var room_mode := _get_room_mode()
+		if (
+			team < 0 or team > 1
+			or position < 0 or position >= 5
+			or (room_mode == "skirmish" and position >= int(_manager.get("skirmish_team_size")))
+			or _is_player_at_position(team, position)
+		):
+			continue
+		var dummy_name: String = str(dummy_slots[key_value]).strip_edges()
+		if not dummy_name.begins_with("Dummy") or not dummy_name.substr(5).is_valid_int():
+			continue
+		valid_slots[key] = dummy_name
+	_manager.set("skirmish_dummy_slots", valid_slots)
+	_manager.emit_signal("skirmish_dummy_slots_changed", valid_slots.duplicate(true))
+
+func _next_dummy_display_name(dummy_slots: Dictionary) -> String:
+	var highest_number := 0
+	for dummy_name_value in dummy_slots.values():
+		var dummy_name := str(dummy_name_value)
+		if not dummy_name.begins_with("Dummy"):
+			continue
+		var number_text := dummy_name.substr(5)
+		if number_text.is_valid_int():
+			highest_number = maxi(highest_number, int(number_text))
+	return "Dummy%d" % (highest_number + 1)
+func _trim_dummy_slots_to_team_size() -> void:
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots")
+	for key_value in dummy_slots.keys():
+		var parts: PackedStringArray = str(key_value).split(":")
+		if parts.size() != 2 or int(parts[1]) >= int(_manager.get("skirmish_team_size")):
+			dummy_slots.erase(key_value)
+	_manager.emit_signal("skirmish_dummy_slots_changed", dummy_slots.duplicate(true))
+	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
+		_manager.rpc("sync_skirmish_dummy_slots", dummy_slots.duplicate(true))
+
+func _get_room_mode() -> String:
+	var room_mode := str(_manager.get("hosted_room_mode"))
+	if room_mode.is_empty():
+		room_mode = str(_manager.get("expected_room_mode"))
+	return room_mode
+func _dummy_slot_key(team: int, position: int) -> String:
+	return "%d:%d" % [team, position]
+
+func _is_player_at_position(team: int, position: int) -> bool:
+	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
+	for peer_id_value in positions:
+		var peer_id := int(peer_id_value)
+		if (
+			int(assignments.get(peer_id, -1)) == team
+			and int(positions[peer_id_value]) == position
+		):
+			return true
+	return false
+
 func set_local_team(team: int) -> void:
 	if team < 0 or team > 1:
 		return
 	if not _manager.call("is_networked") or _manager.get_multiplayer().is_server():
 		apply_team(1, team)
-	else:
+	elif _can_send_client_rpc():
 		_manager.rpc_id(1, "request_skirmish_team", team)
 
 func set_local_position(team: int, position: int) -> void:
-	if team < 0 or team > 1 or position < 0 or position >= 5:
+	if (
+		team < -1 or team > 1 or position < 0
+		or (team == -1 and position >= 2)
+		or (team >= 0 and position >= 5)
+		or (
+			team >= 0
+			and str(_manager.get("hosted_room_mode")) == "skirmish"
+			and position >= int(_manager.get("skirmish_team_size"))
+		)
+	):
 		return
 	if not _manager.call("is_networked") or _manager.get_multiplayer().is_server():
 		apply_position(1, team, position)
-	else:
+	elif _can_send_client_rpc():
 		_manager.rpc_id(1, "request_skirmish_position", team, position)
+
+func clear_local_position() -> void:
+	if not _manager.call("is_networked") or _manager.get_multiplayer().is_server():
+		clear_peer_position(1)
+	elif _can_send_client_rpc():
+		_manager.rpc_id(1, "request_leave_skirmish_position")
+
+func request_leave_position(peer_id: int) -> void:
+	var multiplayer_api: MultiplayerAPI = _manager.get_multiplayer()
+	if not multiplayer_api.has_multiplayer_peer() or not multiplayer_api.is_server():
+		return
+	if peer_id <= 1 or not multiplayer_api.get_peers().has(peer_id):
+		return
+	clear_peer_position(peer_id)
+
+func clear_peer_position(peer_id: int) -> void:
+	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
+	if not assignments.has(peer_id) and not positions.has(peer_id):
+		return
+	assignments.erase(peer_id)
+	positions.erase(peer_id)
+	_manager.emit_signal("skirmish_teams_changed", assignments.duplicate(true))
+	if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
+		_sync_teams()
+
+func _can_send_client_rpc() -> bool:
+	var multiplayer_api: MultiplayerAPI = _manager.get_multiplayer()
+	if _manager.get("connection_pending") or not multiplayer_api.has_multiplayer_peer():
+		return false
+	var network_peer := multiplayer_api.multiplayer_peer
+	return (
+		network_peer != null
+		and network_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED
+	)
 
 func request_team(team: int, peer_id: int) -> void:
 	if not _manager.get_multiplayer().is_server() or team < 0 or team > 1:
@@ -85,7 +270,12 @@ func request_position(team: int, position: int, peer_id: int) -> void:
 
 func apply_team(peer_id: int, team: int) -> void:
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
-	var max_team_players := int(_manager.get("skirmish_team_size"))
+	var room_mode := str(_manager.get("hosted_room_mode"))
+	if room_mode.is_empty():
+		room_mode = str(_manager.get("expected_room_mode"))
+	var max_team_players := 5
+	if room_mode == "skirmish":
+		max_team_players = int(_manager.get("skirmish_team_size"))
 	var current_team := int(assignments.get(peer_id, -1))
 	if current_team != team:
 		var team_player_count := 0
@@ -102,7 +292,34 @@ func apply_team(peer_id: int, team: int) -> void:
 		_sync_teams()
 
 func apply_position(peer_id: int, team: int, position: int) -> void:
-	if team < 0 or team > 1 or position < 0 or position >= 5:
+	if team < -1 or team > 1 or position < 0:
+		return
+	if team == -1:
+		if position >= 2:
+			return
+		var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+		var positions: Dictionary = _manager.get("skirmish_position_assignments")
+		for assigned_peer in positions:
+			if (
+				int(assigned_peer) != peer_id
+				and int(assignments.get(int(assigned_peer), -2)) == -1
+				and int(positions[assigned_peer]) == position
+			):
+				return
+		assignments[peer_id] = -1
+		positions[peer_id] = position
+		_manager.emit_signal("skirmish_teams_changed", assignments.duplicate(true))
+		if _manager.call("is_networked") and _manager.get_multiplayer().is_server():
+			_sync_teams()
+		return
+	if position >= 5:
+		return
+	var room_mode := str(_manager.get("hosted_room_mode"))
+	if room_mode.is_empty():
+		room_mode = str(_manager.get("expected_room_mode"))
+	if room_mode == "skirmish" and position >= int(_manager.get("skirmish_team_size")):
+		return
+	if _is_dummy_slot(team, position):
 		return
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
 	if int(assignments.get(peer_id, -1)) != team:
@@ -123,7 +340,7 @@ func _first_available_position(team: int) -> int:
 	var positions: Dictionary = _manager.get("skirmish_position_assignments")
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
 	for position in range(5):
-		var occupied := false
+		var occupied := _is_dummy_slot(team, position)
 		for peer_id in positions:
 			if int(assignments.get(int(peer_id), -1)) == team and int(positions[peer_id]) == position:
 				occupied = true
@@ -131,6 +348,10 @@ func _first_available_position(team: int) -> int:
 		if not occupied:
 			return position
 	return 0
+
+func _is_dummy_slot(team: int, position: int) -> bool:
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots") as Dictionary
+	return dummy_slots.has(_dummy_slot_key(team, position))
 
 func _sync_teams() -> void:
 	_manager.rpc(
@@ -152,6 +373,12 @@ func apply_teams(team_assignments: Dictionary, position_assignments: Dictionary 
 	_manager.emit_signal("skirmish_teams_changed", team_assignments.duplicate(true))
 
 func start_match(scene_path: String) -> Error:
+	if (
+		not scene_path.begins_with("res://scenes/maps/skirmish/")
+		or not scene_path.get_file().get_basename().to_lower().begins_with("skirmish")
+		or not ResourceLoader.exists(scene_path)
+	):
+		return ERR_INVALID_PARAMETER
 	if _manager.get("_match_flow").is_transition_pending():
 		return ERR_BUSY
 	if _manager.call("is_networked") and not _manager.get_multiplayer().is_server():
@@ -159,17 +386,24 @@ func start_match(scene_path: String) -> Error:
 	if not are_all_players_assigned():
 		return ERR_INVALID_DATA
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
-	if assignments.size() > int(_manager.get("skirmish_team_size")) * 2:
+	var active_player_count := 0
+	for team_value in assignments.values():
+		if int(team_value) == 0 or int(team_value) == 1:
+			active_player_count += 1
+	if active_player_count > int(_manager.get("skirmish_team_size")) * 2:
 		return ERR_INVALID_DATA
 	_manager.get("_skirmish_ready_peers").clear()
 	_manager.set("_skirmish_match_initializing", false)
 	_manager.set("match_started", true)
 	if _manager.call("is_networked"):
-		_manager.rpc("begin_skirmish_scene")
+		_manager.rpc("begin_skirmish_scene", scene_path)
 		return OK
 	return _manager.get("_match_flow").load_skirmish_scene(scene_path)
 
 func are_all_players_assigned() -> bool:
+	return are_all_room_players_seated(true)
+
+func are_all_room_players_seated(skirmish_mode: bool) -> bool:
 	var peer_ids: Array[int] = []
 	if _manager.call("is_networked"):
 		peer_ids.append(1)
@@ -180,18 +414,34 @@ func are_all_players_assigned() -> bool:
 	if peer_ids.is_empty():
 		return false
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	var positions: Dictionary = _manager.get("skirmish_position_assignments")
 	for peer_id in peer_ids:
-		var team := int(assignments.get(peer_id, -1))
-		if team != 0 and team != 1:
+		var team := int(assignments.get(peer_id, -2))
+		var position := int(positions.get(peer_id, -1))
+		if team == -1:
+			if position < 0 or position >= 2:
+				return false
+		elif team == 0 or team == 1:
+			if position < 0 or position >= 5:
+				return false
+			if skirmish_mode and position >= int(_manager.get("skirmish_team_size")):
+				return false
+		else:
 			return false
 	return true
 
-func begin_scene() -> void:
+func begin_scene(scene_path: String) -> void:
 	if not _manager.get("_peer_lifecycle").is_server_rpc_sender():
+		return
+	if (
+		not scene_path.begins_with("res://scenes/maps/skirmish/")
+		or not scene_path.get_file().get_basename().to_lower().begins_with("skirmish")
+		or not ResourceLoader.exists(scene_path)
+	):
 		return
 	_manager.set("match_started", true)
 	var error: int = _manager.get("_match_flow").load_skirmish_scene(
-		"res://scenes/maps/skirmish/skirmish_a.tscn"
+		scene_path
 	)
 	if error != OK:
 		_manager.set("match_started", false)
@@ -255,21 +505,30 @@ func initialize_match() -> void:
 	if mode_selector:
 		mode_selector.selected_mode = GameModeSelector.Mode.SKIRMISH
 	var assignments: Dictionary = _manager.get("skirmish_team_assignments")
+	var position_assignments: Dictionary = _manager.get("skirmish_position_assignments")
 	var peer_ids: Array = assignments.keys()
 	peer_ids.sort()
+	var team_peer_ids_by_team: Array = [[], []]
+	for peer_id_value in peer_ids:
+		var team := int(assignments[peer_id_value])
+		if team >= 0 and team < team_peer_ids_by_team.size():
+			team_peer_ids_by_team[team].append(int(peer_id_value))
 	var used_agents_by_team: Array[Dictionary] = [{}, {}]
-	var dummy_index := 0
+	var team_markers_by_team: Array = [
+		get_team_markers(current_scene, 0),
+		get_team_markers(current_scene, 1),
+	]
 	for team in range(2):
-		var team_peer_ids: Array[int] = []
-		for peer_id_value in peer_ids:
-			if int(assignments[peer_id_value]) == team:
-				team_peer_ids.append(int(peer_id_value))
-		var team_markers := get_team_markers(current_scene, team)
-		for slot_index in team_peer_ids.size():
-			var peer_id := team_peer_ids[slot_index]
-			if slot_index >= team_markers.size():
+		var team_peer_ids: Array = team_peer_ids_by_team[team]
+		var team_markers: Array = team_markers_by_team[team]
+		for peer_id_value in team_peer_ids:
+			var peer_id := int(peer_id_value)
+			var slot_index := int(position_assignments.get(peer_id, -1))
+			if slot_index < 0 or slot_index >= team_markers.size():
 				continue
-			var marker := team_markers[slot_index]
+			var marker := team_markers[slot_index] as Marker2D
+			if not marker:
+				continue
 			var agent_id := choose_agent_id(str(_manager.get("selected_agent_id")), used_agents_by_team[team])
 			if agent_id.is_empty():
 				push_error("No unique agent is available for Skirmish team %d." % team)
@@ -279,10 +538,17 @@ func initialize_match() -> void:
 				_manager.rpc("spawn_player", peer_id, marker.global_position, 1, agent_id)
 			else:
 				_manager.call("spawn_player", peer_id, marker.global_position, 1, agent_id)
-		for slot_index in range(team_peer_ids.size(), int(_manager.get("skirmish_team_size"))):
-			if slot_index >= team_markers.size():
+	var dummy_slots: Dictionary = _manager.get("skirmish_dummy_slots")
+	var dummy_index := 0
+	for team in range(2):
+		var team_markers: Array = team_markers_by_team[team]
+		for slot_index in range(int(_manager.get("skirmish_team_size"))):
+			var slot_key := _dummy_slot_key(team, slot_index)
+			if not dummy_slots.has(slot_key) or slot_index >= team_markers.size():
 				continue
-			var dummy_marker := team_markers[slot_index]
+			var dummy_marker := team_markers[slot_index] as Marker2D
+			if not dummy_marker:
+				continue
 			var weapon_index := randi_range(0, BaseAgent.AVAILABLE_WEAPONS.size() - 1)
 			var agent_index := _choose_agent_index(used_agents_by_team[team])
 			if agent_index < 0:

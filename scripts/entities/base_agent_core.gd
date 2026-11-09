@@ -150,6 +150,8 @@ func _ready() -> void:
 	_ensure_controllers()
 	_spectator_controller = SpectatorControllerScript.new()
 	_spectator_controller.setup(self)
+	if not agent_data and is_ai_dummy and has_method("get_dummy_agent_data_fallback"):
+		agent_data = call("get_dummy_agent_data_fallback") as AgentData
 	if not agent_data:
 		push_error("BaseAgent requires an AgentData resource.")
 		return
@@ -211,7 +213,11 @@ func _setup_controllers() -> void:
 func _input(event: InputEvent) -> void:
 	if NetworkManager.is_match_loading():
 		return
-	if _spectator_controller and has_local_authority() and is_dead:
+	if (
+		_spectator_controller
+		and (has_local_authority() or NetworkManager.is_local_deathmatch_spectator())
+		and is_dead
+	):
 		_spectator_controller.process_input(event)
 		return
 	if (

@@ -21,7 +21,13 @@ const FALLBACK_MAP_PATHS: Array[String] = [
 @onready var main_screen: Control = $Main
 @onready var mode_button: Button = $Main/Custom/Mode
 @onready var map_button: Button = $Main/Custom/Map
+@onready var server_button: Button = $Main/Custom/Server
+@onready var start_button: TextureButton = $Main/Custom/Start
+@onready var start_label: Label = $Main/Custom/Start/Label
 @onready var mode_options: Control = $Main/Custom/Options
+@onready var connect_options: Control = $Main/Custom/Options/Connect
+@onready var connect_ip_input: TextEdit = $Main/Custom/Options/Connect/IP
+@onready var connect_button: Button = $Main/Custom/Options/Connect/Button
 @onready var deathmatch_option: Button = $Main/Custom/Options/VBoxContainer/Deathmatch
 @onready var selected_mode_indicator: TextureRect = $Main/Custom/Options/VBoxContainer/Deathmatch/Selected
 @onready var skirmish_option: Button = $Main/Custom/Options/VBoxContainer/Skirmish
@@ -35,17 +41,24 @@ var _selected_mode := "DEATHMATCH"
 var _selected_map_path := ""
 var _active_options_kind := ""
 var _map_option_buttons: Array[Button] = []
+var _connection_elapsed := 0.0
 
 func _ready() -> void:
 	loading_screen.hide()
 	main_screen.hide()
+	mode_options.hide()
+	connect_options.hide()
 	username_input.text = _load_saved_player_name()
 	if not username_input.text.strip_edges().is_empty():
 		NetworkManager.player_display_name = username_input.text.strip_edges()
 	username_input.text_changed.connect(_on_username_changed)
 	login_button.pressed.connect(_on_login_pressed)
+	start_button.pressed.connect(_on_start_pressed)
 	_game_update_service.setup(self)
 	_game_update_service.download_progress.connect(_on_update_download_progress)
+	NetworkManager.connected.connect(_on_lan_connected)
+	NetworkManager.connection_failed.connect(_on_lan_connection_failed)
+	NetworkManager.room_mode_mismatch.connect(_on_lan_room_mode_mismatch)
 	loading_bar_label.hide()
 	copyright_label.text = "A fan-made project. Not affiliated with or endorsed by Riot Games."
 	_on_username_changed()
@@ -59,6 +72,10 @@ func _input(event: InputEvent) -> void:
 		return
 	var mouse_event := event as InputEventMouseButton
 	if mouse_event.button_index != MOUSE_BUTTON_LEFT or not mouse_event.pressed:
+		return
+	if server_button.get_global_rect().has_point(mouse_event.position):
+		_toggle_options("server")
+		get_viewport().set_input_as_handled()
 		return
 	if mode_button.get_global_rect().has_point(mouse_event.position):
 		_toggle_options("mode")
@@ -95,6 +112,11 @@ func _input(event: InputEvent) -> void:
 			_hide_options()
 			get_viewport().set_input_as_handled()
 			return
+	if _active_options_kind == "server":
+		if connect_button.get_global_rect().has_point(mouse_event.position):
+			_connect_or_host_lan_room()
+			get_viewport().set_input_as_handled()
+			return
 
 func _process(_delta: float) -> void:
 	var mouse_position := get_global_mouse_position()
@@ -104,6 +126,63 @@ func _process(_delta: float) -> void:
 		var check := map_option.get_node_or_null("Selected") as TextureRect
 		if check:
 			check.modulate = _mode_check_color(map_option, mouse_position, "map")
+	_update_lan_menu_status(_delta)
+	_update_start_button()
+
+func _update_start_button() -> void:
+	var can_start := (
+		not NetworkManager.connection_pending
+		and not NetworkManager.match_started
+		and _are_all_room_players_seated()
+	)
+	if NetworkManager.is_networked():
+		can_start = can_start and get_tree().get_multiplayer().is_server()
+	start_button.disabled = not can_start
+
+func _are_all_room_players_seated() -> bool:
+	return NetworkManager.are_all_room_players_seated()
+
+func _on_start_pressed() -> void:
+	if NetworkManager.connection_pending or NetworkManager.match_started:
+		return
+	if NetworkManager.is_networked() and not get_tree().get_multiplayer().is_server():
+		return
+	if not NetworkManager.is_networked():
+		_ensure_lan_host()
+	if not NetworkManager.is_networked():
+		_show_start_error("NO SE PUDO CREAR LA SALA")
+		return
+	if NetworkManager.hosted_room_mode != _selected_mode.to_lower():
+		_show_start_error("LA SALA NO COINCIDE CON EL MODO")
+		return
+	if not _are_all_room_players_seated():
+		_show_start_error("ASIGNA UN LUGAR A CADA JUGADOR")
+		return
+	if _selected_map_path.is_empty() or not ResourceLoader.exists(_selected_map_path):
+		_show_start_error("NO HAY MAPA PARA ESTE MODO")
+		return
+	var start_error: Error
+	if _selected_mode == "SKIRMISH":
+		start_error = NetworkManager.start_skirmish_match(_selected_map_path)
+	else:
+		start_error = NetworkManager.start_lan_match(
+			NetworkManager.deathmatch_room_dummy_count,
+			NetworkManager.deathmatch_room_dummy_difficulty
+		)
+	if start_error != OK:
+		if start_error == ERR_INVALID_DATA:
+			_show_start_error("ASIGNA A TODOS LOS JUGADORES")
+		else:
+			_show_start_error("NO SE PUDO INICIAR: %d" % start_error)
+		push_warning("Could not start %s: %s" % [_selected_mode, error_string(start_error)])
+
+func _show_start_error(message: String) -> void:
+	start_label.text = message
+	var reset_timer := get_tree().create_timer(2.5)
+	reset_timer.timeout.connect(func() -> void:
+		if is_instance_valid(start_label) and not NetworkManager.match_started:
+			start_label.text = "START"
+	)
 
 func _mode_check_color(button: Control, mouse_position: Vector2, options_kind: String) -> Color:
 	if (
@@ -195,6 +274,7 @@ func _load_selected_map_resources() -> void:
 				await get_tree().create_timer(0.35).timeout
 				await _animate_window(loading_screen, false)
 				await _animate_window(main_screen, true)
+				call_deferred("_ensure_lan_host")
 				return
 			ResourceLoader.THREAD_LOAD_FAILED, ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
 				_show_loading_error("Could not load game files.")
@@ -211,14 +291,24 @@ func _toggle_options(options_kind: String) -> void:
 		_hide_options()
 		return
 	_active_options_kind = options_kind
+	connect_options.hide()
 	if options_kind == "mode":
+		options_container.show()
 		deathmatch_option.show()
 		skirmish_option.show()
+		_update_mode_indicators()
 		_clear_map_options()
-	else:
+	elif options_kind == "map":
+		options_container.show()
 		deathmatch_option.hide()
 		skirmish_option.hide()
 		_populate_map_options()
+	else:
+		options_container.hide()
+		deathmatch_option.hide()
+		skirmish_option.hide()
+		_clear_map_options()
+		connect_options.show()
 	_animate_window(mode_options, true)
 
 func _hide_options() -> void:
@@ -226,14 +316,113 @@ func _hide_options() -> void:
 	_animate_window(mode_options, false)
 
 func _select_mode(mode_name: String) -> void:
+	if NetworkManager.is_networked():
+		if not get_tree().get_multiplayer().is_server():
+			return
+		if (
+			NetworkManager.hosted_room_mode != mode_name.to_lower()
+			and not get_tree().get_multiplayer().get_peers().is_empty()
+		):
+			return
+	var restart_lan_host := (
+		NetworkManager.is_networked()
+		and get_tree().get_multiplayer().is_server()
+		and NetworkManager.hosted_room_mode != mode_name.to_lower()
+	)
 	_selected_mode = mode_name
 	mode_button.text = "MODE: %s" % mode_name
-	selected_mode_indicator.visible = mode_name == "DEATHMATCH"
-	skirmish_mode_indicator.visible = mode_name == "SKIRMISH"
+	_update_mode_indicators()
 	var allowed_maps := _get_maps_for_selected_mode()
 	if not allowed_maps.has(_selected_map_path):
 		_selected_map_path = str(allowed_maps[0]) if not allowed_maps.is_empty() else ""
 	_update_map_button_text()
+	if restart_lan_host:
+		NetworkManager.disconnect_game()
+		call_deferred("_ensure_lan_host")
+
+func _update_mode_indicators() -> void:
+	selected_mode_indicator.visible = _selected_mode == "DEATHMATCH"
+	skirmish_mode_indicator.visible = _selected_mode == "SKIRMISH"
+
+func is_skirmish_mode_selected() -> bool:
+	return _selected_mode == "SKIRMISH"
+
+func _connect_or_host_lan_room() -> void:
+	if NetworkManager.connection_pending:
+		return
+	var requested_ip := connect_ip_input.text.strip_edges()
+	if requested_ip.is_empty():
+		return
+	if NetworkManager.is_networked():
+		NetworkManager.disconnect_game()
+	var join_error := NetworkManager.join_game(requested_ip, _selected_mode.to_lower())
+	if join_error != OK:
+		call_deferred("_ensure_lan_host")
+		return
+	NetworkManager.room_ip_address = requested_ip
+	_connection_elapsed = 0.0
+
+func _on_lan_connected() -> void:
+	_connection_elapsed = 0.0
+	NetworkManager.set_local_player_name(NetworkManager.player_display_name)
+
+func _on_lan_connection_failed() -> void:
+	call_deferred("_ensure_lan_host")
+
+func _on_lan_room_mode_mismatch(_hosted_mode: String) -> void:
+	call_deferred("_ensure_lan_host")
+
+func _update_lan_menu_status(delta: float) -> void:
+	if NetworkManager.connection_pending:
+		_connection_elapsed += delta
+		if _connection_elapsed >= 8.0:
+			NetworkManager.disconnect_game()
+			call_deferred("_ensure_lan_host")
+	if NetworkManager.connection_pending:
+		server_button.text = "SERVER: CONNECTING"
+	elif NetworkManager.is_networked():
+		var role := "HOST" if get_tree().get_multiplayer().is_server() else "CLIENT"
+		server_button.text = "SERVER: %s" % role
+	else:
+		server_button.text = "SERVER: HOST"
+	server_button.show()
+	connect_button.text = "CONNECT"
+
+func _ensure_lan_host() -> void:
+	if (
+		NetworkManager.is_networked()
+		or NetworkManager.connection_pending
+	):
+		return
+	for port_offset in range(32):
+		var port := NetworkManager.PORT + port_offset
+		var host_error := (
+			NetworkManager.create_skirmish_room(port)
+			if _selected_mode == "SKIRMISH"
+			else NetworkManager.create_deathmatch_room(port)
+		)
+		if host_error == OK:
+			NetworkManager.room_ip_address = _get_local_lan_endpoint(port)
+			return
+		if host_error != ERR_ALREADY_IN_USE and host_error != ERR_CANT_CREATE:
+			return
+
+func _get_local_lan_endpoint(port: int) -> String:
+	var addresses := _get_local_ipv4_addresses()
+	addresses.append("127.0.0.1")
+	var endpoints := PackedStringArray()
+	for address in addresses:
+		endpoints.append("%s:%d" % [address, port])
+	return ", ".join(endpoints)
+
+func _get_local_ipv4_addresses() -> PackedStringArray:
+	var addresses := PackedStringArray()
+	for address in IP.get_local_addresses():
+		if address.contains(":") or address == "127.0.0.1" or address.begins_with("169.254."):
+			continue
+		if not addresses.has(address):
+			addresses.append(address)
+	return addresses
 
 func _select_map(map_path: String) -> void:
 	if not _get_maps_for_selected_mode().has(map_path):

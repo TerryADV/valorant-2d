@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cd62a0qu1olbt" path="res://assets/ui/main/custom/custom_hover.png" id="9_qch7b"]
 [ext_resource type="Texture2D" uid="uid://cwtp415chmfpv" path="res://assets/ui/main/custom/mode_selected.png" id="10_qch7b"]
 [ext_resource type="Texture2D" uid="uid://ohbrb25fj22e" path="res://assets/ui/main/custom/defender_player_button.png" id="11_pw24t"]
+[ext_resource type="Texture2D" uid="uid://ukw88jkb8d5a" path="res://assets/ui/main/custom/check.png" id="12_4ovp2"]
 [ext_resource type="Texture2D" uid="uid://cjfrnalj5me43" path="res://assets/ui/main/custom/defender_player_button_hover.png" id="12_5dct7"]
 [ext_resource type="Texture2D" uid="uid://dvr3g2jtorxiu" path="res://assets/ui/fgrdhtfyj.png" id="12_877pj"]
 [ext_resource type="Texture2D" uid="uid://clh7aokpgaumo" path="res://assets/ui/main/custom/oberserver_player_button.png" id="13_qilvv"]
@@ -60,9 +61,29 @@ bg_color = Color(0.22745098, 0.23529412, 0.25882354, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d0u6y"]
 content_margin_left = 6.0
+texture = ExtResource("10_qch7b")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0u6y"]
+content_margin_left = 10.0
+bg_color = Color(0.043, 0.0715, 0.1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3137255, 0.3647059, 0.39607844, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ovp2"]
+font_size = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_d0u6y"]
 font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1u0y"]
+font_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yf5fn"]
 bg_color = Color(0.9843137, 0.27058825, 0.32941177, 0.47058824)
@@ -150,6 +171,7 @@ theme_override_constants/line_spacing = 16
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_g4v7s")
 placeholder_text = "Username"
+context_menu_enabled = false
 
 [node name="TextureButton" type="TextureButton" parent="LogIn" unique_id=726555170]
 texture_filter = 1
@@ -333,7 +355,7 @@ offset_bottom = 0.023986816
 theme_override_font_sizes/font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_7numd")
 theme_override_styles/hover = SubResource("StyleBoxTexture_4ovp2")
-text = "SERVER: LOCAL"
+text = "SERVER: HOST"
 alignment = 0
 
 [node name="Options" type="Control" parent="Main/Custom" unique_id=1855583771]
@@ -364,6 +386,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Main/Custom/Options" unique_id=977337516]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.021000002
@@ -395,6 +418,7 @@ offset_left = 0.024978638
 offset_top = 0.0089998245
 offset_right = 0.049987793
 offset_bottom = 0.0030002594
+texture = ExtResource("12_4ovp2")
 expand_mode = 2
 stretch_mode = 5
 
@@ -418,8 +442,47 @@ offset_left = 0.024978638
 offset_top = 0.0089998245
 offset_right = 0.049987793
 offset_bottom = 0.0030002594
+texture = ExtResource("12_4ovp2")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="Connect" type="Control" parent="Main/Custom/Options" unique_id=1661741096]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IP" type="TextEdit" parent="Main/Custom/Options/Connect" unique_id=55746190]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.021000002
+anchor_right = 0.97900003
+anchor_bottom = 0.07300001
+offset_left = -0.082000256
+offset_top = 5.919999
+offset_right = 0.08198547
+offset_bottom = 5.9599953
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_d0u6y")
+placeholder_text = "IP:PORT"
+context_menu_enabled = false
+
+[node name="Button" type="Button" parent="Main/Custom/Options/Connect" unique_id=1342903118]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24800001
+anchor_top = 0.108
+anchor_right = 0.702
+anchor_bottom = 0.17300001
+offset_left = -0.016002655
+offset_top = 0.15999985
+offset_right = 0.115997314
+offset_bottom = -0.040000916
+text = "CONNECT
+"
 
 [node name="Players" type="Control" parent="Main/Custom" unique_id=962745615]
 layout_mode = 1
@@ -432,20 +495,75 @@ offset_top = -0.03201294
 offset_right = -0.32000732
 offset_bottom = -0.056030273
 script = ExtResource("19_players")
+metadata/_edit_lock_ = true
 
-[node name="IP" type="Label" parent="Main/Custom/Players" unique_id=1708485934]
-visible = false
+[node name="Players" type="Label" parent="Main/Custom/Players" unique_id=1021011174]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.33600003
-anchor_top = 0.91
-anchor_right = 0.661
-anchor_bottom = 0.98700005
-offset_left = -0.17601013
-offset_right = 0.24899292
+anchor_left = 0.669
+anchor_top = 0.407
+anchor_right = 1.0
+anchor_bottom = 0.55200005
+offset_left = -0.27902222
+offset_top = -0.099998474
+offset_right = -1.0
 offset_bottom = -0.1000061
+theme_override_font_sizes/font_size = 7
+text = "PLAYERS"
+label_settings = SubResource("LabelSettings_4ovp2")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="IP" type="Label" parent="Main/Custom/Players" unique_id=1708485934]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.669
+anchor_top = 0.563
+anchor_right = 1.0
+anchor_bottom = 0.71000004
+offset_left = -0.27902222
+offset_top = 0.099990845
+offset_right = -2.0
+offset_bottom = -1.5258789e-05
 text = "IP: 192.168.1.7"
 label_settings = SubResource("LabelSettings_d0u6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dificulty" type="OptionButton" parent="Main/Custom/Players" unique_id=1409717587]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.757
+anchor_top = 0.77000004
+anchor_right = 0.91200006
+anchor_bottom = 0.85300004
+offset_left = -0.08703613
+offset_top = -1.5258789e-05
+offset_right = -0.1920166
+offset_bottom = 0.099990845
+theme_override_font_sizes/font_size = 8
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "EASY"
+popup/item_0/id = 0
+popup/item_1/text = "MEDIUM"
+popup/item_1/id = 1
+popup/item_2/text = "HARD"
+popup/item_2/id = 2
+
+[node name="Tittle" type="Label" parent="Main/Custom/Players/Dificulty" unique_id=1974569826]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.615
+anchor_right = 1.0
+anchor_bottom = -0.07700001
+offset_top = -0.010000229
+offset_bottom = 0.0020000935
+text = "Difficulty"
+label_settings = SubResource("LabelSettings_p1u0y")
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Tittles" type="Control" parent="Main/Custom/Players" unique_id=237810998]
@@ -504,6 +622,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Attackers" type="Control" parent="Main/Custom/Players/Positions" unique_id=1776915079]
 layout_mode = 1
@@ -544,6 +663,22 @@ texture = ExtResource("15_y1h5l")
 expand_mode = 4
 stretch_mode = 5
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=184780150]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Name" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=304215038]
 visible = false
 layout_mode = 0
@@ -555,7 +690,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1921175870]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1921175870]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -571,7 +706,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1358520513]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker" unique_id=1358520513]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -626,7 +761,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=756973625]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=756973625]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -642,7 +777,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=1375660949]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=1375660949]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -658,15 +793,31 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers/Attacker2" unique_id=2147000001]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Attacker3" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=1815349881]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.407
 anchor_right = 0.33
 anchor_bottom = 0.55700004
-offset_top = -0.099998474
+offset_top = -1.0999985
 offset_right = -0.030014038
-offset_bottom = -0.1000061
+offset_bottom = -1.1000061
 texture_normal = ExtResource("8_7suek")
 texture_hover = ExtResource("9_otr3d")
 ignore_texture_size = true
@@ -699,7 +850,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1034796394]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1034796394]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -715,7 +866,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1596070353]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=1596070353]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -731,14 +882,31 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers/Attacker3" unique_id=2147000002]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Attacker4" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=1657439045]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.56
 anchor_right = 0.33
 anchor_bottom = 0.71000004
+offset_top = -1.0
 offset_right = -0.030014038
-offset_bottom = -1.5258789e-05
+offset_bottom = -1.0000153
 texture_normal = ExtResource("8_7suek")
 texture_hover = ExtResource("9_otr3d")
 ignore_texture_size = true
@@ -771,7 +939,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=990637842]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=990637842]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -787,7 +955,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=284068400]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=284068400]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -803,15 +971,31 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers/Attacker4" unique_id=2147000003]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Attacker5" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers" unique_id=27476826]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.71300006
 anchor_right = 0.33
 anchor_bottom = 0.86300004
-offset_top = 0.099975586
+offset_top = -0.9000244
 offset_right = -0.030014038
-offset_bottom = 0.099975586
+offset_bottom = -0.9000244
 texture_normal = ExtResource("8_7suek")
 texture_hover = ExtResource("9_otr3d")
 ignore_texture_size = true
@@ -844,7 +1028,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=1208775300]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=1208775300]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -860,7 +1044,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=550017573]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=550017573]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -875,6 +1059,22 @@ offset_bottom = 0.019996643
 text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
+
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Attackers/Attacker5" unique_id=2147000004]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Defenders" type="Control" parent="Main/Custom/Players/Positions" unique_id=1966713971]
 layout_mode = 1
@@ -928,7 +1128,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=1853607852]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=1853607852]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -944,7 +1144,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=309227749]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=309227749]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -959,6 +1159,22 @@ offset_bottom = 0.019996643
 text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
+
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders/Defender" unique_id=2147000005]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Defender2" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=868219211]
 layout_mode = 1
@@ -1001,7 +1217,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=1663032510]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=1663032510]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1017,7 +1233,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=282780501]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=282780501]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1033,6 +1249,22 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders/Defender2" unique_id=2147000006]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Defender3" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=1679596800]
 layout_mode = 1
 anchors_preset = -1
@@ -1041,9 +1273,9 @@ anchor_top = 0.407
 anchor_right = 0.66400003
 anchor_bottom = 0.55700004
 offset_left = 0.2059784
-offset_top = -0.099998474
+offset_top = -1.0999985
 offset_right = 0.17596436
-offset_bottom = -0.1000061
+offset_bottom = -1.1000061
 texture_normal = ExtResource("11_pw24t")
 texture_hover = ExtResource("12_5dct7")
 ignore_texture_size = true
@@ -1076,7 +1308,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=1390611717]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=1390611717]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1092,7 +1324,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=577667930]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=577667930]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1108,6 +1340,22 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders/Defender3" unique_id=2147000007]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Defender4" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=1776343896]
 layout_mode = 1
 anchors_preset = -1
@@ -1116,8 +1364,9 @@ anchor_top = 0.56
 anchor_right = 0.66400003
 anchor_bottom = 0.71000004
 offset_left = 0.2059784
+offset_top = -1.0
 offset_right = 0.17596436
-offset_bottom = -1.5258789e-05
+offset_bottom = -1.0000153
 texture_normal = ExtResource("11_pw24t")
 texture_hover = ExtResource("12_5dct7")
 ignore_texture_size = true
@@ -1150,7 +1399,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1187730406]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1187730406]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1166,7 +1415,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1760833540]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=1760833540]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1182,6 +1431,22 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders/Defender4" unique_id=2147000008]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
+
 [node name="Defender5" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders" unique_id=313139666]
 layout_mode = 1
 anchors_preset = -1
@@ -1190,9 +1455,9 @@ anchor_top = 0.71300006
 anchor_right = 0.66400003
 anchor_bottom = 0.86300004
 offset_left = 0.2059784
-offset_top = 0.099975586
+offset_top = -0.9000244
 offset_right = 0.17596436
-offset_bottom = 0.099975586
+offset_bottom = -0.9000244
 texture_normal = ExtResource("11_pw24t")
 texture_hover = ExtResource("12_5dct7")
 ignore_texture_size = true
@@ -1225,7 +1490,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1210588165]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1210588165]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1241,7 +1506,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1578207988]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=1578207988]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1256,6 +1521,22 @@ offset_bottom = 0.019996643
 text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
+
+[node name="Add" type="TextureButton" parent="Main/Custom/Players/Positions/Defenders/Defender5" unique_id=2147000009]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.31800002
+anchor_right = 0.53900003
+anchor_bottom = 0.72700006
+offset_left = 97.89199
+offset_top = -0.30999374
+offset_right = 98.107994
+offset_bottom = -0.30599594
+texture_normal = ExtResource("15_e0hcc")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Observers" type="Control" parent="Main/Custom/Players/Positions" unique_id=688624275]
 layout_mode = 1
@@ -1309,7 +1590,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=351391678]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=351391678]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1325,7 +1606,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=703907203]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer" unique_id=703907203]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1382,7 +1663,7 @@ text = "TerryADV"
 label_settings = SubResource("LabelSettings_va03m")
 vertical_alignment = 1
 
-[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=195726810]
+[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=195726810]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1398,7 +1679,7 @@ text = "READY"
 label_settings = SubResource("LabelSettings_fcnqv")
 vertical_alignment = 1
 
-[node name="Ready" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=1792419334]
+[node name="Ping" type="Label" parent="Main/Custom/Players/Positions/Observers/Observer2" unique_id=1792419334]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -1414,7 +1695,7 @@ text = "24 ms"
 label_settings = SubResource("LabelSettings_6ud2m")
 vertical_alignment = 1
 
-[node name="Invite" type="Button" parent="Main/Custom/Players" unique_id=1226529022]
+[node name="Fill" type="Button" parent="Main/Custom/Players" unique_id=1226529022]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.897
@@ -1425,10 +1706,10 @@ offset_right = -0.08300018
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxFlat_qqxfm")
 theme_override_styles/hover = SubResource("StyleBoxFlat_57qmd")
-text = "INVITE"
+text = "FILL"
 alignment = 0
 
-[node name="TextureRect" type="TextureRect" parent="Main/Custom/Players/Invite" unique_id=844208813]
+[node name="TextureRect" type="TextureRect" parent="Main/Custom/Players/Fill" unique_id=844208813]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1

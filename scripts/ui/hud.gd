@@ -591,6 +591,8 @@ func bind_player() -> void:
 			) as BaseAgent
 		if not local_player and local_peer_id == 1:
 			local_player = current_scene.get_node_or_null("BaseAgent") as BaseAgent
+		if not local_player and NetworkManager.is_local_deathmatch_spectator():
+			local_player = current_scene.get_node_or_null("BaseAgent") as BaseAgent
 	else:
 		local_player = get_node_or_null(player_path) as BaseAgent
 		if not local_player:
@@ -720,7 +722,9 @@ func _process(_delta: float) -> void:
 			update_scoreboard()
 
 func _update_spectator_ability_display() -> void:
-	if not player or not player.is_dead or not player.has_local_authority():
+	if not player or not player.is_dead or not (
+		player.has_local_authority() or NetworkManager.is_local_deathmatch_spectator()
+	):
 		_ability_display.set_display_agent(null)
 		return
 	var controller: Object = player.get("_spectator_controller")

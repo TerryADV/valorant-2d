@@ -21,6 +21,15 @@ enum Difficulty { EASY, MEDIUM, HARD }
 
 signal ultimate_state_changed(ready: bool, active: bool)
 
+func get_dummy_agent_data_fallback() -> AgentData:
+	if AVAILABLE_AGENTS.is_empty():
+		return null
+	var safe_agent_index := clampi(agent_index, 0, AVAILABLE_AGENTS.size() - 1)
+	var fallback_data := AVAILABLE_AGENTS[safe_agent_index] as AgentData
+	if fallback_data:
+		return fallback_data
+	return AVAILABLE_AGENTS[0] as AgentData
+
 func _setup_dummy_controllers() -> void:
 	_dummy_controller = AgentDummyControllerScript.new()
 

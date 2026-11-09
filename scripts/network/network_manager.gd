@@ -14,6 +14,7 @@ signal lobby_players_updated(player_names: Dictionary)
 @warning_ignore("unused_signal")
 signal skirmish_config_changed(team_size: int, dummy_difficulty: int)
 signal skirmish_teams_changed(team_assignments: Dictionary)
+signal skirmish_dummy_slots_changed(dummy_slots: Dictionary)
 @warning_ignore("unused_signal")
 signal skirmish_round_result_received(winner_team: int, team_wins: Array, round_stats: Dictionary)
 signal kill_feed_received(killer_peer_id: int, victim_peer_id: int, weapon_name: String)
@@ -27,10 +28,11 @@ signal skirmish_combat_outcome_received(
 )
 signal shop_purchase_rejected(item_id: String)
 signal deathmatch_scores_updated(scores: Dictionary, deaths: Dictionary)
+signal deathmatch_spectators_updated(spectators: Dictionary)
 signal room_mode_mismatch(hosted_mode: String)
 const PORT := 7000
-const MAX_PLAYERS := 11
-const MAX_DEATHMATCH_PARTICIPANTS := 12
+const MAX_DEATHMATCH_PARTICIPANTS := 10
+const MAX_PLAYERS := MAX_DEATHMATCH_PARTICIPANTS - 1
 const RESPAWN_DELAY := 3.0
 const GAME_SCENE_PATH := "res://scenes/maps/ascent.tscn"
 const SKIRMISH_SCENE_PATH := "res://scenes/maps/skirmish/skirmish_a.tscn"
@@ -79,13 +81,17 @@ var connection_pending: bool:
 		return _network_session.connection_pending
 var expected_room_mode := "deathmatch"
 var hosted_room_mode := ""
+var room_ip_address := ""
+var room_port := PORT
 var match_started := false
 var player_display_name := "Player"
 var lobby_player_names: Dictionary = {}
+var lobby_human_count := 0
 var skirmish_team_size := 1
 var skirmish_dummy_difficulty: int = BaseAgent.Difficulty.HARD
 var skirmish_team_assignments: Dictionary = {}
 var skirmish_position_assignments: Dictionary = {}
+var skirmish_dummy_slots: Dictionary = {}
 @warning_ignore("unused_private_class_variable")
 var _skirmish_ready_peers: Dictionary = {}
 @warning_ignore("unused_private_class_variable")
@@ -96,6 +102,8 @@ var lan_dummy_count := MAX_DEATHMATCH_PARTICIPANTS - 1
 var lan_dummy_difficulty: int = BaseAgent.Difficulty.HARD
 var deathmatch_room_dummy_count := MAX_DEATHMATCH_PARTICIPANTS - 1
 var deathmatch_room_dummy_difficulty: int = BaseAgent.Difficulty.HARD
+var deathmatch_spectator_peers: Dictionary = {}
+var deathmatch_spectator_preference := false
 var selected_agent_id: String:
 	get:
 		return _agent_selection_service.selected_agent_id
@@ -146,6 +154,106 @@ func set_local_player_name(player_name: String) -> void:
 	_lobby_service.set_local_player_name(player_name)
 func get_player_display_name(peer_id: int) -> String:
 	return _lobby_service.get_player_display_name(peer_id)
+func get_max_deathmatch_dummy_count() -> int:
+	return maxi(0, MAX_DEATHMATCH_PARTICIPANTS - get_deathmatch_active_peer_ids().size())
+
+func get_deathmatch_active_peer_ids() -> Array[int]:
+	var active_peer_ids: Array[int] = []
+	for peer_id in get_connected_peer_ids():
+		if not is_deathmatch_spectator(peer_id):
+			active_peer_ids.append(peer_id)
+	return active_peer_ids
+
+func is_deathmatch_spectator(peer_id: int) -> bool:
+	if bool(deathmatch_spectator_peers.get(peer_id, false)):
+		return true
+	var room_mode := hosted_room_mode if not hosted_room_mode.is_empty() else expected_room_mode
+	return (
+		room_mode == "deathmatch"
+		and int(skirmish_team_assignments.get(peer_id, -2)) == -1
+		and int(skirmish_position_assignments.get(peer_id, -1)) >= 0
+	)
+
+func is_local_deathmatch_spectator() -> bool:
+	if not multiplayer.has_multiplayer_peer() or not _match_flow.is_deathmatch_mode():
+		return false
+	var local_peer_id := multiplayer.get_unique_id() if multiplayer.has_multiplayer_peer() else 1
+	return (
+		bool(deathmatch_spectator_peers.get(local_peer_id, deathmatch_spectator_preference))
+		or is_deathmatch_spectator(local_peer_id)
+	)
+
+func set_local_deathmatch_spectator(enabled: bool) -> void:
+	deathmatch_spectator_preference = enabled
+	var local_peer_id := multiplayer.get_unique_id() if multiplayer.has_multiplayer_peer() else 1
+	if not multiplayer.has_multiplayer_peer():
+		return
+	if multiplayer.is_server():
+		_set_deathmatch_spectator_role(local_peer_id, enabled)
+	else:
+		if enabled:
+			deathmatch_spectator_peers[local_peer_id] = true
+		else:
+			deathmatch_spectator_peers.erase(local_peer_id)
+		deathmatch_spectators_updated.emit(deathmatch_spectator_peers.duplicate(true))
+		rpc_id(1, "request_deathmatch_spectator_role", enabled)
+
+func _set_deathmatch_spectator_role(peer_id: int, enabled: bool) -> void:
+	if enabled:
+		deathmatch_spectator_peers[peer_id] = true
+	else:
+		deathmatch_spectator_peers.erase(peer_id)
+	if peer_id == (multiplayer.get_unique_id() if multiplayer.has_multiplayer_peer() else 1):
+		deathmatch_spectator_preference = enabled
+	deathmatch_spectators_updated.emit(deathmatch_spectator_peers.duplicate(true))
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		rpc("sync_deathmatch_spectator_roles", deathmatch_spectator_peers.duplicate(true))
+		if not match_started:
+			_lobby_service.refresh_deathmatch_room_bot_count()
+			_lobby_service.publish_lobby_state()
+
+@rpc("any_peer", "reliable")
+func request_deathmatch_spectator_role(enabled: bool) -> void:
+	if not multiplayer.is_server() or match_started or hosted_room_mode != "deathmatch":
+		return
+	var sender_id := multiplayer.get_remote_sender_id()
+	if sender_id <= 1 or not multiplayer.get_peers().has(sender_id):
+		return
+	_set_deathmatch_spectator_role(sender_id, enabled)
+
+@rpc("authority", "call_remote", "reliable")
+func sync_deathmatch_spectator_roles(spectators: Dictionary) -> void:
+	if not _peer_lifecycle.is_server_rpc_sender():
+		return
+	deathmatch_spectator_peers = spectators.duplicate(true)
+	var local_peer_id := multiplayer.get_unique_id() if multiplayer.has_multiplayer_peer() else 1
+	deathmatch_spectator_preference = bool(deathmatch_spectator_peers.get(local_peer_id, false))
+	deathmatch_spectators_updated.emit(deathmatch_spectator_peers.duplicate(true))
+
+func activate_local_deathmatch_spectator() -> void:
+	var current_scene := get_tree().current_scene
+	var local_agent := current_scene.get_node_or_null("BaseAgent") as BaseAgent if current_scene else null
+	if not local_agent or not is_local_deathmatch_spectator():
+		return
+	local_agent.set_lobby_locked(false)
+	local_agent.is_dead = true
+	local_agent.collision_layer = 0
+	local_agent.collision_mask = 0
+	local_agent.velocity = Vector2.ZERO
+	local_agent.visible = false
+	local_agent.configure_network_visuals(false)
+	var spectator_controller: Node = local_agent.get("_spectator_controller")
+	spectator_controller.enter()
+	var hud := current_scene.get_node_or_null("HUD") as GameHud
+	if hud:
+		hud.visible = true
+		hud.call_deferred("bind_player")
+		hud.call("refresh_game_mode")
+
+@rpc("authority", "call_remote", "reliable")
+func activate_local_deathmatch_spectator_rpc() -> void:
+	if _peer_lifecycle.is_server_rpc_sender():
+		activate_local_deathmatch_spectator()
 func publish_skirmish_config(team_size: int, dummy_difficulty: int) -> void:
 	_skirmish_service.publish_config(team_size, dummy_difficulty)
 @rpc("any_peer", "reliable")
@@ -158,18 +266,32 @@ func set_local_skirmish_team(team: int) -> void:
 	_skirmish_service.set_local_team(team)
 func set_local_skirmish_position(team: int, position: int) -> void:
 	_skirmish_service.set_local_position(team, position)
+func clear_local_skirmish_position() -> void:
+	_skirmish_service.clear_local_position()
+func set_skirmish_dummy_slot(team: int, position: int, invited: bool) -> void:
+	_skirmish_service.set_dummy_slot(team, position, invited)
+func fill_room_with_dummies() -> void:
+	_skirmish_service.fill_room_with_dummies()
 @rpc("any_peer", "reliable")
 func request_skirmish_team(team: int) -> void:
 	_skirmish_service.request_team(team, multiplayer.get_remote_sender_id())
 @rpc("any_peer", "reliable")
 func request_skirmish_position(team: int, position: int) -> void:
 	_skirmish_service.request_position(team, position, multiplayer.get_remote_sender_id())
+@rpc("any_peer", "reliable")
+func request_leave_skirmish_position() -> void:
+	_skirmish_service.request_leave_position(multiplayer.get_remote_sender_id())
 @rpc("authority", "call_remote", "reliable")
 func sync_skirmish_teams(
 	team_assignments: Dictionary,
 	position_assignments: Dictionary = {}
 ) -> void:
 	_skirmish_service.apply_teams(team_assignments, position_assignments)
+@rpc("authority", "call_remote", "reliable")
+func sync_skirmish_dummy_slots(dummy_slots: Dictionary) -> void:
+	_skirmish_service.apply_dummy_slots(
+		dummy_slots, _peer_lifecycle.is_server_rpc_sender()
+	)
 @rpc("any_peer", "reliable")
 func request_player_name(player_name: String) -> void:
 	_lobby_service.receive_player_name(player_name, multiplayer.get_remote_sender_id())
@@ -214,38 +336,45 @@ func host_game() -> Error:
 		hosted_room_mode = "deathmatch"
 	return error
 
-func create_skirmish_room() -> Error:
-	var error: Error = _lobby_service.create_skirmish_room(PORT)
+func create_skirmish_room(port: int = PORT) -> Error:
+	var error: Error = _lobby_service.create_skirmish_room(port)
 	if error == OK:
 		hosted_room_mode = "skirmish"
+		room_port = port
 	return error
-func create_deathmatch_room() -> Error:
-	var error: Error = _lobby_service.create_deathmatch_room(PORT)
+func create_deathmatch_room(port: int = PORT) -> Error:
+	var error: Error = _lobby_service.create_deathmatch_room(port)
 	if error == OK:
 		hosted_room_mode = "deathmatch"
+		room_port = port
 	return error
 
 func leave_deathmatch_room() -> void:
 	_lobby_service.leave_deathmatch_room()
 
 func set_deathmatch_room_bot_count(bot_count: int) -> void:
-	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server() or match_started:
+	if match_started and _match_flow.is_deathmatch_map_loaded():
 		return
-	var human_count := get_connected_peer_ids().size()
-	var maximum_bots := maxi(0, MAX_DEATHMATCH_PARTICIPANTS - human_count)
+	var networked := multiplayer.has_multiplayer_peer()
+	if networked and not multiplayer.is_server():
+		return
+	var maximum_bots := maxi(0, MAX_DEATHMATCH_PARTICIPANTS - get_deathmatch_active_peer_ids().size())
 	deathmatch_room_dummy_count = clampi(bot_count, 0, maximum_bots)
-	if multiplayer.get_peers().size() > 0:
+	if networked and multiplayer.get_peers().size() > 0:
 		rpc("sync_deathmatch_room_settings", deathmatch_room_dummy_count, deathmatch_room_dummy_difficulty)
 	else:
 		_lobby_service.publish_local_lobby_state()
 
 func set_deathmatch_room_dummy_difficulty(difficulty: int) -> void:
-	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server() or match_started:
+	if match_started and _match_flow.is_deathmatch_map_loaded():
+		return
+	var networked := multiplayer.has_multiplayer_peer()
+	if networked and not multiplayer.is_server():
 		return
 	if difficulty < BaseAgent.Difficulty.EASY or difficulty > BaseAgent.Difficulty.HARD:
 		return
 	deathmatch_room_dummy_difficulty = difficulty
-	if multiplayer.get_peers().size() > 0:
+	if networked and multiplayer.get_peers().size() > 0:
 		rpc("sync_deathmatch_room_settings", deathmatch_room_dummy_count, deathmatch_room_dummy_difficulty)
 	else:
 		_lobby_service.publish_local_lobby_state()
@@ -256,7 +385,7 @@ func sync_deathmatch_room_settings(bot_count: int, difficulty: int) -> void:
 		return
 	if difficulty < BaseAgent.Difficulty.EASY or difficulty > BaseAgent.Difficulty.HARD:
 		return
-	var maximum_bots := maxi(0, MAX_DEATHMATCH_PARTICIPANTS - multiplayer.get_peers().size() - 1)
+	var maximum_bots := maxi(0, MAX_DEATHMATCH_PARTICIPANTS - get_deathmatch_active_peer_ids().size())
 	deathmatch_room_dummy_count = clampi(bot_count, 0, maximum_bots)
 	deathmatch_room_dummy_difficulty = difficulty
 	_lobby_service.publish_local_lobby_state()
@@ -264,13 +393,17 @@ func sync_deathmatch_room_settings(bot_count: int, difficulty: int) -> void:
 func start_lan_match(dummy_count: int, dummy_difficulty: int) -> Error:
 	return _lobby_service.start_lan_match(dummy_count, dummy_difficulty)
 
-func start_skirmish_match() -> Error:
-	return _skirmish_service.start_match(SKIRMISH_SCENE_PATH)
+func are_all_room_players_seated() -> bool:
+	var room_mode := hosted_room_mode if not hosted_room_mode.is_empty() else expected_room_mode
+	return _skirmish_service.are_all_room_players_seated(room_mode == "skirmish")
+
+func start_skirmish_match(scene_path: String = SKIRMISH_SCENE_PATH) -> Error:
+	return _skirmish_service.start_match(scene_path)
 func are_all_skirmish_players_assigned() -> bool:
 	return _skirmish_service.are_all_players_assigned()
 @rpc("authority", "call_local", "reliable")
-func begin_skirmish_scene() -> void:
-	_skirmish_service.begin_scene()
+func begin_skirmish_scene(scene_path: String) -> void:
+	_skirmish_service.begin_scene(scene_path)
 @rpc("any_peer", "reliable")
 func request_deathmatch_map_start() -> void:
 	_lobby_service.request_deathmatch_match_start(multiplayer.get_remote_sender_id())
@@ -346,8 +479,27 @@ func sync_lobby_state(human_count: int, _host_started: bool) -> void:
 func join_game(address: String, requested_mode: String = "deathmatch") -> Error:
 	if requested_mode != "deathmatch" and requested_mode != "skirmish":
 		return ERR_INVALID_PARAMETER
+	var target_address := address.strip_edges()
+	if target_address.to_upper().begins_with("IP:"):
+		target_address = target_address.substr(3).strip_edges()
+	if target_address.contains(","):
+		target_address = target_address.get_slice(",", 0).strip_edges()
+	var target_port := PORT
+	var port_separator := target_address.rfind(":")
+	if port_separator > 0:
+		var port_text := target_address.substr(port_separator + 1)
+		if port_text.is_valid_int():
+			target_port = int(port_text)
+			target_address = target_address.substr(0, port_separator)
+			if target_port < 1 or target_port > 65535:
+				return ERR_INVALID_PARAMETER
+	if target_address.is_empty():
+		return ERR_INVALID_PARAMETER
 	expected_room_mode = requested_mode
-	return _network_session.join(address, PORT, multiplayer)
+	var error := _network_session.join(target_address, target_port, multiplayer)
+	if error == OK:
+		room_port = target_port
+	return error
 
 func start_solo_match(
 	solo_dummy_count: int = MAX_DEATHMATCH_PARTICIPANTS - 1,
@@ -357,22 +509,30 @@ func start_solo_match(
 
 func disconnect_game() -> void:
 	_skirmish_round_service.stop()
-	var was_server := multiplayer.has_multiplayer_peer() and multiplayer.is_server()
+	var was_server := not hosted_room_mode.is_empty()
 	if was_server:
 		hosted_room_mode = ""
 	_network_session.disconnect_session(multiplayer)
+	room_ip_address = ""
 	match_started = false
+	deathmatch_spectator_peers.clear()
+	deathmatch_spectator_preference = false
+	deathmatch_spectators_updated.emit(deathmatch_spectator_peers.duplicate(true))
+	lobby_human_count = 0
 	lobby_player_names.clear()
 	skirmish_team_assignments.clear()
 	skirmish_position_assignments.clear()
+	skirmish_dummy_slots.clear()
 	lobby_players_updated.emit(lobby_player_names.duplicate(true))
 	skirmish_teams_changed.emit(skirmish_team_assignments.duplicate(true))
+	skirmish_dummy_slots_changed.emit(skirmish_dummy_slots.duplicate(true))
+	lobby_state_changed.emit(lobby_human_count, false)
 
 func is_networked() -> bool:
 	return multiplayer.has_multiplayer_peer()
 
 @rpc("any_peer", "call_remote", "reliable")
-func request_room_mode(requested_mode: String) -> void:
+func request_room_mode(requested_mode: String, spectator_preference: bool = false) -> void:
 	if not multiplayer.is_server():
 		return
 	var sender_id := multiplayer.get_remote_sender_id()
@@ -381,6 +541,8 @@ func request_room_mode(requested_mode: String) -> void:
 	if requested_mode != hosted_room_mode:
 		rpc_id(sender_id, "reject_room_mode", hosted_room_mode)
 		return
+	if requested_mode == "deathmatch" and hosted_room_mode == "deathmatch":
+		_set_deathmatch_spectator_role(sender_id, spectator_preference)
 	rpc_id(sender_id, "accept_room_mode", hosted_room_mode)
 
 @rpc("authority", "call_remote", "reliable")

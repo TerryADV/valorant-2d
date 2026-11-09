@@ -8,7 +8,7 @@ var deathmatch_scores: Dictionary = {}
 var deathmatch_deaths: Dictionary = {}
 var respawning_peers: Dictionary = {}
 var _manager: Node
-var _max_participants := 12
+var _max_participants := 10
 var _respawn_delay := 3.0
 
 func setup(manager: Node, max_participants: int, respawn_delay: float) -> void:
@@ -205,7 +205,7 @@ func start_solo_match(dummy_count: int, dummy_difficulty: int) -> bool:
 	return true
 
 func get_max_bot_count(human_count: int) -> int:
-	if human_count <= 0:
+	if human_count < 0:
 		return 0
 	var current_scene := _manager.get_tree().current_scene
 	if not current_scene:
@@ -431,6 +431,15 @@ func update_dummy_population(
 		)
 
 func _get_or_create_dummy(dummy_index: int, agent_index: int) -> BaseAgent:
+	if agent_index < 0 or agent_index >= BaseAgent.AVAILABLE_AGENTS.size():
+		push_error("Cannot create dummy %d with invalid agent index %d." % [dummy_index, agent_index])
+		return null
+	var dummy_agent_data := BaseAgent.AVAILABLE_AGENTS[agent_index] as AgentData
+	if not dummy_agent_data:
+		dummy_agent_data = _manager.call("get_agent_data", "phoenix") as AgentData
+	if not dummy_agent_data:
+		push_error("Cannot create dummy %d: no AgentData resource is available." % dummy_index)
+		return null
 	var dummies := get_dummies()
 	while dummies.size() <= dummy_index:
 		var dummy := AGENT_SCENE.instantiate() as BaseAgent
@@ -440,7 +449,7 @@ func _get_or_create_dummy(dummy_index: int, agent_index: int) -> BaseAgent:
 		dummy.name = "Dummy_%02d" % (dummies.size() + 1)
 		dummy.is_ai_dummy = true
 		dummy.agent_index = agent_index
-		dummy.agent_data = BaseAgent.AVAILABLE_AGENTS[agent_index] as AgentData
+		dummy.agent_data = dummy_agent_data
 		dummy.set_multiplayer_authority(1)
 		dummy.visible = false
 		_manager.get_tree().current_scene.add_child(dummy, true)

@@ -10,6 +10,7 @@ light_mode = 2
 radius = 4.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_em82u"]
+cull_mode = 2
 polygon = PackedVector2Array(0, -4, 1, -3.9, 2, -3.45, 2.85, -2.8, 3.45, -2, 3.85, -1, 4, 0, 3.85, 1, 3.45, 2, 2.85, 2.8, 2, 3.45, 1, 3.9, 0, 4, -1.05, 3.85, -2, 3.45, -2.85, 2.8, -3.45, 2, -3.85, 1, -4, 0, -3.85, -1, -3.45, -2, -2.85, -2.8, -2, -3.45, -1.05, -3.85)
 
 [node name="cloud_burst" type="Area2D" unique_id=1635705396]

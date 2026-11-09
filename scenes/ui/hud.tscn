@@ -1067,10 +1067,9 @@ metadata/_edit_lock_ = true
 [node name="Report" type="VBoxContainer" parent="Control/Combat Report" unique_id=450375409]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.546
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 2.2700002
-offset_top = 43.50772
 offset_right = 0.00012207031
 offset_bottom = 0.020019531
 theme_override_constants/separation = 36
@@ -1141,9 +1140,12 @@ vertical_alignment = 1
 
 [node name="Agent" type="TextureRect" parent="Control/Combat Report/Report/Container" unique_id=1050116245]
 texture_filter = 1
-layout_mode = 0
-offset_left = 63.0
-offset_right = 103.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.268
+anchor_right = 0.43800002
+offset_left = 0.019996643
+offset_right = 0.069992065
 offset_bottom = 35.0
 texture = ExtResource("47_n8oob")
 expand_mode = 2
@@ -1260,6 +1262,7 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="Normal" type="Control" parent="Control/Main/Top" unique_id=600791289]
+visible = false
 layout_mode = 1
 anchor_left = 0.20600002
 anchor_top = 0.028
@@ -1477,7 +1480,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Deathmatch" type="Control" parent="Control/Main/Top" unique_id=469028633]
-visible = false
 layout_mode = 1
 anchor_left = 0.20600002
 anchor_top = 0.028
@@ -1533,7 +1535,7 @@ offset_right = -1.0700684
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer" unique_id=35456571]
 layout_mode = 2
-theme_override_constants/separation = 51
+theme_override_constants/separation = 63
 
 [node name="Player" type="Control" parent="Control/Main/Top/Deathmatch/FirstPlayers/PlayersContainer/HBoxContainer" unique_id=858828385]
 layout_mode = 2
@@ -1628,7 +1630,7 @@ offset_bottom = 0.1439991
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer" unique_id=1651834691]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 63
 
 [node name="Player" type="Control" parent="Control/Main/Top/Deathmatch/LastPlayers/PlayersContainer/HBoxContainer" unique_id=735266067]
 layout_mode = 2
@@ -1701,11 +1703,16 @@ texture_progress = ExtResource("30_playerbar")
 
 [node name="Decor" type="TextureRect" parent="Control/Main/Top/Deathmatch" unique_id=21246999]
 texture_filter = 1
-layout_mode = 0
-offset_left = -19.312012
-offset_top = -10.144001
-offset_right = 696.688
-offset_bottom = 54.856
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.028
+anchor_top = -0.423
+anchor_right = 1.0270001
+anchor_bottom = 2.288
+offset_left = -0.3132267
+offset_top = -0.002152443
+offset_right = -0.16033936
+offset_bottom = -0.0010948181
 texture = ExtResource("13_27rlx")
 expand_mode = 2
 stretch_mode = 5

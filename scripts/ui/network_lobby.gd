@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var bot_settings: VBoxContainer = $Panel/Content/BotSettings
 @onready var bot_count_spin_box: SpinBox = $Panel/Content/BotSettings/BotCount
 @onready var difficulty_option: OptionButton = $Panel/Content/BotSettings/Difficulty
+@onready var spectator_mode_button: CheckButton = $Panel/Content/SpectatorMode
 
 var connection_attempt_id := 0
 var is_host := false
@@ -21,17 +22,21 @@ func _ready() -> void:
 	host_button.pressed.connect(_on_host_or_start_pressed)
 	join_button.pressed.connect(_on_join_pressed)
 	back_button.pressed.connect(_on_back_pressed)
+	spectator_mode_button.toggled.connect(_on_spectator_mode_toggled)
 	NetworkManager.connected.connect(_on_connected)
 	NetworkManager.connection_failed.connect(_on_connection_failed)
 	NetworkManager.lobby_state_changed.connect(_on_lobby_state_changed)
 	NetworkManager.lobby_players_updated.connect(_on_lobby_players_updated)
+	NetworkManager.deathmatch_spectators_updated.connect(_on_spectators_updated)
 	difficulty_option.add_item("Fácil (25%)", BaseAgent.Difficulty.EASY)
 	difficulty_option.add_item("Medio (50%)", BaseAgent.Difficulty.MEDIUM)
 	difficulty_option.add_item("Difícil (100%)", BaseAgent.Difficulty.HARD)
 	difficulty_option.select(BaseAgent.Difficulty.HARD)
 	bot_count_spin_box.max_value = NetworkManager.MAX_DEATHMATCH_PARTICIPANTS - 1
-	participants_label.text = "Jugadores: --/12"
+	bot_count_spin_box.value = NetworkManager.deathmatch_room_dummy_count
+	participants_label.text = "Jugadores: --/%d" % NetworkManager.MAX_DEATHMATCH_PARTICIPANTS
 	_on_lobby_players_updated(NetworkManager.lobby_player_names)
+	spectator_mode_button.button_pressed = NetworkManager.deathmatch_spectator_preference
 	bot_settings.hide()
 	host_button.show()
 	host_button.text = "Crear sala"
@@ -56,6 +61,7 @@ func _on_host_or_start_pressed() -> void:
 		)
 		return
 	is_host = true
+	NetworkManager.set_local_deathmatch_spectator(spectator_mode_button.button_pressed)
 	NetworkManager.set_local_player_name(NetworkManager.player_display_name)
 	var local_addresses := _get_local_ipv4_addresses()
 	if local_addresses.is_empty():
@@ -89,6 +95,10 @@ func _on_back_pressed() -> void:
 	if error != OK:
 		status_label.text = "No se pudo volver al menú: %s" % error
 
+func _on_spectator_mode_toggled(enabled: bool) -> void:
+	NetworkManager.set_local_deathmatch_spectator(enabled)
+	_on_lobby_players_updated(NetworkManager.lobby_player_names)
+
 func _on_connected() -> void:
 	connection_attempt_id += 1
 	NetworkManager.set_local_player_name(NetworkManager.player_display_name)
@@ -120,14 +130,22 @@ func _on_lobby_players_updated(player_names: Dictionary) -> void:
 		var player_label := Label.new()
 		var player_name := str(player_names[peer_id_value])
 		player_label.text = "%s%s" % [player_name, " (Tú)" if peer_id == multiplayer.get_unique_id() else ""]
+		if NetworkManager.deathmatch_spectator_peers.has(peer_id):
+			player_label.text += " (Espectador)"
 		player_names_container.add_child(player_label)
 
+func _on_spectators_updated(_spectators: Dictionary) -> void:
+	_on_lobby_players_updated(NetworkManager.lobby_player_names)
+
 func _update_lobby_controls(human_count: int, host_started: bool) -> void:
-	var maximum_bots: int = NetworkManager.get_max_bot_count(human_count)
+	var maximum_bots: int = NetworkManager.get_max_bot_count(
+		NetworkManager.get_deathmatch_active_peer_ids().size()
+	)
 	bot_count_spin_box.max_value = maximum_bots
 	bot_count_spin_box.value = mini(int(bot_count_spin_box.value), maximum_bots)
-	participants_label.text = "Jugadores: %d/12" % human_count
+	participants_label.text = "Jugadores: %d/%d" % [human_count, NetworkManager.MAX_DEATHMATCH_PARTICIPANTS]
 	bot_settings.visible = is_host and not host_started
+	spectator_mode_button.visible = not host_started
 	host_button.visible = is_host or not is_client
 	host_button.text = "Iniciar partida" if is_host else "Crear sala"
 	host_button.disabled = (host_started or NetworkManager.connection_pending) and not is_host

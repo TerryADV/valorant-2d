@@ -7,8 +7,11 @@ extends Area2D
 @export_range(0.05, 2.0, 0.05) var expansion_duration: float = 0.2
 @export_range(0.0, 720.0, 5.0) var smoke_rotation_speed_degrees: float = 180.0
 @export_range(0.01, 0.2, 0.01) var network_sync_interval: float = 0.05
+@export var exterior_smoke_color := Color(0.12, 0.72, 0.70, 1.0)
+@export_range(12, 96, 4) var exterior_smoke_segments: int = 48
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var smoke_sprite: Sprite2D = $Sprite2D
 
 var owner_peer_id := 1
 var cast_id := 0
@@ -20,6 +23,8 @@ var smoke_elapsed := 0.0
 var smoke_expansion_elapsed := 0.0
 var network_sync_timer := 0.0
 var original_scale := Vector2.ONE
+var exterior_smoke_fill: Polygon2D
+var exterior_smoke_sprite: Sprite2D
 
 func initialize(
 	p_owner_peer_id: int,
@@ -46,6 +51,7 @@ func _physics_process(delta: float) -> void:
 	if not initialized:
 		return
 	if smoke_started:
+		_update_smoke_view_layers()
 		_process_smoke(delta)
 	else:
 		_process_projectile(delta)
@@ -127,8 +133,82 @@ func enter_smoke(smoke_position: Vector2) -> void:
 	smoke_elapsed = 0.0
 	smoke_expansion_elapsed = 0.0
 	collision_shape.set_deferred("disabled", true)
+	_create_smoke_view_layers()
+	_update_smoke_view_layers()
 	if is_instance_valid(ability):
 		ability.call("_on_cloudburst_detonated", cast_id)
+
+func _create_smoke_view_layers() -> void:
+	if exterior_smoke_fill or exterior_smoke_sprite or not smoke_sprite.texture:
+		return
+	exterior_smoke_fill = Polygon2D.new()
+	exterior_smoke_fill.name = "ExteriorSmokeFill"
+	exterior_smoke_fill.color = exterior_smoke_color
+	exterior_smoke_fill.polygon = _build_exterior_smoke_polygon()
+	exterior_smoke_fill.z_index = 100
+	add_child(exterior_smoke_fill)
+
+	exterior_smoke_sprite = Sprite2D.new()
+	exterior_smoke_sprite.name = "ExteriorSmokeTexture"
+	exterior_smoke_sprite.texture = smoke_sprite.texture
+	exterior_smoke_sprite.texture_filter = smoke_sprite.texture_filter
+	exterior_smoke_sprite.centered = smoke_sprite.centered
+	exterior_smoke_sprite.offset = smoke_sprite.offset
+	exterior_smoke_sprite.position = smoke_sprite.position
+	exterior_smoke_sprite.scale = smoke_sprite.scale
+	exterior_smoke_sprite.modulate = smoke_sprite.modulate
+	exterior_smoke_sprite.self_modulate = smoke_sprite.self_modulate
+	exterior_smoke_sprite.z_index = 101
+	add_child(exterior_smoke_sprite)
+
+func _build_exterior_smoke_polygon() -> PackedVector2Array:
+	var polygon := PackedVector2Array()
+	var circle := collision_shape.shape as CircleShape2D
+	if not circle:
+		return polygon
+	var radius := circle.radius * maxf(
+		absf(collision_shape.scale.x), absf(collision_shape.scale.y)
+	)
+	for index in range(exterior_smoke_segments):
+		var angle := TAU * float(index) / float(exterior_smoke_segments)
+		polygon.append(collision_shape.position + Vector2.from_angle(angle) * radius)
+	return polygon
+
+func _update_smoke_view_layers() -> void:
+	if not exterior_smoke_fill or not exterior_smoke_sprite:
+		return
+	var camera := get_viewport().get_camera_2d()
+	if not camera:
+		exterior_smoke_fill.visible = true
+		exterior_smoke_sprite.visible = true
+		return
+	var circle := collision_shape.shape as CircleShape2D
+	if not circle:
+		exterior_smoke_fill.visible = true
+		exterior_smoke_sprite.visible = true
+		return
+	var smoke_radius := circle.radius * maxf(
+		absf(collision_shape.global_scale.x), absf(collision_shape.global_scale.y)
+	)
+	var viewer_position := _get_local_viewer_position(camera)
+	var viewer_is_inside := (
+		viewer_position.distance_squared_to(collision_shape.global_position)
+		<= smoke_radius * smoke_radius
+	)
+	exterior_smoke_fill.visible = not viewer_is_inside
+	exterior_smoke_sprite.visible = not viewer_is_inside
+
+func _get_local_viewer_position(camera: Camera2D) -> Vector2:
+	var scene := get_tree().current_scene
+	if scene:
+		for node in scene.find_children("*", "BaseAgent", true, false):
+			var agent := node as BaseAgent
+			if not agent or agent.is_ai_dummy or not agent.has_local_authority():
+				continue
+			var agent_camera := agent.player_camera
+			if agent_camera and agent_camera.is_current():
+				return agent.global_position
+	return camera.global_position
 
 func blocks_vision(from_position: Vector2, to_position: Vector2) -> bool:
 	if not smoke_started or not collision_shape.shape is CircleShape2D:
